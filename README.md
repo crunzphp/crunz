@@ -6,9 +6,9 @@ Crunz is a framework-agnostic package to schedule periodic tasks (cron jobs) in 
 
 Crunz is capable of executing any kind of executable command as well as PHP closures.
 
-[![Version](http://img.shields.io/packagist/v/lavary/crunz.svg?style=flat-square)](https://packagist.org/packages/lavary/crunz)
-[![Packagist](https://img.shields.io/packagist/dt/lavary/crunz.svg?style=flat-square)](https://packagist.org/packages/lavary/crunz/stats)
-[![Packagist](https://img.shields.io/packagist/dm/lavary/crunz.svg?style=flat-square)](https://packagist.org/packages/lavary/crunz/stats)
+[![Version](http://img.shields.io/packagist/v/crunzphp/crunz.svg?style=flat-square)](https://packagist.org/packages/crunzphp/crunz)
+[![Packagist](https://img.shields.io/packagist/dt/crunzphp/crunz.svg?style=flat-square)](https://packagist.org/packages/crunzphp/crunz/stats)
+[![Packagist](https://img.shields.io/packagist/dm/crunzphp/crunz.svg?style=flat-square)](https://packagist.org/packages/crunzphp/crunz/stats)
 
 | Version             | Supported PHP versions                                                                            |
 |---------------------|---------------------------------------------------------------------------------------------------|
@@ -29,7 +29,7 @@ Crunz is capable of executing any kind of executable command as well as PHP clos
 To install it:
 
 ```bash
-composer require lavary/crunz
+composer require crunzphp/crunz
 ```
 If the installation is successful, a command-line utility named **crunz** is symlinked to the `vendor/bin` directory of your project.
 

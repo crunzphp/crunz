@@ -204,7 +204,7 @@ final class Environment
                 ],
             ],
             'require' => [
-                'lavary/crunz' => '*@dev',
+                'crunzphp/crunz' => '*@dev',
             ],
         ];
         $contentJson = \json_encode($content, JSON_PRETTY_PRINT);
