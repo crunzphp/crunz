@@ -12,7 +12,7 @@
         "Job Manager",
         "Event Runner"
     ],
-    "homepage": "https://github.com/lavary/crunz",
+    "homepage": "https://github.com/crunzphp/crunz",
     "license": "MIT",
     "authors": [
         {
@@ -22,7 +22,7 @@
     ],
     "support": {
         "email": "mrl.8081@gmail.com",
-        "issues": "http://github.com/lavary/crunz/issues"
+        "issues": "https://github.com/crunzphp/crunz/issues"
     },
     "require": {
         "php": ">=7.4",
