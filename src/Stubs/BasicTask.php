@@ -8,7 +8,7 @@ declare(strict_types=1);
 |
 | This file basically registers a new task to be executed by Crunz
 | To get the list of all frequency and constraint method, you may
-| go to this link: https://github.com/lavary/crunz#scheduling-frequency-and-constraints
+| go to this link: https://github.com/crunzphp/crunz#frequency-of-execution
 |
 */
 
