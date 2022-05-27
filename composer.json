@@ -26,7 +26,6 @@
         }
     ],
     "support": {
-        "email": "mrl.8081@gmail.com",
         "issues": "https://github.com/crunzphp/crunz/issues"
     },
     "require": {
