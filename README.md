@@ -21,8 +21,9 @@ Crunz is capable of executing any kind of executable command as well as PHP clos
 | Version | Release date | Active support until | Bug support until | Status         |
 |---------|--------------|----------------------|-------------------|----------------|
 | v1.x    | April 2016   | April 2019           | April 2020        | End of life    |
-| v2.x    | April 2019   | April 2021           | April 2022        | Bug support    |
-| v3.x    | April 2021   | April 2023           | April 2024        | Active support |
+| v2.x    | April 2019   | April 2021           | April 2022        | End of life    |
+| v3.x    | April 2021   | TBD                  | TBD               | Active support |
+| v4.x    | TBD          | TBD                  | TBD               | Development    |
 
 ## Installation
 
@@ -336,10 +337,12 @@ The above task runs **every hour** between **minutes 5 to 15**
 Crunz also provides a set of methods which specify a certain day in the week. 
 * `mondays()`
 * `tuesdays()`
-* ...
+* `wednesdays()`
+* `thursdays()`
+* `fridays()`
+* `saturdays()`
 * `sundays()`
-* `weekedays()`
-* `weekends()`
+* `weekdays()`
 
 These methods have been designed to be used as a constraint and should not be used alone. The reason is that weekday methods just modify the `Day of Week` field of a cron job expression.
 
