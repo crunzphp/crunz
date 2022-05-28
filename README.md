@@ -921,12 +921,15 @@ Enabled by default in `docker-compose`.
 Flag used to enable/disable Crunz deprecation handler, useful only for integration tests.
 Disabled by default for tests.
 
+## Support
+
+You can support further Crunz development by [GitHub](https://github.com/sponsors/PabloKowalczyk). 
+
 ## Contributing
 
 ### Which branch should I choose?
 
-In most cases you should target branch `1.12.x`, as this is active development branch.
-Branch `master` is for future release, but all bugs/features should go to `1.11.x` anyway.
+Bug fixes and readme changes should target `3.2`, new features should target `3.3`.
 
 ## If You Need Help
 
