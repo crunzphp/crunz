@@ -17,34 +17,25 @@ if (!\defined('CRUNZ_BIN')) {
     \define('CRUNZ_BIN', __FILE__);
 }
 
-$generatePath = function (array $parts) {
+$generatePath = static function (string ...$parts): string {
     return \implode(DIRECTORY_SEPARATOR, $parts);
 };
 $autoloadPaths = [
     // Dependency
     $generatePath(
-        [
-            __DIR__,
-            '..',
-            '..',
-            'autoload.php'
-        ]
+        \dirname(__DIR__, 2),
+        'autoload.php'
     ),
     // Vendor/Bin
     $generatePath(
-        [
-            __DIR__,
-            '..',
-            'autoload.php'
-        ]
+        \dirname(__DIR__),
+        'autoload.php'
     ),
     // Local dev
     $generatePath(
-        [
-            __DIR__,
-            'vendor',
-            'autoload.php'
-        ]
+        __DIR__,
+        'vendor',
+        'autoload.php'
     ),
 ];
 
