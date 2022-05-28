@@ -339,7 +339,6 @@ Crunz also provides a set of methods which specify a certain day in the week.
 * ...
 * `sundays()`
 * `weekdays()`
-* `weekends()`
 
 These methods have been designed to be used as a constraint and should not be used alone. The reason is that weekday methods just modify the `Day of Week` field of a cron job expression.
 
