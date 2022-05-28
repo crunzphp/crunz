@@ -925,8 +925,7 @@ Disabled by default for tests.
 
 ### Which branch should I choose?
 
-In most cases you should target branch `1.12.x`, as this is active development branch.
-Branch `master` is for future release, but all bugs/features should go to `1.11.x` anyway.
+Bug fixes and readme changes should target `3.2`, new features should target `3.3`.
 
 ## If You Need Help
 
