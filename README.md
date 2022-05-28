@@ -336,7 +336,10 @@ The above task runs **every hour** between **minutes 5 to 15**
 Crunz also provides a set of methods which specify a certain day in the week. 
 * `mondays()`
 * `tuesdays()`
-* ...
+* `wednesdays()`
+* `thursdays()`
+* `fridays()`
+* `saturdays()`
 * `sundays()`
 * `weekdays()`
 
