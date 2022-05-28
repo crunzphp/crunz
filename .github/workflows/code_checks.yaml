@@ -25,6 +25,13 @@ jobs:
                     - php: '7.4'
                       dependencies: 'high'
                       symfony_version: "~v6.0.0"
+                include:
+                    - php: '8.1'
+                      dependencies: 'low'
+                      symfony_version: "~v6.1.0"
+                    - php: '8.1'
+                      dependencies: 'high'
+                      symfony_version: "~v6.1.0"
 
         name: PHP ${{ matrix.php }} / Symfony ${{ matrix.symfony_version }} / deps '${{ matrix.dependencies }}' / Ubuntu
         steps:
