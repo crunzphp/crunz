@@ -336,10 +336,12 @@ The above task runs **every hour** between **minutes 5 to 15**
 Crunz also provides a set of methods which specify a certain day in the week. 
 * `mondays()`
 * `tuesdays()`
-* ...
+* `wednesdays()`
+* `thursdays()`
+* `fridays()`
+* `saturdays()`
 * `sundays()`
-* `weekedays()`
-* `weekends()`
+* `weekdays()`
 
 These methods have been designed to be used as a constraint and should not be used alone. The reason is that weekday methods just modify the `Day of Week` field of a cron job expression.
 
