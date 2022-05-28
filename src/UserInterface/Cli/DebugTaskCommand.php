@@ -18,9 +18,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class DebugTaskCommand extends Command
 {
-    /** @var string */
-    protected static $defaultName = 'task:debug';
-
     /** @var TaskInformationHandler */
     private $taskInformationHandler;
 
@@ -28,7 +25,7 @@ final class DebugTaskCommand extends Command
     {
         $this->taskInformationHandler = $taskInformationHandler;
 
-        parent::__construct();
+        parent::__construct('task:debug');
     }
 
     protected function configure(): void
@@ -40,7 +37,6 @@ final class DebugTaskCommand extends Command
                 InputArgument::REQUIRED,
                 'Task number from schedule:list command'
             )
-            ->setName(self::$defaultName)
         ;
     }
 
