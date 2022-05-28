@@ -38,25 +38,22 @@ $autoloadPaths = [
         'autoload.php'
     ),
 ];
-
-$autoloadFileFound = false;
-
-foreach ($autoloadPaths as $autoloadPath) {
-    if (\file_exists($autoloadPath)) {
-        require_once $autoloadPath;
-        $autoloadFileFound = true;
-        break;
+$loadAutoloader = static function () use($autoloadPaths): void {
+    foreach ($autoloadPaths as $autoloadPath) {
+        if (\file_exists($autoloadPath) === true) {
+            require_once $autoloadPath;
+            return;
+        }
     }
-}
 
-if ($autoloadFileFound === false) {
     throw new RuntimeException(
         \sprintf(
             'Unable to find "vendor/autoload.php" in "%s" paths.',
             \implode('", "', $autoloadPaths)
         )
     );
-}
+};
+$loadAutoloader();
 
 $application = new Crunz\Application('Crunz Command Line Interface', 'v3.2.1');
 $application->run();
