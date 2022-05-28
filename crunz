@@ -55,5 +55,5 @@ $loadAutoloader = static function () use($autoloadPaths): void {
 };
 $loadAutoloader();
 
-$application = new Crunz\Application('Crunz Command Line Interface', 'v3.2.1');
+$application = new Crunz\Application('Crunz Command Line Interface', 'v3.2.2');
 $application->run();
