@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+## [v3.2.2] - 2022-05-28
+
+### Fixed
+
+- [crunzphp#5] Fix Symfony 6.1 deprecations
+
 ## [v3.2.1] - 2022-01-09
 
 ### Fixed
@@ -481,6 +487,7 @@ In `v2` this will result in exception.
 [#23]: https://github.com/lavary/crunz/pull/23
 [#17]: https://github.com/lavary/crunz/pull/17
 [#16]: https://github.com/lavary/crunz/pull/16
+[crunzphp#5]: https://github.com/crunzphp/crunz/pull/5
 [v1.9.0]: https://github.com/crunzphp/crunz/compare/v1.8.0...v1.9.0
 [v1.8.0]: https://github.com/crunzphp/crunz/compare/v1.7.3...v1.8.0
 [v1.7.3]: https://github.com/crunzphp/crunz/compare/v1.7.2...v1.7.3
@@ -521,6 +528,7 @@ In `v2` this will result in exception.
 [v3.1.0]: https://github.com/crunzphp/crunz/compare/v3.0.1...v3.1.0
 [v3.2.0]: https://github.com/crunzphp/crunz/compare/v3.1.0...v3.2.0
 [v3.2.1]: https://github.com/crunzphp/crunz/compare/v3.2.0...v3.2.1
+[v3.2.2]: https://github.com/crunzphp/crunz/compare/v3.2.1...v3.2.2
 [@andrewmy]: https://github.com/andrewmy
 [@arthurbarros]: https://github.com/arthurbarros
 [@bashgeek]: https://github.com/bashgeek
