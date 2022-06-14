@@ -921,6 +921,10 @@ Enabled by default in `docker-compose`.
 Flag used to enable/disable Crunz deprecation handler, useful only for integration tests.
 Disabled by default for tests.
 
+## Sponsors
+
+[![Blakfire.io logo](resources/docs/blackfire-logo.png)](https://www.blackfire.io/?utm_source=crunz&utm_medium=readme&utm_campaign=free-open-source)
+
 ## Support
 
 You can support further Crunz development by [GitHub](https://github.com/sponsors/PabloKowalczyk). 
