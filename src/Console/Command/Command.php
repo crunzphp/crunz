@@ -8,18 +8,10 @@ use Symfony\Component\Console\Command\Command as BaseCommand;
 
 class Command extends BaseCommand
 {
-    /**
-     * Command arguments.
-     *
-     * @var array<string,string>
-     */
+    /** @var array<string|bool|int|float|array|null> */
     protected $arguments;
 
-    /**
-     * Command options.
-     *
-     * @var array<string,string>
-     */
+    /** @var array<string|bool|int|float|array|null> */
     protected $options;
 
     /**

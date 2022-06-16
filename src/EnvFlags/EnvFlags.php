@@ -8,8 +8,8 @@ use Crunz\Exception\CrunzException;
 
 final class EnvFlags
 {
-    const DEPRECATION_HANDLER_FLAG = 'CRUNZ_DEPRECATION_HANDLER';
-    const CONTAINER_DEBUG_FLAG = 'CRUNZ_CONTAINER_DEBUG';
+    public const DEPRECATION_HANDLER_FLAG = 'CRUNZ_DEPRECATION_HANDLER';
+    public const CONTAINER_DEBUG_FLAG = 'CRUNZ_CONTAINER_DEBUG';
 
     /** @return bool */
     public function isDeprecationHandlerEnabled()

@@ -45,10 +45,10 @@ class ProcessUtils
      */
     public static function escapeArgument($argument)
     {
-        //Fix for PHP bug #43784 escapeshellarg removes % from given string
-        //Fix for PHP bug #49446 escapeshellarg doesn't work on Windows
-        //@see https://bugs.php.net/bug.php?id=43784
-        //@see https://bugs.php.net/bug.php?id=49446
+        // Fix for PHP bug #43784 escapeshellarg removes % from given string
+        // Fix for PHP bug #49446 escapeshellarg doesn't work on Windows
+        // @see https://bugs.php.net/bug.php?id=43784
+        // @see https://bugs.php.net/bug.php?id=49446
         if ('\\' === DIRECTORY_SEPARATOR) {
             if ('' === $argument) {
                 return \escapeshellarg($argument);

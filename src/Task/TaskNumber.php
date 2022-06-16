@@ -8,7 +8,7 @@ use Crunz\Exception\WrongTaskNumberException;
 
 class TaskNumber
 {
-    const MIN_VALUE = 1;
+    public const MIN_VALUE = 1;
     /** @var int */
     private $number;
 

@@ -1,8 +1,13 @@
 {
     "require": {
-        "friendsofphp/php-cs-fixer": "^2.12",
+        "friendsofphp/php-cs-fixer": "^3.8",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-phpunit": "^0.12",
         "phpstan/phpstan-strict-rules": "^0.12"
+    },
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
     }
 }
