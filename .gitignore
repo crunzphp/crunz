@@ -1,5 +1,4 @@
 /vendor
-/vendor-bin/*/vendor/
 /tasks
 composer.phar
 /composer.lock
