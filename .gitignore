@@ -7,7 +7,7 @@ composer.phar
 *.log
 .idea/
 var/
-.php_cs.cache
+.php-cs-fixer.cache
 /crunz.phar
 /crunz.yml
 /.phpunit.result.cache
