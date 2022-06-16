@@ -1,0 +1,946 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Parameter \\#4 \\$preventOverlapping of class Crunz\\\\Application\\\\Query\\\\TaskInformation\\\\TaskInformationView constructor expects bool, mixed given\\.$#"
+			count: 1
+			path: src/Application/Query/TaskInformation/TaskInformationHandler.php
+
+		-
+			message: "#^Parameter \\#5 \\$timeZone of class Crunz\\\\Application\\\\Query\\\\TaskInformation\\\\TaskInformationView constructor expects DateTimeZone\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Application/Query/TaskInformation/TaskInformationHandler.php
+
+		-
+			message: "#^Variable property access on \\$this\\(Crunz\\\\Application\\\\Query\\\\TaskInformation\\\\TaskInformationHandler\\)\\.$#"
+			count: 1
+			path: src/Application/Query/TaskInformation/TaskInformationHandler.php
+
+		-
+			message: "#^Parameter \\#1 \\$parts of static method Crunz\\\\Path\\\\Path\\:\\:create\\(\\) expects array\\<string\\>, array\\<int, mixed\\> given\\.$#"
+			count: 1
+			path: src/Configuration/Configuration.php
+
+		-
+			message: "#^Method Crunz\\\\Configuration\\\\ConfigurationParser\\:\\:parseConfig\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Configuration/ConfigurationParser.php
+
+		-
+			message: "#^Variable \\$cwd on left side of \\?\\? always exists and is not nullable\\.$#"
+			count: 1
+			path: src/Configuration/ConfigurationParser.php
+
+		-
+			message: "#^Method Crunz\\\\Configuration\\\\ConfigurationParserInterface\\:\\:parseConfig\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Configuration/ConfigurationParserInterface.php
+
+		-
+			message: "#^Method Crunz\\\\Configuration\\\\FileParser\\:\\:parse\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Configuration/FileParser.php
+
+		-
+			message: "#^Method Crunz\\\\Configuration\\\\FileParser\\:\\:parse\\(\\) should return array\\<array\\> but returns array\\<int, mixed\\>\\.$#"
+			count: 1
+			path: src/Configuration/FileParser.php
+
+		-
+			message: "#^Property Crunz\\\\Console\\\\Command\\\\Command\\:\\:\\$arguments type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Console/Command/Command.php
+
+		-
+			message: "#^Property Crunz\\\\Console\\\\Command\\\\Command\\:\\:\\$options type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Console/Command/Command.php
+
+		-
+			message: "#^Method Crunz\\\\Console\\\\Command\\\\ConfigGeneratorCommand\\:\\:askForTimezone\\(\\) should return string but returns mixed\\.$#"
+			count: 1
+			path: src/Console/Command/ConfigGeneratorCommand.php
+
+		-
+			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
+			count: 1
+			path: src/Console/Command/ConfigGeneratorCommand.php
+
+		-
+			message: "#^Only booleans are allowed in a negated boolean, int\\<0, max\\> given\\.$#"
+			count: 1
+			path: src/Console/Command/ScheduleListCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$source of method Crunz\\\\Task\\\\Collection\\:\\:all\\(\\) expects string, array\\|bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Console/Command/ScheduleListCommand.php
+
+		-
+			message: "#^Only booleans are allowed in a negated boolean, int\\<0, max\\> given\\.$#"
+			count: 2
+			path: src/Console/Command/ScheduleRunCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$source of method Crunz\\\\Task\\\\Collection\\:\\:all\\(\\) expects string, array\\|bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Console/Command/ScheduleRunCommand.php
+
+		-
+			message: "#^Binary operation \"\\.\" between array\\|string\\|null and mixed results in an error\\.$#"
+			count: 1
+			path: src/Console/Command/TaskGeneratorCommand.php
+
+		-
+			message: "#^Cannot call method ask\\(\\) on mixed\\.$#"
+			count: 1
+			path: src/Console/Command/TaskGeneratorCommand.php
+
+		-
+			message: "#^Method Crunz\\\\Console\\\\Command\\\\TaskGeneratorCommand\\:\\:type\\(\\) should return string but returns array\\|bool\\|float\\|int\\|string\\|null\\.$#"
+			count: 1
+			path: src/Console/Command/TaskGeneratorCommand.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, string given\\.$#"
+			count: 1
+			path: src/Console/Command/TaskGeneratorCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function rtrim expects string, array\\|bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 2
+			path: src/Console/Command/TaskGeneratorCommand.php
+
+		-
+			message: "#^Parameter \\#2 \\$replace of function str_replace expects array\\|string, array\\|bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 3
+			path: src/Console/Command/TaskGeneratorCommand.php
+
+		-
+			message: "#^Parameter \\#3 \\$subject of function preg_replace expects array\\|string, array\\|bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Console/Command/TaskGeneratorCommand.php
+
+		-
+			message: "#^Return type \\(int\\|null\\) of method Crunz\\\\Console\\\\Command\\\\TaskGeneratorCommand\\:\\:execute\\(\\) should be covariant with return type \\(int\\) of method Symfony\\\\Component\\\\Console\\\\Command\\\\Command\\:\\:execute\\(\\)$#"
+			count: 1
+			path: src/Console/Command/TaskGeneratorCommand.php
+
+		-
+			message: "#^Call to function is_string\\(\\) with string will always evaluate to true\\.$#"
+			count: 1
+			path: src/Event.php
+
+		-
+			message: "#^Call to method createLock\\(\\) on an unknown class Symfony\\\\Component\\\\Lock\\\\Factory\\.$#"
+			count: 1
+			path: src/Event.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: src/Event.php
+
+		-
+			message: "#^Class Symfony\\\\Component\\\\Lock\\\\StoreInterface not found\\.$#"
+			count: 2
+			path: src/Event.php
+
+		-
+			message: "#^Instanceof between Closure and Closure will always evaluate to true\\.$#"
+			count: 1
+			path: src/Event.php
+
+		-
+			message: "#^Instanceof between DateTimeZone and DateTimeZone will always evaluate to true\\.$#"
+			count: 1
+			path: src/Event.php
+
+		-
+			message: "#^Instanceof between Symfony\\\\Component\\\\Lock\\\\StoreInterface and Symfony\\\\Component\\\\Lock\\\\StoreInterface will always evaluate to true\\.$#"
+			count: 1
+			path: src/Event.php
+
+		-
+			message: "#^Only booleans are allowed in a negated boolean, mixed given\\.$#"
+			count: 1
+			path: src/Event.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, DateTimeZone\\|string given\\.$#"
+			count: 1
+			path: src/Event.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, mixed given\\.$#"
+			count: 2
+			path: src/Event.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, string given\\.$#"
+			count: 3
+			path: src/Event.php
+
+		-
+			message: "#^Parameter \\$store of method Crunz\\\\Event\\:\\:preventOverlapping\\(\\) has invalid type Symfony\\\\Component\\\\Lock\\\\StoreInterface\\.$#"
+			count: 1
+			path: src/Event.php
+
+		-
+			message: "#^Property Crunz\\\\Event\\:\\:\\$lock \\(Symfony\\\\Component\\\\Lock\\\\Lock\\) does not accept Symfony\\\\Component\\\\Lock\\\\SharedLockInterface\\.$#"
+			count: 1
+			path: src/Event.php
+
+		-
+			message: "#^Property Crunz\\\\Event\\:\\:\\$lockFactory has unknown class Symfony\\\\Component\\\\Lock\\\\Factory as its type\\.$#"
+			count: 1
+			path: src/Event.php
+
+		-
+			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
+			count: 1
+			path: src/Event.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between false and array\\<string, mixed\\> will always evaluate to false\\.$#"
+			count: 1
+			path: src/Event.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 1
+			path: src/EventRunner.php
+
+		-
+			message: "#^Only booleans are allowed in &&, mixed given on the left side\\.$#"
+			count: 2
+			path: src/EventRunner.php
+
+		-
+			message: "#^Only booleans are allowed in a negated boolean, int\\<0, max\\> given\\.$#"
+			count: 1
+			path: src/EventRunner.php
+
+		-
+			message: "#^Only booleans are allowed in a ternary operator condition, string\\|null given\\.$#"
+			count: 2
+			path: src/EventRunner.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, mixed given\\.$#"
+			count: 2
+			path: src/EventRunner.php
+
+		-
+			message: "#^Short ternary operator is not allowed\\. Use null coalesce operator if applicable or consider using long ternary\\.$#"
+			count: 1
+			path: src/EventRunner.php
+
+		-
+			message: "#^Parameter \\#1 \\$callback of function array_map expects \\(callable\\(mixed\\)\\: mixed\\)\\|null, Closure\\(array\\)\\: SplFileInfo given\\.$#"
+			count: 1
+			path: src/Finder/Finder.php
+
+		-
+			message: "#^Method Crunz\\\\Infrastructure\\\\Laravel\\\\LaravelClosureSerializer\\:\\:extractWrapper\\(\\) should return Laravel\\\\SerializableClosure\\\\SerializableClosure but returns mixed\\.$#"
+			count: 1
+			path: src/Infrastructure/Laravel/LaravelClosureSerializer.php
+
+		-
+			message: "#^Method Crunz\\\\Infrastructure\\\\Psr\\\\Logger\\\\EnabledLoggerDecorator\\:\\:log\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Infrastructure/Psr/Logger/EnabledLoggerDecorator.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 1
+			path: src/Infrastructure/Psr/Logger/PsrStreamLogger.php
+
+		-
+			message: "#^Method Crunz\\\\Infrastructure\\\\Psr\\\\Logger\\\\PsrStreamLogger\\:\\:log\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Infrastructure/Psr/Logger/PsrStreamLogger.php
+
+		-
+			message: "#^Parameter \\#1 \\$message of method Crunz\\\\Infrastructure\\\\Psr\\\\Logger\\\\PsrStreamLogger\\:\\:replaceNewlines\\(\\) expects string, string\\|Stringable given\\.$#"
+			count: 1
+			path: src/Infrastructure/Psr/Logger/PsrStreamLogger.php
+
+		-
+			message: "#^Parameter \\#1 \\$string of function mb_strtoupper expects string, mixed given\\.$#"
+			count: 1
+			path: src/Infrastructure/Psr/Logger/PsrStreamLogger.php
+
+		-
+			message: "#^Parameter \\#3 \\$outputStreamPath of class Crunz\\\\Infrastructure\\\\Psr\\\\Logger\\\\PsrStreamLogger constructor expects string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Infrastructure/Psr/Logger/PsrStreamLoggerFactory.php
+
+		-
+			message: "#^Parameter \\#4 \\$errorStreamPath of class Crunz\\\\Infrastructure\\\\Psr\\\\Logger\\\\PsrStreamLogger constructor expects string\\|null, mixed given\\.$#"
+			count: 1
+			path: src/Infrastructure/Psr/Logger/PsrStreamLoggerFactory.php
+
+		-
+			message: "#^Parameter \\#5 \\$ignoreEmptyContext of class Crunz\\\\Infrastructure\\\\Psr\\\\Logger\\\\PsrStreamLogger constructor expects bool, mixed given\\.$#"
+			count: 1
+			path: src/Infrastructure/Psr/Logger/PsrStreamLoggerFactory.php
+
+		-
+			message: "#^Parameter \\#6 \\$timezoneLog of class Crunz\\\\Infrastructure\\\\Psr\\\\Logger\\\\PsrStreamLogger constructor expects bool, mixed given\\.$#"
+			count: 1
+			path: src/Infrastructure/Psr/Logger/PsrStreamLoggerFactory.php
+
+		-
+			message: "#^Parameter \\#7 \\$allowLineBreaks of class Crunz\\\\Infrastructure\\\\Psr\\\\Logger\\\\PsrStreamLogger constructor expects bool, mixed given\\.$#"
+			count: 1
+			path: src/Infrastructure/Psr/Logger/PsrStreamLoggerFactory.php
+
+		-
+			message: "#^Method Crunz\\\\Logger\\\\LoggerFactory\\:\\:createLoggerFactory\\(\\) should return Crunz\\\\Application\\\\Service\\\\LoggerFactoryInterface but returns object\\.$#"
+			count: 1
+			path: src/Logger/LoggerFactory.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, mixed given\\.$#"
+			count: 1
+			path: src/Logger/LoggerFactory.php
+
+		-
+			message: "#^Parameter \\#1 \\$class of function class_exists expects string, mixed given\\.$#"
+			count: 1
+			path: src/Logger/LoggerFactory.php
+
+		-
+			message: "#^Part \\$loggerFactoryClass \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
+			count: 2
+			path: src/Logger/LoggerFactory.php
+
+		-
+			message: "#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#"
+			count: 1
+			path: src/Mailer.php
+
+		-
+			message: "#^Only booleans are allowed in an if condition, Symfony\\\\Component\\\\Mailer\\\\Mailer\\|null given\\.$#"
+			count: 1
+			path: src/Mailer.php
+
+		-
+			message: "#^Parameter \\#1 \\$address of class Symfony\\\\Component\\\\Mime\\\\Address constructor expects string, mixed given\\.$#"
+			count: 1
+			path: src/Mailer.php
+
+		-
+			message: "#^Parameter \\#1 \\.\\.\\.\\$addresses of method Symfony\\\\Component\\\\Mime\\\\Email\\:\\:addTo\\(\\) expects string\\|Symfony\\\\Component\\\\Mime\\\\Address, mixed given\\.$#"
+			count: 1
+			path: src/Mailer.php
+
+		-
+			message: "#^Parameter \\#2 \\$name of class Symfony\\\\Component\\\\Mime\\\\Address constructor expects string, mixed given\\.$#"
+			count: 1
+			path: src/Mailer.php
+
+		-
+			message: "#^Part \\$host \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: src/Mailer.php
+
+		-
+			message: "#^Part \\$password \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: src/Mailer.php
+
+		-
+			message: "#^Part \\$port \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: src/Mailer.php
+
+		-
+			message: "#^Part \\$user \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: src/Mailer.php
+
+		-
+			message: "#^Only booleans are allowed in \\|\\|, mixed given on the right side\\.$#"
+			count: 1
+			path: src/Output/OutputFactory.php
+
+		-
+			message: "#^Call to function is_string\\(\\) with string will always evaluate to true\\.$#"
+			count: 1
+			path: src/Schedule.php
+
+		-
+			message: "#^Only booleans are allowed in &&, int\\<0, max\\> given on the right side\\.$#"
+			count: 1
+			path: src/Schedule.php
+
+		-
+			message: "#^Parameter \\#2 \\$suffix of method Crunz\\\\Finder\\\\FinderInterface\\:\\:find\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: src/Task/Collection.php
+
+		-
+			message: "#^Part \\$suffix \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
+			count: 1
+			path: src/Task/Collection.php
+
+		-
+			message: "#^Call to function is_string\\(\\) with string will always evaluate to true\\.$#"
+			count: 1
+			path: src/Task/TaskNumber.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 1
+			path: src/Task/Timezone.php
+
+		-
+			message: "#^Parameter \\#1 \\$timezone of class DateTimeZone constructor expects string, mixed given\\.$#"
+			count: 1
+			path: src/Task/Timezone.php
+
+		-
+			message: "#^Part \\$newTimezone \\(mixed\\) of encapsed string cannot be cast to string\\.$#"
+			count: 2
+			path: src/Task/Timezone.php
+
+		-
+			message: "#^Return type \\(int\\|null\\) of method Crunz\\\\UserInterface\\\\Cli\\\\ClosureRunCommand\\:\\:execute\\(\\) should be covariant with return type \\(int\\) of method Symfony\\\\Component\\\\Console\\\\Command\\\\Command\\:\\:execute\\(\\)$#"
+			count: 1
+			path: src/UserInterface/Cli/ClosureRunCommand.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
+			count: 3
+			path: tests/EndToEnd/ClosureRunTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertFileExists\\(\\)\\.$#"
+			count: 1
+			path: tests/EndToEnd/ConfigProviderTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\)\\.$#"
+			count: 1
+			path: tests/EndToEnd/ConfigProviderTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertTrue\\(\\)\\.$#"
+			count: 1
+			path: tests/EndToEnd/ConfigProviderTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
+			count: 2
+			path: tests/EndToEnd/ConfigRecognitionTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\)\\.$#"
+			count: 2
+			path: tests/EndToEnd/ConfigRecognitionTest.php
+
+		-
+			message: "#^Dynamic call to static method Crunz\\\\Tests\\\\TestCase\\\\EndToEndTestCase\\:\\:assertMatchesRegularExpression\\(\\)\\.$#"
+			count: 1
+			path: tests/EndToEnd/DebugTaskTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\)\\.$#"
+			count: 3
+			path: tests/EndToEnd/DebugTaskTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 2
+			path: tests/EndToEnd/DebugTaskTest.php
+
+		-
+			message: "#^Dynamic call to static method Crunz\\\\Tests\\\\TestCase\\\\EndToEndTestCase\\:\\:assertFileDoesNotExist\\(\\)\\.$#"
+			count: 1
+			path: tests/EndToEnd/LoggerTest.php
+
+		-
+			message: "#^Dynamic call to static method Crunz\\\\Tests\\\\TestCase\\\\EndToEndTestCase\\:\\:assertMatchesRegularExpression\\(\\)\\.$#"
+			count: 1
+			path: tests/EndToEnd/LoggerTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertEmpty\\(\\)\\.$#"
+			count: 1
+			path: tests/EndToEnd/LoggerTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertFileExists\\(\\)\\.$#"
+			count: 1
+			path: tests/EndToEnd/LoggerTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
+			count: 1
+			path: tests/EndToEnd/LoggerTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
+			count: 2
+			path: tests/EndToEnd/TasksSourceRecognitionTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\)\\.$#"
+			count: 2
+			path: tests/EndToEnd/TasksSourceRecognitionTest.php
+
+		-
+			message: "#^Dynamic call to static method Crunz\\\\Tests\\\\TestCase\\\\EndToEndTestCase\\:\\:assertMatchesRegularExpression\\(\\)\\.$#"
+			count: 1
+			path: tests/EndToEnd/WrongTaskTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertFalse\\(\\)\\.$#"
+			count: 1
+			path: tests/EndToEnd/WrongTaskTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\EndToEnd\\\\WrongTaskTest\\:\\:scheduleInstanceProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/EndToEnd/WrongTaskTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 1
+			path: tests/Functional/ConfigProviderTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
+			count: 1
+			path: tests/Functional/ConfigProviderTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 1
+			path: tests/Functional/ScheduleListTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
+			count: 1
+			path: tests/Functional/ScheduleListTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 1
+			path: tests/Functional/ScheduleRunTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
+			count: 1
+			path: tests/Functional/ScheduleRunTest.php
+
+		-
+			message: "#^Call to function method_exists\\(\\) with Symfony\\\\Component\\\\Console\\\\Tester\\\\CommandTester and 'setInputs' will always evaluate to true\\.$#"
+			count: 1
+			path: tests/Functional/TaskGeneratorTest.php
+
+		-
+			message: "#^Cannot call method setInputStream\\(\\) on mixed\\.$#"
+			count: 1
+			path: tests/Functional/TaskGeneratorTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertFileExists\\(\\)\\.$#"
+			count: 1
+			path: tests/Functional/TaskGeneratorTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 1
+			path: tests/Functional/TaskGeneratorTest.php
+
+		-
+			message: "#^Construct empty\\(\\) is not allowed\\. Use more strict comparison\\.$#"
+			count: 2
+			path: tests/TestCase/EndToEnd/Environment/Environment.php
+
+		-
+			message: "#^Casting to string something that's already string\\.$#"
+			count: 1
+			path: tests/TestCase/EndToEndTestCase.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: tests/TestCase/FakeConfiguration.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\TestCase\\\\FakeConfiguration\\:\\:__construct\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/TestCase/FakeConfiguration.php
+
+		-
+			message: "#^Property Crunz\\\\Tests\\\\TestCase\\\\FakeConfiguration\\:\\:\\$config \\(array\\<int\\|string, array\\|bool\\|string\\|null\\>\\) does not accept array\\<int\\|string, mixed\\>\\.$#"
+			count: 1
+			path: tests/TestCase/FakeConfiguration.php
+
+		-
+			message: "#^Property Crunz\\\\Tests\\\\TestCase\\\\FakeConfiguration\\:\\:\\$config type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/TestCase/FakeConfiguration.php
+
+		-
+			message: "#^Parameter \\#1 \\$timezone of class DateTimeZone constructor expects string, mixed given\\.$#"
+			count: 1
+			path: tests/TestCase/Faker.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\TestCase\\\\Logger\\\\SpyPsrLogger\\:\\:getLogs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/TestCase/Logger/SpyPsrLogger.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\TestCase\\\\Logger\\\\SpyPsrLogger\\:\\:log\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/TestCase/Logger/SpyPsrLogger.php
+
+		-
+			message: "#^Property Crunz\\\\Tests\\\\TestCase\\\\Logger\\\\SpyPsrLogger\\:\\:\\$logs type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/TestCase/Logger/SpyPsrLogger.php
+
+		-
+			message: "#^Offset 'uri' on array\\{timed_out\\: bool, blocked\\: bool, eof\\: bool, unread_bytes\\: int, stream_type\\: string, wrapper_type\\: string, wrapper_data\\: mixed, mode\\: string, \\.\\.\\.\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			count: 1
+			path: tests/TestCase/TemporaryFile.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertEquals\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Application/Cron/AbstractCronExpressionTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Application\\\\Cron\\\\AbstractCronExpressionTest\\:\\:multipleRunDatesProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Application/Cron/AbstractCronExpressionTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertEquals\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Application/Query/TaskInformation/TaskInformationHandlerTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 5
+			path: tests/Unit/Application/Query/TaskInformation/TaskInformationHandlerTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Application\\\\Query\\\\TaskInformation\\\\TaskInformationHandlerTest\\:\\:taskInformationProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Application/Query/TaskInformation/TaskInformationHandlerTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Configuration/ConfigurationTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Configuration/ConfigurationTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNull\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Configuration/ConfigurationTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 6
+			path: tests/Unit/Configuration/ConfigurationTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Configuration\\\\ConfigurationTest\\:\\:createConfiguration\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Configuration/ConfigurationTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Configuration/FileParserTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:markTestSkipped\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Configuration/FileParserTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:callback\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Console/Command/ScheduleRunCommandTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\TestCase\\:\\:once\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Console/Command/ScheduleRunCommandTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 3
+			path: tests/Unit/EnvFlags/EnvFlagsTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\EnvFlags\\\\EnvFlagsTest\\:\\:containerDebugProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/EnvFlags/EnvFlagsTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\EnvFlags\\\\EnvFlagsTest\\:\\:statusProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/EnvFlags/EnvFlagsTest.php
+
+		-
+			message: "#^Call to method expects\\(\\) on an unknown class Symfony\\\\Component\\\\Lock\\\\StoreInterface\\.$#"
+			count: 1
+			path: tests/Unit/EventRunnerTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\TestCase\\:\\:once\\(\\)\\.$#"
+			count: 3
+			path: tests/Unit/EventRunnerTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertEquals\\(\\)\\.$#"
+			count: 21
+			path: tests/Unit/EventTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertFalse\\(\\)\\.$#"
+			count: 6
+			path: tests/Unit/EventTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 9
+			path: tests/Unit/EventTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/EventTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertTrue\\(\\)\\.$#"
+			count: 6
+			path: tests/Unit/EventTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:markTestSkipped\\(\\)\\.$#"
+			count: 6
+			path: tests/Unit/EventTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\EventTest\\:\\:deprecatedEveryProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/EventTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\EventTest\\:\\:everyMethodProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/EventTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\EventTest\\:\\:hourlyAtInvalidProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/EventTest.php
+
+		-
+			message: "#^Dynamic call to static method Crunz\\\\Tests\\\\TestCase\\\\UnitTestCase\\:\\:assertDirectoryDoesNotExist\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Filesystem/FilesystemTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertDirectoryExists\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Filesystem/FilesystemTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertFileExists\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Filesystem/FilesystemTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 4
+			path: tests/Unit/Filesystem/FilesystemTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Filesystem/FilesystemTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringEqualsFile\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Filesystem/FilesystemTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Filesystem\\\\FilesystemTest\\:\\:fileExistsProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Filesystem/FilesystemTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Finder/FinderTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertContainsOnlyInstancesOf\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Finder/FinderTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertCount\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Finder/FinderTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:markTestSkipped\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Finder/FinderTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Finder\\\\FinderTest\\:\\:tasksProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Finder/FinderTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertCount\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Infrastructure/Psr/Logger/EnabledLoggerDecoratorTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Infrastructure\\\\Psr\\\\Logger\\\\EnabledLoggerDecoratorTest\\:\\:disabledChannelProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Infrastructure/Psr/Logger/EnabledLoggerDecoratorTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Infrastructure\\\\Psr\\\\Logger\\\\EnabledLoggerDecoratorTest\\:\\:enabledChannelProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Infrastructure/Psr/Logger/EnabledLoggerDecoratorTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Infrastructure/Psr/Logger/PsrStreamLoggerFactoryTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertEmpty\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Infrastructure/Psr/Logger/PsrStreamLoggerTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 5
+			path: tests/Unit/Infrastructure/Psr/Logger/PsrStreamLoggerTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 4
+			path: tests/Unit/InvokerTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\TestCase\\:\\:exactly\\(\\)\\.$#"
+			count: 4
+			path: tests/Unit/Logger/ConsoleLoggerTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$config of class Crunz\\\\Tests\\\\TestCase\\\\FakeConfiguration constructor expects array\\<int\\|string, array\\|bool\\|string\\|null\\>, array\\<string, mixed\\> given\\.$#"
+			count: 1
+			path: tests/Unit/Logger/LoggerFactoryTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Output/OutputFactoryTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Output\\\\OutputFactoryTest\\:\\:inputProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Output/OutputFactoryTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 3
+			path: tests/Unit/Path/PathTest.php
+
+		-
+			message: "#^Call to function is_string\\(\\) with string will always evaluate to true\\.$#"
+			count: 1
+			path: tests/Unit/Pingable.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Pinger\\\\PingableTest\\:\\:nonStringProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Pinger/PingableTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$url of method Crunz\\\\Tests\\\\Unit\\\\Pingable\\:\\:pingBefore\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: tests/Unit/Pinger/PingableTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$url of method Crunz\\\\Tests\\\\Unit\\\\Pingable\\:\\:thenPing\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: tests/Unit/Pinger/PingableTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Schedule/ScheduleFactoryTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertEquals\\(\\)\\.$#"
+			count: 6
+			path: tests/Unit/ScheduleTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Service/AbstractClosureSerializerTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 2
+			path: tests/Unit/Task/TaskNumberTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Task\\\\TaskNumberTest\\:\\:nonNumericProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Task/TaskNumberTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Task\\\\TaskNumberTest\\:\\:nonStringValueProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Task/TaskNumberTest.php
+
+		-
+			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Task\\\\TaskNumberTest\\:\\:numericValueProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: tests/Unit/Task/TaskNumberTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of static method Crunz\\\\Task\\\\TaskNumber\\:\\:fromString\\(\\) expects string, mixed given\\.$#"
+			count: 1
+			path: tests/Unit/Task/TaskNumberTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/Timezone/ProviderTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/UserInterface/Cli/ClosureRunCommandTest.php
+
+		-
+			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertTrue\\(\\)\\.$#"
+			count: 1
+			path: tests/Unit/UserInterface/Cli/ClosureRunCommandTest.php
