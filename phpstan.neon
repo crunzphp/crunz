@@ -34,4 +34,4 @@ parameters:
 includes:
     - vendor-bin/static-checks/vendor/phpstan/phpstan-phpunit/extension.neon
     - vendor-bin/static-checks/vendor/phpstan/phpstan-phpunit/rules.neon
-#    - vendor-bin/static-checks/vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor-bin/static-checks/vendor/phpstan/phpstan-strict-rules/rules.neon
