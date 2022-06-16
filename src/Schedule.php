@@ -194,13 +194,7 @@ class Schedule implements PingableInterface
         }
     }
 
-    /**
-     * Compile parameters for a command.
-     *
-     * @param string[] $parameters
-     *
-     * @return string
-     */
+    /** @param array<int|string,mixed> $parameters */
     protected function compileParameters(array $parameters): string
     {
         return \implode(
