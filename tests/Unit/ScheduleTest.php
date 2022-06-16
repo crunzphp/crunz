@@ -5,32 +5,142 @@ declare(strict_types=1);
 namespace Crunz\Tests\Unit;
 
 use Crunz\Schedule;
-use PHPUnit\Framework\TestCase;
+use Crunz\Tests\TestCase\UnitTestCase;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 
-class ScheduleTest extends TestCase
+final class ScheduleTest extends UnitTestCase
 {
-    public function test_run(): void
-    {
-        $escape = '\\' === DIRECTORY_SEPARATOR ? '"' : '\'';
-        $escapeReal = '\\' === DIRECTORY_SEPARATOR ? '\\"' : '"';
+    use ExpectDeprecationTrait;
 
+    /** @dataProvider runProvider */
+    public function test_run(\Closure $paramsGenerator): void
+    {
+        // Arrange
+        /**
+         * @var string   $command
+         * @var string[] $parameters
+         * @var string   $expectedCommand
+         */
+        [
+            'command' => $command,
+            'parameters' => $parameters,
+            'expectedCommand' => $expectedCommand,
+        ] = $paramsGenerator();
         $schedule = new Schedule();
 
-        $schedule->run('path/to/command');
-        $schedule->run('path/to/command -f --foo="bar"');
-        $schedule->run('path/to/command', ['-f']);
-        $schedule->run('path/to/command', ['--foo' => 'bar']);
-        $schedule->run('path/to/command', ['-f', '--foo' => 'bar']);
-        $schedule->run('path/to/command', ['--title' => 'A "real" test']);
+        // Act
+        $event = $schedule->run($command, $parameters);
 
-        $events = $schedule->events();
+        // Assert
+        self::assertSame($expectedCommand, $event->getCommand());
+    }
 
-        $this->assertEquals('path/to/command', $events[0]->getCommand());
-        $this->assertEquals('path/to/command -f --foo="bar"', $events[1]->getCommand());
-        $this->assertEquals('path/to/command -f', $events[2]->getCommand());
-        $this->assertEquals("path/to/command --foo={$escape}bar{$escape}", $events[3]->getCommand());
-        $this->assertEquals("path/to/command -f --foo={$escape}bar{$escape}", $events[4]->getCommand());
+    /**
+     * @group legacy
+     * @dataProvider nonStringParametersProvider
+     */
+    public function test_run_with_non_string_parameters(\Closure $paramsGenerator): void
+    {
+        // Arrange
+        /**
+         * @var string   $command
+         * @var string[] $parameters
+         * @var string   $expectedCommand
+         */
+        [
+            'command' => $command,
+            'parameters' => $parameters,
+            'expectedCommand' => $expectedCommand,
+        ] = $paramsGenerator();
+        $schedule = new Schedule();
 
-        $this->assertEquals("path/to/command --title={$escape}A {$escapeReal}real{$escapeReal} test{$escape}", $events[5]->getCommand());
+        // Expect
+        $this->expectDeprecation('Passing non-string parameters is deprecated since v3.3, convert all parameters to string.');
+
+        // Act
+        $event = $schedule->run($command, $parameters);
+
+        // Assert
+        self::assertSame($expectedCommand, $event->getCommand());
+    }
+
+    /** @return iterable<string, array{\Closure}> */
+    public function runProvider(): iterable
+    {
+        yield 'simple command' => [
+            static fn (): array => [
+                'command' => '/usr/bin/php',
+                'parameters' => [],
+                'expectedCommand' => '/usr/bin/php',
+            ],
+        ];
+
+        yield 'command with inline argument' => [
+            static fn (): array => [
+                'command' => '/usr/bin/php -v',
+                'parameters' => [],
+                'expectedCommand' => '/usr/bin/php -v',
+            ],
+        ];
+
+        yield 'command with argument' => [
+            static fn (): array => [
+                'command' => '/usr/bin/php',
+                'parameters' => ['-v'],
+                'expectedCommand' => "/usr/bin/php '-v'",
+            ],
+        ];
+
+        yield 'command with option' => [
+            static fn (): array => [
+                'command' => '/usr/bin/php',
+                'parameters' => ['--ini' => 'php.ini'],
+                'expectedCommand' => "/usr/bin/php '--ini' 'php.ini'",
+            ],
+        ];
+
+        yield 'command with mixed parameters' => [
+            static fn (): array => [
+                'command' => '/usr/bin/php',
+                'parameters' => ['--ini' => 'php.ini', '-v'],
+                'expectedCommand' => "/usr/bin/php '--ini' 'php.ini' '-v'",
+            ],
+        ];
+    }
+
+    /** @return iterable<string, array{\Closure}> */
+    public function nonStringParametersProvider(): iterable
+    {
+        yield 'boolean true parameter' => [
+            static fn (): array => [
+                'command' => '/usr/bin/php',
+                'parameters' => ['-v' => true],
+                'expectedCommand' => "/usr/bin/php '-v' '1'",
+            ],
+        ];
+
+        yield 'boolean false parameter' => [
+            static fn (): array => [
+                'command' => '/usr/bin/php',
+                'parameters' => ['-v' => false],
+                'expectedCommand' => "/usr/bin/php '-v' '0'",
+            ],
+        ];
+
+        yield 'int parameter' => [
+            static fn (): array => [
+                'command' => '/usr/bin/php',
+                'parameters' => ['-v' => 4],
+                'expectedCommand' => "/usr/bin/php '-v' '4'",
+            ],
+        ];
+
+        yield 'float parameter' => [
+            static fn (): array => [
+                'command' => '/usr/bin/php',
+                'parameters' => ['-v' => 3.14],
+                'expectedCommand' => "/usr/bin/php '-v' '3.14'",
+            ],
+        ];
     }
 }
