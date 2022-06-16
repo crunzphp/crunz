@@ -45,6 +45,10 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "bamarni/composer-bin-plugin": "^1.2",
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "phpstan/phpstan": "^1.7",
+        "phpstan/phpstan-phpunit": "^1.1",
+        "phpstan/phpstan-strict-rules": "^1.2",
         "phpunit/phpunit": "^9.5.5",
         "symfony/error-handler": "^4.4.30 || ^5.4 || ^6.0",
         "symfony/phpunit-bridge": "^4.4.30 || ^5.4.0 || ^6.0"
