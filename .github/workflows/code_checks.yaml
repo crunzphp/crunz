@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
     tests:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-20.04
         strategy:
             matrix:
                 php:
@@ -42,20 +42,24 @@ jobs:
                     php-version: ${{ matrix.php }}
                     coverage: none # disable xdebug, pcov
 
-            -   uses: "actions/cache@v2"
+            -   name: Get Composer Cache Directory
+                id: composer-cache
+                run: |
+                    echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            -   uses: actions/cache@v3
                 with:
-                    path: "~/.composer/cache"
-                    key: "php-${{ matrix.php }}-composer-locked-${{ hashFiles('composer.lock') }}"
-                    restore-keys: "php-${{ matrix.php }}-composer-locked-"
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: php-${{ matrix.php }}-ubuntu-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: |
+                        php-${{ matrix.php }}-ubuntu-composer-
 
             -   run: php ./composer-install.php "${{ matrix.symfony_version }}" "${{ matrix.dependencies }}" "--no-interaction --no-progress --prefer-dist"
-
-            -   run: composer show
 
             -   run: vendor/bin/phpunit
 
     windows-tests:
-        runs-on: windows-latest
+        runs-on: windows-2022
         strategy:
             matrix:
                 php:
@@ -76,20 +80,24 @@ jobs:
                     coverage: none # disable xdebug, pcov
                     extensions: 'curl'
 
-            -   uses: "actions/cache@v2"
+            -   name: Get Composer Cache Directory
+                id: composer-cache
+                run: |
+                    echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            -   uses: actions/cache@v3
                 with:
-                    path: "~/.composer/cache"
-                    key: "php-${{ matrix.php }}-composer-locked-${{ hashFiles('composer.lock') }}"
-                    restore-keys: "php-${{ matrix.php }}-composer-locked-"
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: php-${{ matrix.php }}-windows-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: |
+                        php-${{ matrix.php }}-windows-composer-
 
             -   run: composer update -a --prefer-dist -n ${{ matrix.vars.composerExtraFlags }}
-
-            -   run: composer show
 
             -   run: vendor/bin/phpunit
 
     static_analysis:
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-20.04
         strategy:
             matrix:
                 include:
@@ -106,18 +114,30 @@ jobs:
                     php-version: ${{ matrix.php }}
                     coverage: none # disable xdebug, pcov
 
-            -   uses: "actions/cache@v2"
+            -   name: Get Composer Cache Directory
+                id: composer-cache
+                run: |
+                    echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            -   uses: actions/cache@v3
                 with:
-                    path: "~/.composer/cache"
-                    key: "php-${{ matrix.php }}-composer-locked-${{ hashFiles('composer.lock') }}"
-                    restore-keys: "php-${{ matrix.php }}-composer-locked-"
+                    path: ${{ steps.composer-cache.outputs.dir }}
+                    key: php-${{ matrix.php }}-ubuntu-composer-${{ hashFiles('**/composer.lock') }}
+                    restore-keys: |
+                        php-${{ matrix.php }}-ubuntu-composer-
 
             -   run: php ./composer-install.php "${{ matrix.symfony_version }}" "${{ matrix.dependencies }}" "--no-interaction --no-progress --prefer-dist"
 
             -   run: composer bin static-checks install -a --no-dev --no-interaction --no-progress --prefer-dist
 
-            -   run: composer show
+            -   uses: actions/cache@v3
+                with:
+                    path: .php_cs.cache
+                    key: php-cs-fixer-cache
+
+            -   uses: actions/cache@v3
+                with:
+                    path: /tmp/phpstan
+                    key: phpstan-cache
 
             -   run: composer crunz:analyze
-
-            -   run: composer phpstan:check
