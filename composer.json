@@ -44,7 +44,7 @@
     "require-dev": {
         "ext-json": "*",
         "ext-mbstring": "*",
-        "friendsofphp/php-cs-fixer": "^3.8",
+        "friendsofphp/php-cs-fixer": "^2.19 || ^3.8",
         "phpstan/phpstan": "^1.7",
         "phpstan/phpstan-phpunit": "^1.1",
         "phpstan/phpstan-strict-rules": "^1.2",
