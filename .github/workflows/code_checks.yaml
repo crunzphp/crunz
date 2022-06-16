@@ -130,4 +130,14 @@ jobs:
 
             -   run: composer bin static-checks install -a --no-dev --no-interaction --no-progress --prefer-dist
 
+            -   uses: actions/cache@v3
+                with:
+                    path: .php_cs.cache
+                    key: php-cs-fixer-cache
+
+            -   uses: actions/cache@v3
+                with:
+                    path: /tmp/phpstan
+                    key: phpstan-cache
+
             -   run: composer crunz:analyze
