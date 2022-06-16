@@ -20,3 +20,4 @@ phpstan.neon export-ignore
 composer-install.php export-ignore
 bootstrap.php export-ignore
 /resources/docs export-ignore
+phpstan-baseline.neon export-ignore
