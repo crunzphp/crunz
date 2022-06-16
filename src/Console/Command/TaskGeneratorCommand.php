@@ -20,7 +20,7 @@ class TaskGeneratorCommand extends Command
      *
      * @var array<string,string>
      */
-    const DEFAULTS = [
+    public const DEFAULTS = [
         'frequency' => 'everyThirtyMinutes',
         'constraint' => 'weekdays',
         'in' => 'path/to/your/command',
