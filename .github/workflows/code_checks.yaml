@@ -128,8 +128,6 @@ jobs:
 
             -   run: php ./composer-install.php "${{ matrix.symfony_version }}" "${{ matrix.dependencies }}" "--no-interaction --no-progress --prefer-dist"
 
-            -   run: composer bin static-checks install -a --no-dev --no-interaction --no-progress --prefer-dist
-
             -   uses: actions/cache@v3
                 with:
                     path: .php-cs-fixer.cache
