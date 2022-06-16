@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRules([
         '@Symfony' => true,
         'array_syntax' => ['syntax' => 'short'],
@@ -21,7 +21,9 @@ return PhpCsFixer\Config::create()
         'linebreak_after_opening_tag' => true,
         'list_syntax' => ['syntax' => 'short'],
         'mb_str_functions' => true,
-        'native_function_invocation' => true,
+        'native_function_invocation' => [
+            'include' => ['@all'],
+        ],
         'no_alias_functions' => true,
         'no_homoglyph_names' => true,
         'no_php4_constructor' => true,
