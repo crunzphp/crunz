@@ -59,7 +59,7 @@ jobs:
             -   run: vendor/bin/phpunit
 
     windows-tests:
-        runs-on: windows-latest
+        runs-on: windows-2022
         strategy:
             matrix:
                 php:
