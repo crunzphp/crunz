@@ -201,7 +201,7 @@ class Schedule implements PingableInterface
      *
      * @return string
      */
-    protected function compileParameters(array $parameters)
+    protected function compileParameters(array $parameters): string
     {
         return \implode(
             ' ',
