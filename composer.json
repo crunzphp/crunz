@@ -44,7 +44,6 @@
     "require-dev": {
         "ext-json": "*",
         "ext-mbstring": "*",
-        "bamarni/composer-bin-plugin": "^1.2",
         "friendsofphp/php-cs-fixer": "^3.8",
         "phpstan/phpstan": "^1.7",
         "phpstan/phpstan-phpunit": "^1.1",
@@ -69,10 +68,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "bamarni/composer-bin-plugin": true
-        }
+        "sort-packages": true
     },
     "scripts": {
         "crunz:cs-fix": "@php vendor/bin/php-cs-fixer fix --diff -v --ansi",
