@@ -56,8 +56,6 @@ jobs:
 
             -   run: php ./composer-install.php "${{ matrix.symfony_version }}" "${{ matrix.dependencies }}" "--no-interaction --no-progress --prefer-dist"
 
-            -   run: composer show
-
             -   run: vendor/bin/phpunit
 
     windows-tests:
@@ -96,8 +94,6 @@ jobs:
 
             -   run: composer update -a --prefer-dist -n ${{ matrix.vars.composerExtraFlags }}
 
-            -   run: composer show
-
             -   run: vendor/bin/phpunit
 
     static_analysis:
@@ -133,8 +129,6 @@ jobs:
             -   run: php ./composer-install.php "${{ matrix.symfony_version }}" "${{ matrix.dependencies }}" "--no-interaction --no-progress --prefer-dist"
 
             -   run: composer bin static-checks install -a --no-dev --no-interaction --no-progress --prefer-dist
-
-            -   run: composer show
 
             -   run: composer crunz:analyze
 
