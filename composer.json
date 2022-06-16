@@ -44,7 +44,10 @@
     "require-dev": {
         "ext-json": "*",
         "ext-mbstring": "*",
-        "bamarni/composer-bin-plugin": "^1.2",
+        "friendsofphp/php-cs-fixer": "^2.19 || ^3.8",
+        "phpstan/phpstan": "^1.7",
+        "phpstan/phpstan-phpunit": "^1.1",
+        "phpstan/phpstan-strict-rules": "^1.2",
         "phpunit/phpunit": "^9.5.5",
         "symfony/error-handler": "^4.4.30 || ^5.4 || ^6.0",
         "symfony/phpunit-bridge": "^4.4.30 || ^5.4.0 || ^6.0"
@@ -65,10 +68,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "bamarni/composer-bin-plugin": true
-        }
+        "sort-packages": true
     },
     "scripts": {
         "crunz:cs-fix": "@php vendor/bin/php-cs-fixer fix --diff -v --ansi",
@@ -76,8 +76,6 @@
             "@php vendor/bin/php-cs-fixer fix --diff --dry-run -v",
             "@phpstan:check"
         ],
-        "crunz:link-changelog": "@php vendor/bin/changelog-linker dump-merges --dry-run --in-categories",
-        "crunz:link-changelog:since": "@php vendor/bin/changelog-linker dump-merges --dry-run --in-categories --since-id",
         "phpstan:check": "@php vendor/bin/phpstan analyse -c phpstan.neon src tests crunz config bootstrap.php"
     },
     "funding": [

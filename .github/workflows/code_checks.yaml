@@ -101,8 +101,8 @@ jobs:
         strategy:
             matrix:
                 include:
-                    - php: '7.4'
-                      symfony_version: "~v4.4.30"
+                    - php: '8.1'
+                      symfony_version: "~v6.1.0"
                       dependencies: "high"
 
         name: Static analysis
@@ -127,8 +127,6 @@ jobs:
                         php-${{ matrix.php }}-ubuntu-composer-
 
             -   run: php ./composer-install.php "${{ matrix.symfony_version }}" "${{ matrix.dependencies }}" "--no-interaction --no-progress --prefer-dist"
-
-            -   run: composer bin static-checks install -a --no-dev --no-interaction --no-progress --prefer-dist
 
             -   uses: actions/cache@v3
                 with:
