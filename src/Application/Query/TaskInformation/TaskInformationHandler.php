@@ -86,7 +86,7 @@ final class TaskInformationHandler
             $event->getCommand(),
             $event->description ?? '',
             $event->getExpression(),
-            $eventProperties['preventOverlapping'] ?? false,
+            \filter_var($eventProperties['preventOverlapping'] ?? false, FILTER_VALIDATE_BOOLEAN),
             $eventTimezone,
             $timezoneForComparisons,
             ...$nextRuns
