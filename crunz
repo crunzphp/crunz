@@ -20,9 +20,7 @@ if (!\defined('CRUNZ_BIN')) {
     \define('CRUNZ_BIN', __FILE__);
 }
 
-$generatePath = static function (string ...$parts): string {
-    return \implode(DIRECTORY_SEPARATOR, $parts);
-};
+$generatePath = static fn(string ...$parts): string => \implode(DIRECTORY_SEPARATOR, $parts);
 $autoloadPaths = [
     // Dependency
     $generatePath(
