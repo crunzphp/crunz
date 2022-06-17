@@ -55,12 +55,12 @@ final class LoggerTest extends EndToEndTestCase
 
         $process = $environment->runCrunzCommand('schedule:run');
 
-        $this->assertEmpty($process->getOutput());
+        self::assertEmpty($process->getOutput());
 
-        $this->assertFileDoesNotExist("{$logPath}/main.log");
+        self::assertFileDoesNotExist("{$logPath}/main.log");
 
-        $this->assertFileExists("{$logPath}/custom.log");
-        $this->assertStringContainsString(
+        self::assertFileExists("{$logPath}/custom.log");
+        self::assertStringContainsString(
             'Usage: php',
             (string) \file_get_contents("{$logPath}/custom.log")
         );
@@ -73,7 +73,7 @@ final class LoggerTest extends EndToEndTestCase
     ): void {
         $levelFormatted = \mb_strtoupper($level);
 
-        $this->assertMatchesRegularExpression(
+        self::assertMatchesRegularExpression(
             "/^\[[0-9]{4}(-[0-9]{2}){2} [0-9]{2}(:[0-9]{2}){2}\] crunz\.{$levelFormatted}:.+?({$message})/",
             $logRecord
         );

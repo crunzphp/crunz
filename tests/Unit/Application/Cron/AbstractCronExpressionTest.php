@@ -29,7 +29,7 @@ abstract class AbstractCronExpressionTest extends TestCase
             $timeZone
         );
 
-        $this->assertEquals($expectedRunDates, $runDates);
+        self::assertEquals($expectedRunDates, $runDates);
     }
 
     /** @return iterable<string,array> */

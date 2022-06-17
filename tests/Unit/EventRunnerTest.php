@@ -61,7 +61,7 @@ final class EventRunnerTest extends TestCase
 
         // mock the LoggerFactory
         $loggerFactory = $this->createMock(LoggerFactory::class);
-        $loggerFactory->expects($this->once())
+        $loggerFactory->expects(self::once())
             ->method('createEvent')
             ->with($logTarget);
 
@@ -90,7 +90,7 @@ final class EventRunnerTest extends TestCase
         }
 
         $mockStore
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('delete')
         ;
         $schedule = new Schedule();
@@ -115,7 +115,7 @@ final class EventRunnerTest extends TestCase
         $consoleLogger = $this->createMock(ConsoleLoggerInterface::class);
 
         $httpClient
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('ping')
             ->with($url)
         ;

@@ -28,7 +28,7 @@ final class EnabledLoggerDecoratorTest extends UnitTestCase
         $enabledLoggerDecorator->log($logLevel, Faker::words());
 
         // Assert
-        $this->assertCount(0, $spyLogger->getLogs());
+        self::assertCount(0, $spyLogger->getLogs());
     }
 
     /** @dataProvider enabledChannelProvider */
@@ -44,7 +44,7 @@ final class EnabledLoggerDecoratorTest extends UnitTestCase
         $enabledLoggerDecorator->log($logLevel, Faker::words());
 
         // Assert
-        $this->assertCount(1, $spyLogger->getLogs());
+        self::assertCount(1, $spyLogger->getLogs());
     }
 
     /** @return iterable<string,array> */

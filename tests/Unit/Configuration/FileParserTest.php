@@ -29,7 +29,7 @@ class FileParserTest extends TestCase
     public function parse_throws_exception_on_non_readable_file(): void
     {
         if ($this->isWindows()) {
-            $this->markTestSkipped('Required Unix-based OS.');
+            self::markTestSkipped('Required Unix-based OS.');
         }
 
         $tempFile = new TemporaryFile();
@@ -56,7 +56,7 @@ class FileParserTest extends TestCase
 
         $parser = $this->createFileParser();
 
-        $this->assertSame([$configData], $parser->parse($filePath));
+        self::assertSame([$configData], $parser->parse($filePath));
     }
 
     /**

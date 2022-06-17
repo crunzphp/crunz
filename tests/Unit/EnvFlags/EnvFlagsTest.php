@@ -18,7 +18,7 @@ final class EnvFlagsTest extends TestCase
         \putenv(EnvFlags::DEPRECATION_HANDLER_FLAG . "={$flagValue}");
 
         $envFlags = new EnvFlags();
-        $this->assertSame($expectedEnabled, $envFlags->isDeprecationHandlerEnabled());
+        self::assertSame($expectedEnabled, $envFlags->isDeprecationHandlerEnabled());
     }
 
     /** @test */
@@ -48,7 +48,7 @@ final class EnvFlagsTest extends TestCase
         \putenv(EnvFlags::CONTAINER_DEBUG_FLAG . "={$flagValue}");
 
         $envFlags = new EnvFlags();
-        $this->assertSame($expectedEnabled, $envFlags->isContainerDebugEnabled());
+        self::assertSame($expectedEnabled, $envFlags->isContainerDebugEnabled());
     }
 
     /** @test */
@@ -100,6 +100,6 @@ final class EnvFlagsTest extends TestCase
     private function assertFlagValue(string $flag, string $expectedValue): void
     {
         $actualValue = \getenv($flag);
-        $this->assertSame($expectedValue, $actualValue);
+        self::assertSame($expectedValue, $actualValue);
     }
 }

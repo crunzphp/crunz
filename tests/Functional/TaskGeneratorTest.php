@@ -56,8 +56,8 @@ class TaskGeneratorTest extends TestCase
             ]
         );
 
-        $this->assertSame(0, $returnCode);
-        $this->assertFileExists($this->taskFilePath);
+        self::assertSame(0, $returnCode);
+        self::assertFileExists($this->taskFilePath);
     }
 
     /** @return resource */

@@ -21,7 +21,7 @@ final class ClosureRunCommandTest extends UnitTestCase
         $input = $this->createInput($closure);
         $output = new NullOutput();
 
-        $this->assertSame(
+        self::assertSame(
             0,
             $command->run($input, $output)
         );
@@ -32,7 +32,7 @@ final class ClosureRunCommandTest extends UnitTestCase
     {
         $command = $this->createCommand();
 
-        $this->assertTrue($command->isHidden());
+        self::assertTrue($command->isHidden());
     }
 
     /** @return iterable<string,array<int>> */

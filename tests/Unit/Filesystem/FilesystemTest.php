@@ -16,7 +16,7 @@ final class FilesystemTest extends UnitTestCase
     {
         $filesystem = new Filesystem();
 
-        $this->assertSame(\getcwd(), $filesystem->getCwd());
+        self::assertSame(\getcwd(), $filesystem->getCwd());
     }
 
     /**
@@ -27,7 +27,7 @@ final class FilesystemTest extends UnitTestCase
     {
         $filesystem = new Filesystem();
 
-        $this->assertSame($expectedExistence, $filesystem->fileExists($path));
+        self::assertSame($expectedExistence, $filesystem->fileExists($path));
     }
 
     /** @test */
@@ -35,7 +35,7 @@ final class FilesystemTest extends UnitTestCase
     {
         $filesystem = new Filesystem();
 
-        $this->assertSame(\sys_get_temp_dir(), $filesystem->tempDir());
+        self::assertSame(\sys_get_temp_dir(), $filesystem->tempDir());
     }
 
     /** @test */
@@ -57,7 +57,7 @@ final class FilesystemTest extends UnitTestCase
 
         $filesystem->removeDirectory($rootPath->toString());
 
-        $this->assertDirectoryDoesNotExist($rootPath->toString());
+        self::assertDirectoryDoesNotExist($rootPath->toString());
     }
 
     /** @test */
@@ -70,7 +70,7 @@ final class FilesystemTest extends UnitTestCase
         $filesystem = new Filesystem();
         $filesystem->dumpFile($filePath->toString(), $content);
 
-        $this->assertStringEqualsFile($filePath->toString(), $content);
+        self::assertStringEqualsFile($filePath->toString(), $content);
 
         \unlink($filePath->toString());
     }
@@ -90,7 +90,7 @@ final class FilesystemTest extends UnitTestCase
         $filesystem = new Filesystem();
         $filesystem->createDirectory($directoryPath->toString());
 
-        $this->assertDirectoryExists($directoryPath->toString());
+        self::assertDirectoryExists($directoryPath->toString());
 
         $filesystem->removeDirectory($rootDirectoryPath->toString());
     }
@@ -109,8 +109,8 @@ final class FilesystemTest extends UnitTestCase
         $filesystem = new Filesystem();
         $filesystem->copy($filePath->toString(), $targetFile->toString());
 
-        $this->assertFileExists($targetFile->toString());
-        $this->assertStringEqualsFile($targetFile->toString(), $content);
+        self::assertFileExists($targetFile->toString());
+        self::assertStringEqualsFile($targetFile->toString(), $content);
 
         $filesystem->removeDirectory($rootDirectoryPath->toString());
     }
@@ -120,7 +120,7 @@ final class FilesystemTest extends UnitTestCase
     {
         $filesystem = new Filesystem();
 
-        $this->assertSame($this->findProjectRootDirectory(), $filesystem->projectRootDirectory());
+        self::assertSame($this->findProjectRootDirectory(), $filesystem->projectRootDirectory());
     }
 
     /** @test */
@@ -129,7 +129,7 @@ final class FilesystemTest extends UnitTestCase
         $filesystem = new Filesystem();
         $content = $filesystem->readContent(__FILE__);
 
-        $this->assertStringContainsString('final class FilesystemTest extends TestCase', $content);
+        self::assertStringContainsString('final class FilesystemTest extends TestCase', $content);
     }
 
     /** @test */

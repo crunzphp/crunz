@@ -21,8 +21,8 @@ class InvokerTest extends TestCase
             }
         );
 
-        $this->assertSame(2, $i);
-        $this->assertSame(2, $result);
+        self::assertSame(2, $i);
+        self::assertSame(2, $result);
     }
 
     /** @test */
@@ -38,7 +38,7 @@ class InvokerTest extends TestCase
             [2]
         );
 
-        $this->assertSame(3, $i);
+        self::assertSame(3, $i);
     }
 
     /** @test */
@@ -53,6 +53,6 @@ class InvokerTest extends TestCase
             true
         );
 
-        $this->assertSame('Callback was called, nice.', $result);
+        self::assertSame('Callback was called, nice.', $result);
     }
 }

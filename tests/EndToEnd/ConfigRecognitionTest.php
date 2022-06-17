@@ -30,11 +30,11 @@ final class ConfigRecognitionTest extends EndToEndTestCase
         $process = $environment->runCrunzCommand('schedule:list');
         $normalizedOutput = $this->normalizeProcessOutput($process);
 
-        $this->assertStringNotContainsString(
+        self::assertStringNotContainsString(
             '[Deprecation] Probably you are relying on legacy config file recognition which is deprecated.',
             $normalizedOutput
         );
-        $this->assertStringNotContainsString(
+        self::assertStringNotContainsString(
             '[Deprecation] Probably you are relying on legacy tasks source recognition which is deprecated.',
             $normalizedOutput
         );
@@ -43,7 +43,7 @@ final class ConfigRecognitionTest extends EndToEndTestCase
 
     private function assertHasTask(string $output): void
     {
-        $this->assertStringContainsString('PHP version', $output);
-        $this->assertStringContainsString('php -v', $output);
+        self::assertStringContainsString('PHP version', $output);
+        self::assertStringContainsString('php -v', $output);
     }
 }

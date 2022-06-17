@@ -21,7 +21,7 @@ final class ClosureRunTest extends EndToEndTestCase
 
         $process = $environment->runCrunzCommand('schedule:run');
 
-        $this->assertStringContainsString(
+        self::assertStringContainsString(
             'Closure output Var: 153',
             \str_replace(
                 PHP_EOL,
@@ -53,7 +53,7 @@ final class ClosureRunTest extends EndToEndTestCase
         $secondCall = $environment->runCrunzCommand('schedule:run');
         $firstCall->wait();
 
-        $this->assertStringContainsString('Done', $firstCall->getOutput());
-        $this->assertStringContainsString('No event is due!', $secondCall->getOutput());
+        self::assertStringContainsString('Done', $firstCall->getOutput());
+        self::assertStringContainsString('No event is due!', $secondCall->getOutput());
     }
 }

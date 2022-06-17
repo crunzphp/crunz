@@ -44,7 +44,7 @@ class TaskNumberTest extends TestCase
     {
         $taskNumber = TaskNumber::fromString($value);
 
-        $this->assertSame($expectedNumber, $taskNumber->asInt());
+        self::assertSame($expectedNumber, $taskNumber->asInt());
     }
 
     /** @test */
@@ -52,7 +52,7 @@ class TaskNumberTest extends TestCase
     {
         $taskNumber = TaskNumber::fromString('14');
 
-        $this->assertSame(13, $taskNumber->asArrayIndex());
+        self::assertSame(13, $taskNumber->asArrayIndex());
     }
 
     /** @return iterable<string,array> */

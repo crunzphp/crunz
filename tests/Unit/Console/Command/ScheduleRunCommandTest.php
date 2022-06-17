@@ -97,7 +97,7 @@ class ScheduleRunCommandTest extends TestCase
         $mockSchedule = $this->createConfiguredMock(Schedule::class, ['events' => [$mockEvent]]);
         $mockScheduleFactory = $this->createMock(Schedule\ScheduleFactory::class);
         $mockScheduleFactory
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('singleTaskSchedule')
             ->willReturn([$mockSchedule])
         ;
@@ -110,11 +110,11 @@ class ScheduleRunCommandTest extends TestCase
     {
         $mockEventRunner = $this->createMock(EventRunner::class);
         $mockEventRunner
-            ->expects($this->once())
+            ->expects(self::once())
             ->method('handle')
             ->with(
                 $output,
-                $this->callback(
+                self::callback(
                     function ($schedules) {
                         $isArray = \is_array($schedules);
                         $count = \count($schedules);
