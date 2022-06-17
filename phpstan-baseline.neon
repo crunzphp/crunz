@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#4 \\$preventOverlapping of class Crunz\\\\Application\\\\Query\\\\TaskInformation\\\\TaskInformationView constructor expects bool, mixed given\\.$#"
-			count: 1
-			path: src/Application/Query/TaskInformation/TaskInformationHandler.php
-
-		-
 			message: "#^Parameter \\#5 \\$timeZone of class Crunz\\\\Application\\\\Query\\\\TaskInformation\\\\TaskInformationView constructor expects DateTimeZone\\|null, mixed given\\.$#"
 			count: 1
 			path: src/Application/Query/TaskInformation/TaskInformationHandler.php
