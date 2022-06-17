@@ -13,6 +13,9 @@
 |
 */
 
+use Composer\InstalledVersions;
+use Crunz\Application;
+
 if (!\defined('CRUNZ_BIN')) {
     \define('CRUNZ_BIN', __FILE__);
 }
@@ -55,5 +58,8 @@ $loadAutoloader = static function () use($autoloadPaths): void {
 };
 $loadAutoloader();
 
-$application = new Crunz\Application('Crunz Command Line Interface', 'v3.3-dev');
+$application = new Application(
+    'Crunz Command Line Interface',
+    InstalledVersions::getPrettyVersion('crunzphp/crunz') ?? '1.0.x-dev',
+);
 $application->run();

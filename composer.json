@@ -36,6 +36,7 @@
     ],
     "require": {
         "php": ">=7.4",
+        "composer-runtime-api": "^2.0",
         "dragonmantank/cron-expression": "^3.1",
         "laravel/serializable-closure": "^1.0",
         "symfony/config": "^4.4.30 || ^5.4 || ^6.0",
