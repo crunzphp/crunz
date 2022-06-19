@@ -38,12 +38,12 @@ final class TaskInformationHandlerTest extends TestCase
             )
         );
 
-        $this->assertSame($expectedCommand, $taskInformation->command());
-        $this->assertSame($expectedDescription, $taskInformation->description());
-        $this->assertSame($expectedPreventOverlapping, $taskInformation->preventOverlapping());
-        $this->assertSame($expectedCronExpression, $taskInformation->cronExpression());
-        $this->assertSame($comparisonsTimeZone, $taskInformation->configTimeZone());
-        $this->assertEquals($expectedEventTimeZone, $taskInformation->timeZone());
+        self::assertSame($expectedCommand, $taskInformation->command());
+        self::assertSame($expectedDescription, $taskInformation->description());
+        self::assertSame($expectedPreventOverlapping, $taskInformation->preventOverlapping());
+        self::assertSame($expectedCronExpression, $taskInformation->cronExpression());
+        self::assertSame($comparisonsTimeZone, $taskInformation->configTimeZone());
+        self::assertEquals($expectedEventTimeZone, $taskInformation->timeZone());
     }
 
     /** @return iterable<string, array> */

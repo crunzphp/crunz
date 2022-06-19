@@ -19,7 +19,7 @@ final class TasksSourceRecognitionTest extends EndToEndTestCase
 
         $process = $environment->runCrunzCommand('schedule:list');
 
-        $this->assertStringNotContainsString(
+        self::assertStringNotContainsString(
             '[Deprecation] Probably you are relying on legacy tasks source recognition which',
             $process->getOutput()
         );
@@ -41,7 +41,7 @@ final class TasksSourceRecognitionTest extends EndToEndTestCase
 
         $process = $environment->runCrunzCommand('schedule:list');
 
-        $this->assertStringNotContainsString(
+        self::assertStringNotContainsString(
             '[Deprecation] Probably you are relying on legacy tasks source recognition which',
             $process->getOutput()
         );
@@ -50,7 +50,7 @@ final class TasksSourceRecognitionTest extends EndToEndTestCase
 
     private function assertHasTask(string $output): void
     {
-        $this->assertStringContainsString('PHP version', $output);
-        $this->assertStringContainsString('php -v', $output);
+        self::assertStringContainsString('PHP version', $output);
+        self::assertStringContainsString('php -v', $output);
     }
 }

@@ -406,129 +406,9 @@ parameters:
 			path: src/UserInterface/Cli/ClosureRunCommand.php
 
 		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
-			count: 3
-			path: tests/EndToEnd/ClosureRunTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertFileExists\\(\\)\\.$#"
-			count: 1
-			path: tests/EndToEnd/ConfigProviderTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\)\\.$#"
-			count: 1
-			path: tests/EndToEnd/ConfigProviderTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertTrue\\(\\)\\.$#"
-			count: 1
-			path: tests/EndToEnd/ConfigProviderTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
-			count: 2
-			path: tests/EndToEnd/ConfigRecognitionTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\)\\.$#"
-			count: 2
-			path: tests/EndToEnd/ConfigRecognitionTest.php
-
-		-
-			message: "#^Dynamic call to static method Crunz\\\\Tests\\\\TestCase\\\\EndToEndTestCase\\:\\:assertMatchesRegularExpression\\(\\)\\.$#"
-			count: 1
-			path: tests/EndToEnd/DebugTaskTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\)\\.$#"
-			count: 3
-			path: tests/EndToEnd/DebugTaskTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 2
-			path: tests/EndToEnd/DebugTaskTest.php
-
-		-
-			message: "#^Dynamic call to static method Crunz\\\\Tests\\\\TestCase\\\\EndToEndTestCase\\:\\:assertFileDoesNotExist\\(\\)\\.$#"
-			count: 1
-			path: tests/EndToEnd/LoggerTest.php
-
-		-
-			message: "#^Dynamic call to static method Crunz\\\\Tests\\\\TestCase\\\\EndToEndTestCase\\:\\:assertMatchesRegularExpression\\(\\)\\.$#"
-			count: 1
-			path: tests/EndToEnd/LoggerTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertEmpty\\(\\)\\.$#"
-			count: 1
-			path: tests/EndToEnd/LoggerTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertFileExists\\(\\)\\.$#"
-			count: 1
-			path: tests/EndToEnd/LoggerTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
-			count: 1
-			path: tests/EndToEnd/LoggerTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
-			count: 2
-			path: tests/EndToEnd/TasksSourceRecognitionTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringNotContainsString\\(\\)\\.$#"
-			count: 2
-			path: tests/EndToEnd/TasksSourceRecognitionTest.php
-
-		-
-			message: "#^Dynamic call to static method Crunz\\\\Tests\\\\TestCase\\\\EndToEndTestCase\\:\\:assertMatchesRegularExpression\\(\\)\\.$#"
-			count: 1
-			path: tests/EndToEnd/WrongTaskTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertFalse\\(\\)\\.$#"
-			count: 1
-			path: tests/EndToEnd/WrongTaskTest.php
-
-		-
 			message: "#^Method Crunz\\\\Tests\\\\EndToEnd\\\\WrongTaskTest\\:\\:scheduleInstanceProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/EndToEnd/WrongTaskTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 1
-			path: tests/Functional/ConfigProviderTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
-			count: 1
-			path: tests/Functional/ConfigProviderTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 1
-			path: tests/Functional/ScheduleListTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
-			count: 1
-			path: tests/Functional/ScheduleListTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 1
-			path: tests/Functional/ScheduleRunTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
-			count: 1
-			path: tests/Functional/ScheduleRunTest.php
 
 		-
 			message: "#^Call to function method_exists\\(\\) with Symfony\\\\Component\\\\Console\\\\Tester\\\\CommandTester and 'setInputs' will always evaluate to true\\.$#"
@@ -537,16 +417,6 @@ parameters:
 
 		-
 			message: "#^Cannot call method setInputStream\\(\\) on mixed\\.$#"
-			count: 1
-			path: tests/Functional/TaskGeneratorTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertFileExists\\(\\)\\.$#"
-			count: 1
-			path: tests/Functional/TaskGeneratorTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
 			count: 1
 			path: tests/Functional/TaskGeneratorTest.php
 
@@ -606,24 +476,9 @@ parameters:
 			path: tests/TestCase/TemporaryFile.php
 
 		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertEquals\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/Cron/AbstractCronExpressionTest.php
-
-		-
 			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Application\\\\Cron\\\\AbstractCronExpressionTest\\:\\:multipleRunDatesProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Unit/Application/Cron/AbstractCronExpressionTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertEquals\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Application/Query/TaskInformation/TaskInformationHandlerTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 5
-			path: tests/Unit/Application/Query/TaskInformation/TaskInformationHandlerTest.php
 
 		-
 			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Application\\\\Query\\\\TaskInformation\\\\TaskInformationHandlerTest\\:\\:taskInformationProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -631,54 +486,9 @@ parameters:
 			path: tests/Unit/Application/Query/TaskInformation/TaskInformationHandlerTest.php
 
 		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Configuration/ConfigurationTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertIsArray\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Configuration/ConfigurationTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNull\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Configuration/ConfigurationTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 6
-			path: tests/Unit/Configuration/ConfigurationTest.php
-
-		-
 			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Configuration\\\\ConfigurationTest\\:\\:createConfiguration\\(\\) has parameter \\$config with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Unit/Configuration/ConfigurationTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Configuration/FileParserTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:markTestSkipped\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Configuration/FileParserTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:callback\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Console/Command/ScheduleRunCommandTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\TestCase\\:\\:once\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Console/Command/ScheduleRunCommandTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/EnvFlags/EnvFlagsTest.php
 
 		-
 			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\EnvFlags\\\\EnvFlagsTest\\:\\:containerDebugProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -696,41 +506,6 @@ parameters:
 			path: tests/Unit/EventRunnerTest.php
 
 		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\TestCase\\:\\:once\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/EventRunnerTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertEquals\\(\\)\\.$#"
-			count: 21
-			path: tests/Unit/EventTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertFalse\\(\\)\\.$#"
-			count: 6
-			path: tests/Unit/EventTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 9
-			path: tests/Unit/EventTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/EventTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertTrue\\(\\)\\.$#"
-			count: 6
-			path: tests/Unit/EventTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:markTestSkipped\\(\\)\\.$#"
-			count: 6
-			path: tests/Unit/EventTest.php
-
-		-
 			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\EventTest\\:\\:deprecatedEveryProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Unit/EventTest.php
@@ -746,69 +521,14 @@ parameters:
 			path: tests/Unit/EventTest.php
 
 		-
-			message: "#^Dynamic call to static method Crunz\\\\Tests\\\\TestCase\\\\UnitTestCase\\:\\:assertDirectoryDoesNotExist\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Filesystem/FilesystemTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertDirectoryExists\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Filesystem/FilesystemTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertFileExists\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Filesystem/FilesystemTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 4
-			path: tests/Unit/Filesystem/FilesystemTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringContainsString\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Filesystem/FilesystemTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertStringEqualsFile\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Filesystem/FilesystemTest.php
-
-		-
 			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Filesystem\\\\FilesystemTest\\:\\:fileExistsProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Unit/Filesystem/FilesystemTest.php
 
 		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Finder/FinderTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertContainsOnlyInstancesOf\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Finder/FinderTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertCount\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Finder/FinderTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:markTestSkipped\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Finder/FinderTest.php
-
-		-
 			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Finder\\\\FinderTest\\:\\:tasksProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Unit/Finder/FinderTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertCount\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Infrastructure/Psr/Logger/EnabledLoggerDecoratorTest.php
 
 		-
 			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Infrastructure\\\\Psr\\\\Logger\\\\EnabledLoggerDecoratorTest\\:\\:disabledChannelProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -821,49 +541,14 @@ parameters:
 			path: tests/Unit/Infrastructure/Psr/Logger/EnabledLoggerDecoratorTest.php
 
 		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Infrastructure/Psr/Logger/PsrStreamLoggerFactoryTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertEmpty\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Infrastructure/Psr/Logger/PsrStreamLoggerTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 5
-			path: tests/Unit/Infrastructure/Psr/Logger/PsrStreamLoggerTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 4
-			path: tests/Unit/InvokerTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\TestCase\\:\\:exactly\\(\\)\\.$#"
-			count: 4
-			path: tests/Unit/Logger/ConsoleLoggerTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$config of class Crunz\\\\Tests\\\\TestCase\\\\FakeConfiguration constructor expects array\\<int\\|string, array\\|bool\\|string\\|null\\>, array\\<string, mixed\\> given\\.$#"
 			count: 1
 			path: tests/Unit/Logger/LoggerFactoryTest.php
 
 		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Output/OutputFactoryTest.php
-
-		-
 			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Output\\\\OutputFactoryTest\\:\\:inputProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Unit/Output/OutputFactoryTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 3
-			path: tests/Unit/Path/PathTest.php
 
 		-
 			message: "#^Call to function is_string\\(\\) with string will always evaluate to true\\.$#"
@@ -886,26 +571,6 @@ parameters:
 			path: tests/Unit/Pinger/PingableTest.php
 
 		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Schedule/ScheduleFactoryTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertEquals\\(\\)\\.$#"
-			count: 6
-			path: tests/Unit/ScheduleTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Service/AbstractClosureSerializerTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 2
-			path: tests/Unit/Task/TaskNumberTest.php
-
-		-
 			message: "#^Method Crunz\\\\Tests\\\\Unit\\\\Task\\\\TaskNumberTest\\:\\:nonNumericProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/Unit/Task/TaskNumberTest.php
@@ -924,18 +589,3 @@ parameters:
 			message: "#^Parameter \\#1 \\$value of static method Crunz\\\\Task\\\\TaskNumber\\:\\:fromString\\(\\) expects string, mixed given\\.$#"
 			count: 1
 			path: tests/Unit/Task/TaskNumberTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/Timezone/ProviderTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/UserInterface/Cli/ClosureRunCommandTest.php
-
-		-
-			message: "#^Dynamic call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertTrue\\(\\)\\.$#"
-			count: 1
-			path: tests/Unit/UserInterface/Cli/ClosureRunCommandTest.php

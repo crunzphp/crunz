@@ -25,6 +25,14 @@ final class Process
         return new self($process);
     }
 
+    /** @param string[] $command */
+    public static function fromArrayCommand(array $command): self
+    {
+        $process = new SymfonyProcess($command);
+
+        return new self($process);
+    }
+
     /** @param callable|null $callback */
     public function start($callback = null): void
     {
@@ -81,5 +89,12 @@ final class Process
     {
         return $this->process
             ->getErrorOutput();
+    }
+
+    public function commandLine(): string
+    {
+        return $this->process
+            ->getCommandLine()
+        ;
     }
 }

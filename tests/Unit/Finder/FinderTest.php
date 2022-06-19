@@ -56,8 +56,8 @@ final class FinderTest extends TestCase
         $finder = new Finder();
         $foundFiles = $finder->find($tasksDirectory, $suffix);
 
-        $this->assertCount(\count($files), $foundFiles);
-        $this->assertContainsOnlyInstancesOf(\SplFileInfo::class, $foundFiles);
+        self::assertCount(\count($files), $foundFiles);
+        self::assertContainsOnlyInstancesOf(\SplFileInfo::class, $foundFiles);
     }
 
     /**
@@ -98,7 +98,7 @@ final class FinderTest extends TestCase
         if ($this->isWindows()) {
             // Committed symlinks require extra steps to work on Windows
             // https://stackoverflow.com/questions/5917249/git-symlinks-in-windows
-            $this->markTestSkipped('Required Unix-based OS.');
+            self::markTestSkipped('Required Unix-based OS.');
         }
 
         $fixtureDirectory = $this->fixtureDirectory;
@@ -108,9 +108,9 @@ final class FinderTest extends TestCase
         $finder = new Finder();
         $foundFiles = $finder->find($fixtureDirectory, 'Here.php');
 
-        $this->assertCount(2, $foundFiles);
-        $this->assertArrayHasKey($directFile, $foundFiles);
-        $this->assertArrayHasKey($symlinkFileDestination, $foundFiles);
+        self::assertCount(2, $foundFiles);
+        self::assertArrayHasKey($directFile, $foundFiles);
+        self::assertArrayHasKey($symlinkFileDestination, $foundFiles);
     }
 
     private function createFiles(Path ...$files): void

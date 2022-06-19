@@ -34,14 +34,14 @@ final class DebugTaskTest extends EndToEndTestCase
         $this->assertHeader('example_run_dates', $contentLines);
 
         foreach ($expectedValues as $expectedKey => $expectedValue) {
-            $this->assertArrayHasKey($expectedKey, $contentLines);
-            $this->assertSame($expectedValue, $contentLines[$expectedKey]);
+            self::assertArrayHasKey($expectedKey, $contentLines);
+            self::assertSame($expectedValue, $contentLines[$expectedKey]);
         }
 
         for ($i = 1; $i <= 5; ++$i) {
             $key = "_{$i}";
-            $this->assertArrayHasKey($key, $contentLines);
-            $this->assertMatchesRegularExpression(
+            self::assertArrayHasKey($key, $contentLines);
+            self::assertMatchesRegularExpression(
                 '/^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:00 UTC$/',
                 $contentLines[$key]
             );
@@ -90,7 +90,7 @@ final class DebugTaskTest extends EndToEndTestCase
     /** @param array<string,string> $lines */
     private function assertHeader(string $header, array $lines): void
     {
-        $this->assertArrayHasKey($header, $lines);
-        $this->assertSame('', $lines[$header]);
+        self::assertArrayHasKey($header, $lines);
+        self::assertSame('', $lines[$header]);
     }
 }

@@ -9,7 +9,7 @@ if ('' === $version) {
 $dependenciesEnv = $_SERVER['argv'][2] ?? '';
 $defaultComposerFlags = $_SERVER['argv'][3] ?? '';
 $composerFilePath = __DIR__ . DIRECTORY_SEPARATOR . 'composer.json';
-$ignoredPackages = ['symfony/error-handler'];
+$ignoredPackages = ['symfony/error-handler', 'symfony/phpunit-bridge'];
 $changeVersion = static function (
     array $packages
 ) use (

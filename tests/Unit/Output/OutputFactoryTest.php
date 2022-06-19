@@ -22,7 +22,7 @@ final class OutputFactoryTest extends TestCase
 
         $output = $factory->createOutput();
 
-        $this->assertSame($expectedVerbosity, $output->getVerbosity());
+        self::assertSame($expectedVerbosity, $output->getVerbosity());
     }
 
     /** @return iterable<string,array> */

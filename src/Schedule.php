@@ -6,6 +6,7 @@ namespace Crunz;
 
 use Crunz\Pinger\PingableInterface;
 use Crunz\Pinger\PingableTrait;
+use Crunz\Process\Process;
 
 class Schedule implements PingableInterface
 {
@@ -194,24 +195,45 @@ class Schedule implements PingableInterface
         }
     }
 
-    /**
-     * Compile parameters for a command.
-     *
-     * @param string[] $parameters
-     *
-     * @return string
-     */
-    protected function compileParameters(array $parameters)
+    /** @param array<int|string,int|string|float|bool> $parameters */
+    protected function compileParameters(array $parameters): string
     {
-        return \implode(
-            ' ',
-            \array_map(
-                function ($value, $key) {
-                    return \is_numeric($key) ? $value : "{$key}=" . (\is_numeric($value) ? $value : ProcessUtils::escapeArgument($value));
+        $isStrings = \array_reduce(
+            $parameters,
+            static fn (bool $carry, $item): bool => $carry && true === \is_string($item),
+            true,
+        );
+        if (false === $isStrings) {
+            @\trigger_error(
+                'Passing non-string parameters is deprecated since v3.3, convert all parameters to string.',
+                \E_USER_DEPRECATED
+            );
+
+            $parameters = \array_map(
+                static function ($value): string {
+                    if (true === \is_bool($value)) {
+                        return true === $value
+                            ? '1'
+                            : '0'
+                        ;
+                    }
+
+                    return (string) $value;
                 },
                 $parameters,
-                \array_keys($parameters)
-            )
-        );
+            );
+        }
+
+        $flatParameters = [];
+        /** @var string[] $parameters */
+        foreach ($parameters as $key => $value) {
+            if (false === \is_numeric($key)) {
+                $flatParameters[] = $key;
+            }
+
+            $flatParameters[] = $value;
+        }
+
+        return Process::fromArrayCommand($flatParameters)->commandLine();
     }
 }

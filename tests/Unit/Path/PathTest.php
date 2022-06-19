@@ -30,7 +30,7 @@ final class PathTest extends TestCase
 
         $path = Path::create($parts);
 
-        $this->assertSame(
+        self::assertSame(
             \implode(DIRECTORY_SEPARATOR, $parts),
             $path->toString()
         );
@@ -48,7 +48,7 @@ final class PathTest extends TestCase
         ];
         $path = Path::fromStrings(...$parts);
 
-        $this->assertSame(
+        self::assertSame(
             \implode(DIRECTORY_SEPARATOR, $parts),
             $path->toString()
         );
@@ -64,7 +64,7 @@ final class PathTest extends TestCase
 
         $path = Path::create($parts);
 
-        $this->assertSame(
+        self::assertSame(
             'home' . DIRECTORY_SEPARATOR . 'user',
             $path->toString()
         );

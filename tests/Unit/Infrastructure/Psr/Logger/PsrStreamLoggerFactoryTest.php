@@ -22,7 +22,7 @@ final class PsrStreamLoggerFactoryTest extends UnitTestCase
         $logger = $psrStreamLoggerFactory->create(new FakeConfiguration());
 
         // Assert
-        $this->assertInstanceOf(EnabledLoggerDecorator::class, $logger);
+        self::assertInstanceOf(EnabledLoggerDecorator::class, $logger);
     }
 
     private function createStreamLoggerFactory(): PsrStreamLoggerFactory

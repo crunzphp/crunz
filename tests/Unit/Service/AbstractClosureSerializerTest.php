@@ -19,7 +19,7 @@ abstract class AbstractClosureSerializerTest extends UnitTestCase
         $code = $serializer->closureCode($testClosure);
 
         // Assert
-        $this->assertSame('static function (): \stdClass {return new \stdClass(); }', $code);
+        self::assertSame('static function (): \stdClass {return new \stdClass(); }', $code);
     }
 
     abstract protected function createSerializer(): ClosureSerializerInterface;

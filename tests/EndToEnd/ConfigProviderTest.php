@@ -22,9 +22,9 @@ final class ConfigProviderTest extends EndToEndTestCase
         $configPath = Path::fromStrings($environment->rootDirectory(), ConfigGeneratorCommand::CONFIG_FILE_NAME);
         $filesystem = new Filesystem();
 
-        $this->assertTrue($process->isSuccessful(), "Process output: {$process->getOutput()}{$process->errorOutput()}");
-        $this->assertFileExists($configPath->toString());
-        $this->assertIsArray(
+        self::assertTrue($process->isSuccessful(), "Process output: {$process->getOutput()}{$process->errorOutput()}");
+        self::assertFileExists($configPath->toString());
+        self::assertIsArray(
             Yaml::parse(
                 $filesystem->readContent(
                     $configPath->toString()

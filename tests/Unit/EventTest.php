@@ -48,28 +48,28 @@ final class EventTest extends UnitTestCase
     public function test_unit_methods(): void
     {
         $e = new Event($this->id, 'php foo');
-        $this->assertEquals('0 * * * *', $e->hourly()->getExpression());
+        self::assertEquals('0 * * * *', $e->hourly()->getExpression());
 
         $e = new Event($this->id, 'php bar');
-        $this->assertEquals('0 0 * * *', $e->daily()->getExpression());
+        self::assertEquals('0 0 * * *', $e->daily()->getExpression());
 
         $e = new Event($this->id, 'php foo');
-        $this->assertEquals('45 15 * * *', $e->dailyAt('15:45')->getExpression());
+        self::assertEquals('45 15 * * *', $e->dailyAt('15:45')->getExpression());
 
         $e = new Event($this->id, 'php bar');
-        $this->assertEquals('0 4,8 * * *', $e->twiceDaily(4, 8)->getExpression());
+        self::assertEquals('0 4,8 * * *', $e->twiceDaily(4, 8)->getExpression());
 
         $e = new Event($this->id, 'php foo');
-        $this->assertEquals('0 0 * * 0', $e->weekly()->getExpression());
+        self::assertEquals('0 0 * * 0', $e->weekly()->getExpression());
 
         $e = new Event($this->id, 'php bar');
-        $this->assertEquals('0 0 1 * *', $e->monthly()->getExpression());
+        self::assertEquals('0 0 1 * *', $e->monthly()->getExpression());
 
         $e = new Event($this->id, 'php foo');
-        $this->assertEquals('0 0 1 */3 *', $e->quarterly()->getExpression());
+        self::assertEquals('0 0 1 */3 *', $e->quarterly()->getExpression());
 
         $e = new Event($this->id, 'php bar');
-        $this->assertEquals('0 0 1 1 *', $e->yearly()->getExpression());
+        self::assertEquals('0 0 1 1 *', $e->yearly()->getExpression());
     }
 
     /**
@@ -80,13 +80,13 @@ final class EventTest extends UnitTestCase
         $timezone = new \DateTimeZone('UTC');
 
         $e = new Event($this->id, 'php foo');
-        $this->assertEquals('30 1 11 4 *', $e->on('01:30 11-04-2016')->getExpression());
+        self::assertEquals('30 1 11 4 *', $e->on('01:30 11-04-2016')->getExpression());
 
         $e = new Event($this->id, 'php bar');
-        $this->assertEquals('45 13 * * *', $e->on('13:45')->getExpression());
+        self::assertEquals('45 13 * * *', $e->on('13:45')->getExpression());
 
         $e = new Event($this->id, 'php foo');
-        $this->assertEquals('45 13 * * *', $e->at('13:45')->getExpression());
+        self::assertEquals('45 13 * * *', $e->at('13:45')->getExpression());
 
         $e = new Event($this->id, 'php bar');
 
@@ -96,13 +96,13 @@ final class EventTest extends UnitTestCase
           ->month('1-8')
           ->dayOfWeek('mon,wed,thu');
 
-        $this->assertEquals('12,24,35 1-5,4,8 1,6,12,19,25 1-8 mon,wed,thu', $e->getExpression());
+        self::assertEquals('12,24,35 1-5,4,8 1,6,12,19,25 1-8 mon,wed,thu', $e->getExpression());
 
         $e = new Event($this->id, 'php foo');
-        $this->assertEquals('45 13 * * *', $e->cron('45 13 * * *')->getExpression());
+        self::assertEquals('45 13 * * *', $e->cron('45 13 * * *')->getExpression());
 
         $e = new Event($this->id, 'php foo');
-        $this->assertTrue($e->isDue($timezone));
+        self::assertTrue($e->isDue($timezone));
     }
 
     /**
@@ -111,22 +111,22 @@ final class EventTest extends UnitTestCase
     public function test_weekday_methods(): void
     {
         $e = new Event($this->id, 'php qux');
-        $this->assertEquals('* * * * 2', $e->tuesdays()->getExpression());
+        self::assertEquals('* * * * 2', $e->tuesdays()->getExpression());
 
         $e = new Event($this->id, 'php flob');
-        $this->assertEquals('* * * * 3', $e->wednesdays()->getExpression());
+        self::assertEquals('* * * * 3', $e->wednesdays()->getExpression());
 
         $e = new Event($this->id, 'php foo');
-        $this->assertEquals('* * * * 4', $e->thursdays()->getExpression());
+        self::assertEquals('* * * * 4', $e->thursdays()->getExpression());
 
         $e = new Event($this->id, 'php bar');
-        $this->assertEquals('* * * * 5', $e->fridays()->getExpression());
+        self::assertEquals('* * * * 5', $e->fridays()->getExpression());
 
         $e = new Event($this->id, 'php baz');
-        $this->assertEquals('* * * * 1-5', $e->weekdays()->getExpression());
+        self::assertEquals('* * * * 1-5', $e->weekdays()->getExpression());
 
         $e = new Event($this->id, 'php bla');
-        $this->assertEquals('30 1 * * 2', $e->weeklyOn('2', '01:30')->getExpression());
+        self::assertEquals('30 1 * * 2', $e->weeklyOn('2', '01:30')->getExpression());
     }
 
     public function test_cron_life_time(): void
@@ -134,7 +134,7 @@ final class EventTest extends UnitTestCase
         $timezone = new \DateTimeZone('UTC');
 
         $event = new Event($this->id, 'php foo');
-        $this->assertFalse(
+        self::assertFalse(
             $event
                 ->between('2015-01-01', '2015-01-02')
                 ->isDue($timezone)
@@ -144,7 +144,7 @@ final class EventTest extends UnitTestCase
         $futureDate = new \DateTimeImmutable('+1 year');
 
         $event = new Event($this->id, 'php foo');
-        $this->assertFalse(
+        self::assertFalse(
             $event
                 ->from($futureDate->format('Y-m-d'))
                 ->isDue($timezone)
@@ -152,7 +152,7 @@ final class EventTest extends UnitTestCase
         ;
 
         $event = new Event($this->id, 'php foo');
-        $this->assertFalse(
+        self::assertFalse(
             $event
                 ->to('2015-01-01')
                 ->isDue($timezone)
@@ -165,16 +165,16 @@ final class EventTest extends UnitTestCase
         $timezone = new \DateTimeZone('UTC');
 
         $e = new Event($this->id, 'php foo');
-        $this->assertFalse($e->cron('* * * * *')->when(function () { return false; })->isDue($timezone));
+        self::assertFalse($e->cron('* * * * *')->when(function () { return false; })->isDue($timezone));
 
         $e = new Event($this->id, 'php foo');
-        $this->assertTrue($e->cron('* * * * *')->when(function () { return true; })->isDue($timezone));
+        self::assertTrue($e->cron('* * * * *')->when(function () { return true; })->isDue($timezone));
 
         $e = new Event($this->id, 'php foo');
-        $this->assertFalse($e->cron('* * * * *')->skip(function () { return true; })->isDue($timezone));
+        self::assertFalse($e->cron('* * * * *')->skip(function () { return true; })->isDue($timezone));
 
         $e = new Event($this->id, 'php foo');
-        $this->assertTrue($e->cron('* * * * *')->skip(function () { return false; })->isDue($timezone));
+        self::assertTrue($e->cron('* * * * *')->skip(function () { return false; })->isDue($timezone));
     }
 
     /** @test */
@@ -191,7 +191,7 @@ final class EventTest extends UnitTestCase
     {
         $e = new Event($this->id, 'php -i');
 
-        $this->assertSame('php -i', $e->buildCommand());
+        self::assertSame('php -i', $e->buildCommand());
     }
 
     public function test_is_due(): void
@@ -200,15 +200,15 @@ final class EventTest extends UnitTestCase
         $this->setClockNow(new \DateTimeImmutable('2015-04-12 00:00:00', $timezone));
 
         $e = new Event($this->id, 'php foo');
-        $this->assertTrue($e->sundays()->isDue($timezone));
+        self::assertTrue($e->sundays()->isDue($timezone));
 
         $e = new Event($this->id, 'php bar');
-        $this->assertEquals('0 19 * * 6', $e->saturdays()->at('19:00')->timezone('EST')->getExpression());
-        $this->assertTrue($e->isDue($timezone));
+        self::assertEquals('0 19 * * 6', $e->saturdays()->at('19:00')->timezone('EST')->getExpression());
+        self::assertTrue($e->isDue($timezone));
 
         $e = new Event($this->id, 'php bar');
         $this->setClockNow(new \DateTimeImmutable(\date('Y') . '-04-12 00:00:00'));
-        $this->assertTrue($e->on('00:00 ' . \date('Y') . '-04-12')->isDue($timezone));
+        self::assertTrue($e->on('00:00 ' . \date('Y') . '-04-12')->isDue($timezone));
     }
 
     public function test_name(): void
@@ -216,14 +216,14 @@ final class EventTest extends UnitTestCase
         $e = new Event($this->id, 'php foo');
         $e->description('Testing Cron');
 
-        $this->assertEquals('Testing Cron', $e->description);
+        self::assertEquals('Testing Cron', $e->description);
     }
 
     /** @test */
     public function in_change_working_directory_in_build_command_on_windows(): void
     {
         if (!$this->isWindows()) {
-            $this->markTestSkipped('Required Windows OS.');
+            self::markTestSkipped('Required Windows OS.');
         }
 
         $workingDir = 'C:\\windows\\temp';
@@ -231,21 +231,21 @@ final class EventTest extends UnitTestCase
 
         $event->in($workingDir);
 
-        $this->assertSame("cd /d {$workingDir} & php -v", $event->buildCommand());
+        self::assertSame("cd /d {$workingDir} & php -v", $event->buildCommand());
     }
 
     /** @test */
     public function in_change_working_directory_in_build_command_on_unix(): void
     {
         if ($this->isWindows()) {
-            $this->markTestSkipped('Required Unix-based OS.');
+            self::markTestSkipped('Required Unix-based OS.');
         }
 
         $event = new Event($this->id, 'php -v');
 
         $event->in('/tmp');
 
-        $this->assertSame('cd /tmp; php -v', $event->buildCommand());
+        self::assertSame('cd /tmp; php -v', $event->buildCommand());
     }
 
     /** @test */
@@ -255,28 +255,28 @@ final class EventTest extends UnitTestCase
 
         $event->on('Thursday 8:00');
 
-        $this->assertSame('0 8 * * *', $event->getExpression());
+        self::assertSame('0 8 * * *', $event->getExpression());
     }
 
     /** @test */
     public function setting_user_prepend_sudo_to_command(): void
     {
         if ($this->isWindows()) {
-            $this->markTestSkipped('Required Unix-based OS.');
+            self::markTestSkipped('Required Unix-based OS.');
         }
 
         $event = new Event($this->id, 'php -v');
 
         $event->user('john');
 
-        $this->assertSame('sudo -u john php -v', $event->buildCommand());
+        self::assertSame('sudo -u john php -v', $event->buildCommand());
     }
 
     /** @test */
     public function custom_user_and_cwd(): void
     {
         if ($this->isWindows()) {
-            $this->markTestSkipped('Required Unix-based OS.');
+            self::markTestSkipped('Required Unix-based OS.');
         }
 
         $event = new Event($this->id, 'php -i');
@@ -284,14 +284,14 @@ final class EventTest extends UnitTestCase
         $event->user('john');
         $event->in('/var/test');
 
-        $this->assertSame('sudo -u john cd /var/test; sudo -u john php -i', $event->buildCommand());
+        self::assertSame('sudo -u john cd /var/test; sudo -u john php -i', $event->buildCommand());
     }
 
     /** @test */
     public function not_implemented_user_change_on_windows(): void
     {
         if (!$this->isWindows()) {
-            $this->markTestSkipped('Required Windows OS.');
+            self::markTestSkipped('Required Windows OS.');
         }
 
         $this->expectException(\Crunz\Exception\NotImplementedException::class);
@@ -324,7 +324,7 @@ final class EventTest extends UnitTestCase
 
         $command = $event->buildCommand();
 
-        $this->assertSame(PHP_BINARY . " {$crunzBin} closure:run {$queryClosure}", $command);
+        self::assertSame(PHP_BINARY . " {$crunzBin} closure:run {$queryClosure}", $command);
     }
 
     /** @test */
@@ -341,12 +341,12 @@ final class EventTest extends UnitTestCase
 
         $wholeOutput = $event->wholeOutput();
 
-        $this->assertStringContainsString(
+        self::assertStringContainsString(
             'Test output',
             $wholeOutput,
             'Missing standard output'
         );
-        $this->assertStringContainsString(
+        self::assertStringContainsString(
             'Exception output',
             $wholeOutput,
             'Missing error output'
@@ -363,7 +363,7 @@ final class EventTest extends UnitTestCase
     public function task_will_prevent_overlapping_with_semaphore_store(): void
     {
         if (!\extension_loaded('sysvsem')) {
-            $this->markTestSkipped('Semaphore extension not installed.');
+            self::markTestSkipped('Semaphore extension not installed.');
         }
 
         $this->assertPreventOverlapping(new SemaphoreStore());
@@ -382,7 +382,7 @@ final class EventTest extends UnitTestCase
         $methodCallClosure();
 
         // Assert
-        $this->assertSame($expectedCronExpression, $event->getExpression());
+        self::assertSame($expectedCronExpression, $event->getExpression());
     }
 
     public function test_hourly_at_with_valid_minute(): void
@@ -395,7 +395,7 @@ final class EventTest extends UnitTestCase
         $event->hourlyAt($minute);
 
         // Assert
-        $this->assertSame("{$minute} * * * *", $event->getExpression());
+        self::assertSame("{$minute} * * * *", $event->getExpression());
     }
 
     /** @dataProvider hourlyAtInvalidProvider */
@@ -461,7 +461,7 @@ final class EventTest extends UnitTestCase
 
         $event->start();
 
-        $this->assertFalse($event2->isDue(new \DateTimeZone('UTC')));
+        self::assertFalse($event2->isDue(new \DateTimeZone('UTC')));
     }
 
     private function createPreventOverlappingEvent(BlockingStoreInterface $store = null): Event

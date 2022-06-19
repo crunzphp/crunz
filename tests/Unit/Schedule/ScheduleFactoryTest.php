@@ -27,7 +27,7 @@ final class ScheduleFactoryTest extends TestCase
         /** @var Schedule $firstSchedule */
         $firstSchedule = \reset($schedules);
 
-        $this->assertSame([$event1], $firstSchedule->events());
+        self::assertSame([$event1], $firstSchedule->events());
     }
 
     /** @test */
@@ -42,7 +42,7 @@ final class ScheduleFactoryTest extends TestCase
 
         $event = $factory->singleTask(TaskNumber::fromString('1'), $schedule);
 
-        $this->assertSame($event1, $event);
+        self::assertSame($event1, $event);
     }
 
     /** @test */

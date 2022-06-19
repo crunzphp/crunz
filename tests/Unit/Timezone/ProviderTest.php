@@ -21,6 +21,6 @@ class ProviderTest extends TestCase
         $provider = new Provider();
         $timezone = $provider->defaultTimezone();
 
-        $this->assertSame($timezoneName, $timezone->getName());
+        self::assertSame($timezoneName, $timezone->getName());
     }
 }

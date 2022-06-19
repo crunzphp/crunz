@@ -24,7 +24,7 @@ final class PsrStreamLoggerTest extends TestCase
 
         $logger->log($level, $message);
 
-        $this->assertSame(
+        self::assertSame(
             $this->formatLine(
                 $now,
                 $message,
@@ -43,7 +43,7 @@ final class PsrStreamLoggerTest extends TestCase
 
         $logger->log($level, $message);
 
-        $this->assertEmpty($tempFile->contents());
+        self::assertEmpty($tempFile->contents());
     }
 
     /** @dataProvider supportedLevelsProvider */
@@ -61,7 +61,7 @@ final class PsrStreamLoggerTest extends TestCase
 
         $logger->log($level, $message);
 
-        $this->assertSame(
+        self::assertSame(
             $this->formatLine(
                 $now,
                 $message,
@@ -89,7 +89,7 @@ final class PsrStreamLoggerTest extends TestCase
 
         $logger->log($level, $message);
 
-        $this->assertSame(
+        self::assertSame(
             $this->formatLine(
                 $now,
                 $message,
@@ -120,7 +120,7 @@ final class PsrStreamLoggerTest extends TestCase
 
         $logger->log($level, $message);
 
-        $this->assertSame(
+        self::assertSame(
             $this->formatLine(
                 $now,
                 $message,
@@ -143,7 +143,7 @@ final class PsrStreamLoggerTest extends TestCase
 
         $logger->log($level, $message);
 
-        $this->assertSame(
+        self::assertSame(
             $this->formatLine(
                 $now,
                 $message,

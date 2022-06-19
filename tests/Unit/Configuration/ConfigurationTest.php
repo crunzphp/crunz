@@ -23,7 +23,7 @@ final class ConfigurationTest extends TestCase
             ]
         );
 
-        $this->assertSame(1234, $configuration->get('smtp.port'));
+        self::assertSame(1234, $configuration->get('smtp.port'));
     }
 
     /** @test */
@@ -31,8 +31,8 @@ final class ConfigurationTest extends TestCase
     {
         $configuration = $this->createConfiguration();
 
-        $this->assertNull($configuration->get('wrong'));
-        $this->assertSame('anon', $configuration->get('notExist', 'anon'));
+        self::assertNull($configuration->get('wrong'));
+        self::assertSame('anon', $configuration->get('notExist', 'anon'));
     }
 
     /** @test */
@@ -43,7 +43,7 @@ final class ConfigurationTest extends TestCase
         $expectedPath = Path::fromStrings($cwd, $sourcePath->toString());
         $configuration = $this->createConfiguration(['source' => $sourcePath->toString()], $cwd);
 
-        $this->assertSame($expectedPath->toString(), $configuration->getSourcePath());
+        self::assertSame($expectedPath->toString(), $configuration->getSourcePath());
     }
 
     /** @test */
@@ -53,7 +53,7 @@ final class ConfigurationTest extends TestCase
         $expectedPath = Path::fromStrings($cwd, 'tasks');
         $configuration = $this->createConfiguration([], $cwd);
 
-        $this->assertSame($expectedPath->toString(), $configuration->getSourcePath());
+        self::assertSame($expectedPath->toString(), $configuration->getSourcePath());
     }
 
     /** @test */
@@ -68,7 +68,7 @@ final class ConfigurationTest extends TestCase
 
         $newConfiguration = $configuration->withNewEntry($keyName, $expectedValue);
 
-        $this->assertSame($newConfiguration->get($keyName), $expectedValue);
+        self::assertSame($newConfiguration->get($keyName), $expectedValue);
     }
 
     /** @test */
@@ -85,9 +85,9 @@ final class ConfigurationTest extends TestCase
         $newConfiguration = $configuration->withNewEntry("{$arrayName}.{$keyName}", $expectedValue);
         $expectedArray = $newConfiguration->get($arrayName);
 
-        $this->assertIsArray($expectedArray);
-        $this->assertArrayHasKey($keyName, $expectedArray);
-        $this->assertSame($expectedArray[$keyName], $expectedValue);
+        self::assertIsArray($expectedArray);
+        self::assertArrayHasKey($keyName, $expectedArray);
+        self::assertSame($expectedArray[$keyName], $expectedValue);
     }
 
     /** @param array<string,string|array> $config */

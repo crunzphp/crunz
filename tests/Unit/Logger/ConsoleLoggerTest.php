@@ -21,7 +21,7 @@ final class ConsoleLoggerTest extends TestCase
         $expectedCalls = ($ioVerbosity >= ConsoleLoggerInterface::VERBOSITY_NORMAL) ? 1 : 0;
         $mockSymfonyStyle = $this->mockSymfonyStyle($ioVerbosity);
         $mockSymfonyStyle
-            ->expects($this->exactly($expectedCalls))
+            ->expects(self::exactly($expectedCalls))
             ->method('writeln')
         ;
 
@@ -38,7 +38,7 @@ final class ConsoleLoggerTest extends TestCase
         $expectedCalls = ($ioVerbosity >= ConsoleLoggerInterface::VERBOSITY_VERBOSE) ? 1 : 0;
         $mockSymfonyStyle = $this->mockSymfonyStyle($ioVerbosity);
         $mockSymfonyStyle
-            ->expects($this->exactly($expectedCalls))
+            ->expects(self::exactly($expectedCalls))
             ->method('writeln')
         ;
 
@@ -55,7 +55,7 @@ final class ConsoleLoggerTest extends TestCase
         $expectedCalls = ($ioVerbosity >= ConsoleLoggerInterface::VERBOSITY_VERY_VERBOSE) ? 1 : 0;
         $mockSymfonyStyle = $this->mockSymfonyStyle($ioVerbosity);
         $mockSymfonyStyle
-            ->expects($this->exactly($expectedCalls))
+            ->expects(self::exactly($expectedCalls))
             ->method('writeln')
         ;
 
@@ -72,7 +72,7 @@ final class ConsoleLoggerTest extends TestCase
         $expectedCalls = ($ioVerbosity >= ConsoleLoggerInterface::VERBOSITY_DEBUG) ? 1 : 0;
         $mockSymfonyStyle = $this->mockSymfonyStyle($ioVerbosity);
         $mockSymfonyStyle
-            ->expects($this->exactly($expectedCalls))
+            ->expects(self::exactly($expectedCalls))
             ->method('writeln')
         ;
 

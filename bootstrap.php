@@ -2,6 +2,10 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+if (!\defined('IS_WINDOWS')) {
+    \define('IS_WINDOWS', PHP_OS_FAMILY === "Windows");
+}
+
 // Disable deprecation helper
 $envFlags = new \Crunz\EnvFlags\EnvFlags();
 $envFlags->disableDeprecationHandler();

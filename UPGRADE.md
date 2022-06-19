@@ -1,3 +1,19 @@
+# Upgrading from v3.2 to v3.3
+
+## Pass only string parameters to `\Crunz\Schedule::run`
+
+Convert this:
+```php
+$schedule = new Schedule();
+$schedule->run('php', ['-v' => true, 2]);
+```
+
+into this:
+```php
+$schedule = new Schedule();
+$schedule->run('php', ['-v' => '1', '2']);
+```
+
 # Upgrading from v1.12 to v2.0
 
 ## Stop using `mail` transport for mailer
