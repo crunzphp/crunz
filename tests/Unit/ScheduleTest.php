@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Crunz\Tests\Unit;
 
+use Crunz\Event;
 use Crunz\Schedule;
 use Crunz\Tests\TestCase\UnitTestCase;
 use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
@@ -32,7 +33,7 @@ final class ScheduleTest extends UnitTestCase
         $event = $schedule->run($command, $parameters);
 
         // Assert
-        self::assertSame($expectedCommand, $event->getCommand());
+        $this->assertCommand($expectedCommand, $event);
     }
 
     /**
@@ -61,7 +62,7 @@ final class ScheduleTest extends UnitTestCase
         $event = $schedule->run($command, $parameters);
 
         // Assert
-        self::assertSame($expectedCommand, $event->getCommand());
+        $this->assertCommand($expectedCommand, $event);
     }
 
     /** @return iterable<string, array{\Closure}> */
@@ -142,5 +143,18 @@ final class ScheduleTest extends UnitTestCase
                 'expectedCommand' => "/usr/bin/php '-v' '3.14'",
             ],
         ];
+    }
+
+    private function assertCommand(string $expectedCommand, Event $event): void
+    {
+        if (IS_WINDOWS === true) {
+            $expectedCommand = \str_replace(
+                "'",
+                '',
+                $expectedCommand,
+            );
+        }
+
+        self::assertSame($expectedCommand, $event->getCommand());
     }
 }

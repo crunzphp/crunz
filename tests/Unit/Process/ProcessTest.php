@@ -26,6 +26,19 @@ final class ProcessTest extends UnitTestCase
         );
 
         // Assert
-        self::assertSame($expectedCommandLine, $process->commandLine());
+        $this->assertCommand($expectedCommandLine, $process);
+    }
+
+    private function assertCommand(string $expectedCommand, Process $process): void
+    {
+        if (IS_WINDOWS === true) {
+            $expectedCommand = \str_replace(
+                "'",
+                '',
+                $expectedCommand,
+            );
+        }
+
+        self::assertSame($expectedCommand, $process->commandLine());
     }
 }
