@@ -62,12 +62,9 @@ class ScheduleListCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->options = $input->getOptions();
-        $this->arguments = $input->getArguments();
-        /** @var \SplFileInfo[] $tasks */
-        $tasks = $this->taskCollection
-            ->all($this->arguments['source']);
-
+        /** @var string $source */
+        $source = $input->getArgument('source');
+        $tasks = $this->tasks($source);
         if (!\count($tasks)) {
             $output->writeln('<comment>No task found!</comment>');
 
@@ -83,28 +80,52 @@ class ScheduleListCommand extends Command
                 'Command to Run',
             ]
         );
-        $row = 0;
 
-        $schedules = $this->taskLoader
-            ->load(...\array_values($tasks))
-        ;
-
-        foreach ($schedules as $schedule) {
-            $events = $schedule->events();
-            foreach ($events as $event) {
-                $table->addRow(
-                    [
-                        ++$row,
-                        $event->description,
-                        $event->getExpression(),
-                        $event->getCommandForDisplay(),
-                    ]
-                );
-            }
+        foreach ($tasks as $task) {
+            $table->addRow($task);
         }
 
         $table->render();
 
         return 0;
+    }
+
+    /**
+     * @return array<
+     *     int,
+     *     array{
+     *         number: int,
+     *         task: string,
+     *         expression: string,
+     *         command: string,
+     *     },
+     * >
+     */
+    private function tasks(string $source): array
+    {
+        /** @var \SplFileInfo[] $tasks */
+        $tasks = $this->taskCollection
+            ->all($source)
+        ;
+        $schedules = $this->taskLoader
+            ->load(...\array_values($tasks))
+        ;
+
+        $tasksList = [];
+        $number = 0;
+
+        foreach ($schedules as $schedule) {
+            $events = $schedule->events();
+            foreach ($events as $event) {
+                $tasksList[] = [
+                    'number' => ++$number,
+                    'task' => $event->description ?? '',
+                    'expression' => $event->getExpression(),
+                    'command' => $event->getCommandForDisplay(),
+                ];
+            }
+        }
+
+        return $tasksList;
     }
 }
