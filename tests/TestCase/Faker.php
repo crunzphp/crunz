@@ -45,7 +45,7 @@ final class Faker
         }
 
         $normalizedElements = \array_values($elements);
-        $index = self::int(0, ($itemsCount - 1));
+        $index = self::int(0, $itemsCount - 1);
 
         return $normalizedElements[$index];
     }
