@@ -19,4 +19,10 @@ abstract class UnitTestCase extends TestCase
     {
         return $this->closureSerializer ??= new LaravelClosureSerializer();
     }
+
+    /** @param mixed $data */
+    protected function encodeJson($data): string
+    {
+        return \json_encode($data, JSON_THROW_ON_ERROR);
+    }
 }
