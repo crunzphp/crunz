@@ -13,7 +13,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ScheduleListCommand extends Command
+class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
 {
     /** @var ConfigurationInterface */
     private $configuration;
