@@ -80,4 +80,9 @@ final class Faker
 
         return \implode(' ', $words);
     }
+
+    public static function word(): string
+    {
+        return self::words(1);
+    }
 }
