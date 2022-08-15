@@ -17,10 +17,6 @@ abstract class UnitTestCase extends TestCase
 
     public function createClosureSerializer(): ClosureSerializerInterface
     {
-        if (null === $this->closureSerializer) {
-            $this->closureSerializer = new LaravelClosureSerializer();
-        }
-
-        return $this->closureSerializer;
+        return $this->closureSerializer ??= new LaravelClosureSerializer();
     }
 }
