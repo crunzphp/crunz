@@ -8,7 +8,7 @@ use Crunz\Application\Cron\CronExpressionFactoryInterface;
 use Crunz\Application\Service\ConfigurationInterface;
 use Crunz\Event;
 use Crunz\Schedule\ScheduleFactory;
-use Crunz\Task\Collection;
+use Crunz\Task\CollectionInterface;
 use Crunz\Task\LoaderInterface;
 use Crunz\Task\Timezone;
 
@@ -18,7 +18,7 @@ final class TaskInformationHandler
     private $timezone;
     /** @var ConfigurationInterface */
     private $configuration;
-    /** @var Collection */
+    /** @var CollectionInterface */
     private $taskCollection;
     /** @var LoaderInterface */
     private $taskLoader;
@@ -30,7 +30,7 @@ final class TaskInformationHandler
     public function __construct(
         Timezone $timezone,
         ConfigurationInterface $configuration,
-        Collection $taskCollection,
+        CollectionInterface $taskCollection,
         LoaderInterface $taskLoader,
         ScheduleFactory $scheduleFactory,
         CronExpressionFactoryInterface $cronExpressionFactory

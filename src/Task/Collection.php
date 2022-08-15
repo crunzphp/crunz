@@ -9,7 +9,7 @@ use Crunz\Finder\FinderInterface;
 use Crunz\Logger\ConsoleLoggerInterface;
 use Crunz\Path\Path;
 
-class Collection
+class Collection implements CollectionInterface
 {
     /** @var ConfigurationInterface */
     private $configuration;
@@ -28,9 +28,6 @@ class Collection
         $this->consoleLogger = $consoleLogger;
     }
 
-    /**
-     * @return \SplFileInfo[]
-     */
     public function all(string $source): iterable
     {
         $this->consoleLogger

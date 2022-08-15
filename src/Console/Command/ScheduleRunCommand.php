@@ -7,7 +7,7 @@ namespace Crunz\Console\Command;
 use Crunz\Application\Service\ConfigurationInterface;
 use Crunz\EventRunner;
 use Crunz\Schedule;
-use Crunz\Task\Collection;
+use Crunz\Task\CollectionInterface;
 use Crunz\Task\LoaderInterface;
 use Crunz\Task\TaskNumber;
 use Crunz\Task\Timezone;
@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ScheduleRunCommand extends Command
 {
-    /** @var Collection */
+    /** @var CollectionInterface */
     private $taskCollection;
     /** @var ConfigurationInterface */
     private $configuration;
@@ -33,7 +33,7 @@ class ScheduleRunCommand extends Command
     private $taskLoader;
 
     public function __construct(
-        Collection $taskCollection,
+        CollectionInterface $taskCollection,
         ConfigurationInterface $configuration,
         EventRunner $eventRunner,
         Timezone $taskTimezone,
@@ -94,9 +94,12 @@ class ScheduleRunCommand extends Command
         $this->arguments = $input->getArguments();
         $this->options = $input->getOptions();
         $task = $this->options['task'];
+        /** @var string $source */
+        $source = $input->getArgument('source') ?? '';
         /** @var \SplFileInfo[] $files */
         $files = $this->taskCollection
-            ->all($this->arguments['source']);
+            ->all($source)
+        ;
 
         if (!\count($files)) {
             $output->writeln('<comment>No task found! Please check your source path.</comment>');

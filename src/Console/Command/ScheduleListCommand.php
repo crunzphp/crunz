@@ -6,7 +6,7 @@ namespace Crunz\Console\Command;
 
 use Crunz\Application\Service\ConfigurationInterface;
 use Crunz\Exception\CrunzException;
-use Crunz\Task\Collection;
+use Crunz\Task\CollectionInterface;
 use Crunz\Task\LoaderInterface;
 use Crunz\Task\WrongTaskInstanceException;
 use Symfony\Component\Console\Helper\Table;
@@ -26,14 +26,14 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
 
     /** @var ConfigurationInterface */
     private $configuration;
-    /** @var Collection */
+    /** @var CollectionInterface */
     private $taskCollection;
     /** @var LoaderInterface */
     private $taskLoader;
 
     public function __construct(
         ConfigurationInterface $configuration,
-        Collection $taskCollection,
+        CollectionInterface $taskCollection,
         LoaderInterface $taskLoader
     ) {
         $this->configuration = $configuration;

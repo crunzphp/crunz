@@ -7,10 +7,10 @@ namespace Crunz\Tests\Unit\Console\Command;
 use Crunz\Console\Command\ScheduleListCommand;
 use Crunz\Exception\CrunzException;
 use Crunz\Schedule;
-use Crunz\Task\Collection;
 use Crunz\Tests\TestCase\FakeConfiguration;
 use Crunz\Tests\TestCase\FakeLoader;
 use Crunz\Tests\TestCase\Faker;
+use Crunz\Tests\TestCase\FakeTaskCollection;
 use Crunz\Tests\TestCase\UnitTestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -138,15 +138,9 @@ final class ScheduleListCommandTest extends UnitTestCase
     /** @param Schedule[] $schedules */
     private function createCommand(array $schedules = []): ScheduleListCommand
     {
-        $collectionMock = $this->createMock(Collection::class);
-        $collectionMock
-            ->method('all')
-            ->willReturn([])
-        ;
-
         return new ScheduleListCommand(
             new FakeConfiguration(),
-            $collectionMock,
+            new FakeTaskCollection(),
             new FakeLoader($schedules),
         );
     }

@@ -37,6 +37,7 @@ use Crunz\Mailer;
 use Crunz\Output\OutputFactory;
 use Crunz\Schedule\ScheduleFactory;
 use Crunz\Task\Collection;
+use Crunz\Task\CollectionInterface;
 use Crunz\Task\Loader;
 use Crunz\Task\LoaderInterface;
 use Crunz\Task\Timezone;
@@ -80,7 +81,7 @@ $container
     ->setPublic(true)
     ->setArguments(
         [
-            new Reference(Collection::class),
+            new Reference(CollectionInterface::class),
             new Reference(ConfigurationInterface::class),
             new Reference(EventRunner::class),
             new Reference(Timezone::class),
@@ -115,7 +116,7 @@ $container
     ->setArguments(
         [
             new Reference(ConfigurationInterface::class),
-            new Reference(Collection::class),
+            new Reference(CollectionInterface::class),
             new Reference(LoaderInterface::class),
         ]
     )
@@ -140,7 +141,7 @@ $container
     )
 ;
 $container
-    ->register(Collection::class, Collection::class)
+    ->register(CollectionInterface::class, Collection::class)
     ->setPublic(false)
     ->setArguments(
         [
@@ -302,7 +303,7 @@ $container
         [
             new Reference(Timezone::class),
             new Reference(ConfigurationInterface::class),
-            new Reference(Collection::class),
+            new Reference(CollectionInterface::class),
             new Reference(LoaderInterface::class),
             new Reference(ScheduleFactory::class),
             new Reference(CronExpressionFactoryInterface::class),
