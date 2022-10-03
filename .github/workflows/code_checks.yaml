@@ -8,7 +8,6 @@ jobs:
         strategy:
             matrix:
                 php:
-                    - '7.4'
                     - '8.0'
                     - '8.1'
                 dependencies:
@@ -18,13 +17,6 @@ jobs:
                     - "~v4.4.30"
                     - "~v5.4.0"
                     - "~v6.0.0"
-                exclude:
-                    - php: '7.4'
-                      dependencies: 'low'
-                      symfony_version: "~v6.0.0"
-                    - php: '7.4'
-                      dependencies: 'high'
-                      symfony_version: "~v6.0.0"
                 include:
                     - php: '8.1'
                       dependencies: 'low'
@@ -63,7 +55,7 @@ jobs:
         strategy:
             matrix:
                 php:
-                    - '7.4'
+                    - '8.0'
                 vars:
                     - dependencies: "high"
                       composerExtraFlags: ''

@@ -13,11 +13,9 @@ class TaskNumberTest extends TestCase
     /**
      * @dataProvider nonStringValueProvider
      *
-     * @param mixed $value
-     *
      * @test
      */
-    public function can_not_create_task_number_with_non_string_value_by_from_string($value): void
+    public function can_not_create_task_number_with_non_string_value_by_from_string(mixed $value): void
     {
         $this->expectException(WrongTaskNumberException::class);
         $this->expectExceptionMessage('Passed task number is not string.');

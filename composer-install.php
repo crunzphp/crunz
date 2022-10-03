@@ -27,7 +27,7 @@ $changeVersion = static function (
             continue;
         }
 
-        if (false === \mb_strpos($packageName, 'symfony/')) {
+        if (!\str_contains($packageName, 'symfony/')) {
             continue;
         }
 

@@ -18,13 +18,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class DebugTaskCommand extends Command
 {
-    /** @var TaskInformationHandler */
-    private $taskInformationHandler;
-
-    public function __construct(TaskInformationHandler $taskInformationHandler)
+    public function __construct(private TaskInformationHandler $taskInformationHandler)
     {
-        $this->taskInformationHandler = $taskInformationHandler;
-
         parent::__construct('task:debug');
     }
 
@@ -64,9 +59,7 @@ final class DebugTaskCommand extends Command
         $timeZone = $taskInformation->timeZone();
         $configTimeZone = $taskInformation->configTimeZone();
         $runDates = \array_map(
-            static function (\DateTimeImmutable $netRunDate): string {
-                return $netRunDate->format('Y-m-d H:i:s e');
-            },
+            static fn (\DateTimeImmutable $netRunDate): string => $netRunDate->format('Y-m-d H:i:s e'),
             $taskInformation->nextRuns()
         );
 
@@ -84,7 +77,7 @@ final class DebugTaskCommand extends Command
                 [
                     'Command to run',
                     \is_object($command)
-                        ? \get_class($command)
+                        ? $command::class
                         : $command,
                 ],
                 [

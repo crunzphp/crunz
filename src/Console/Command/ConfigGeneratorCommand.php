@@ -17,22 +17,11 @@ final class ConfigGeneratorCommand extends Command
 {
     public const CONFIG_FILE_NAME = 'crunz.yml';
 
-    /** @var ProviderInterface */
-    private $timezoneProvider;
-    /** @var Filesystem */
-    private $symfonyFilesystem;
-    /** @var FilesystemInterface */
-    private $filesystem;
-
     public function __construct(
-        ProviderInterface $timezoneProvider,
-        Filesystem $symfonyFilesystem,
-        FilesystemInterface $filesystem
+        private ProviderInterface $timezoneProvider,
+        private Filesystem $symfonyFilesystem,
+        private FilesystemInterface $filesystem
     ) {
-        $this->timezoneProvider = $timezoneProvider;
-        $this->symfonyFilesystem = $symfonyFilesystem;
-        $this->filesystem = $filesystem;
-
         parent::__construct();
     }
 
@@ -123,7 +112,7 @@ final class ConfigGeneratorCommand extends Command
             static function ($answer) {
                 try {
                     new \DateTimeZone($answer);
-                } catch (\Exception $exception) {
+                } catch (\Exception) {
                     throw new \Exception("Timezone '{$answer}' is not valid. Please provide valid timezone.");
                 }
 

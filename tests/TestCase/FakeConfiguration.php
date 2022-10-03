@@ -26,7 +26,7 @@ final class FakeConfiguration implements ConfigurationInterface
     ];
 
     /** @var array<string|int,string|array|bool|null> */
-    private $config;
+    private array $config;
 
     /** @param array<string|int,string|array|bool|null> $config */
     public function __construct(array $config = [])

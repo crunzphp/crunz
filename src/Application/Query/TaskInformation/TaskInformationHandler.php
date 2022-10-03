@@ -14,33 +14,14 @@ use Crunz\Task\Timezone;
 
 final class TaskInformationHandler
 {
-    /** @var Timezone */
-    private $timezone;
-    /** @var ConfigurationInterface */
-    private $configuration;
-    /** @var CollectionInterface */
-    private $taskCollection;
-    /** @var LoaderInterface */
-    private $taskLoader;
-    /** @var ScheduleFactory */
-    private $scheduleFactory;
-    /** @var CronExpressionFactoryInterface */
-    private $cronExpressionFactory;
-
     public function __construct(
-        Timezone $timezone,
-        ConfigurationInterface $configuration,
-        CollectionInterface $taskCollection,
-        LoaderInterface $taskLoader,
-        ScheduleFactory $scheduleFactory,
-        CronExpressionFactoryInterface $cronExpressionFactory
+        private Timezone $timezone,
+        private ConfigurationInterface $configuration,
+        private CollectionInterface $taskCollection,
+        private LoaderInterface $taskLoader,
+        private ScheduleFactory $scheduleFactory,
+        private CronExpressionFactoryInterface $cronExpressionFactory
     ) {
-        $this->timezone = $timezone;
-        $this->configuration = $configuration;
-        $this->taskCollection = $taskCollection;
-        $this->taskLoader = $taskLoader;
-        $this->scheduleFactory = $scheduleFactory;
-        $this->cronExpressionFactory = $cronExpressionFactory;
     }
 
     public function handle(TaskInformation $taskInformation): TaskInformationView
@@ -104,7 +85,7 @@ final class TaskInformationHandler
             $values = [];
             foreach ($properties as $property) {
                 if (!\property_exists($event, $property)) {
-                    $class = \get_class($event);
+                    $class = $event::class;
 
                     throw new \RuntimeException("Property '{$property}' doesn't exists in '{$class}' class.");
                 }

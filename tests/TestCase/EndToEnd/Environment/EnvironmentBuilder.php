@@ -10,18 +10,14 @@ use Crunz\Path\Path;
 final class EnvironmentBuilder
 {
     /** @var array<string> */
-    private $tasks = [];
+    private array $tasks = [];
     /** @var array<string,mixed> */
-    private $config = [];
-    /** @var Path */
-    private $taskDirectory;
-    /** @var FilesystemInterface */
-    private $filesystem;
+    private array $config = [];
+    private Path $taskDirectory;
 
-    public function __construct(FilesystemInterface $filesystem)
+    public function __construct(private FilesystemInterface $filesystem)
     {
         $this->taskDirectory = Path::fromStrings('tasks');
-        $this->filesystem = $filesystem;
     }
 
     public function addTask(string $taskName): self

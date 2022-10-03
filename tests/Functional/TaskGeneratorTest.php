@@ -12,12 +12,9 @@ use Symfony\Component\Console\Tester\CommandTester;
 
 class TaskGeneratorTest extends TestCase
 {
-    /** @var string */
-    private $fileName;
-    /** @var string */
-    private $taskFilePath;
-    /** @var string */
-    private $outputDirectory;
+    private string $fileName;
+    private string $taskFilePath;
+    private string $outputDirectory;
 
     public function setUp(): void
     {

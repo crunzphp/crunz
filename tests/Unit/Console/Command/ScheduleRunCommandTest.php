@@ -8,6 +8,7 @@ use Crunz\Console\Command\ScheduleRunCommand;
 use Crunz\Event;
 use Crunz\EventRunner;
 use Crunz\Schedule;
+use Crunz\Schedule\ScheduleFactory;
 use Crunz\Task\CollectionInterface;
 use Crunz\Task\Loader;
 use Crunz\Task\LoaderInterface;
@@ -45,7 +46,7 @@ class ScheduleRunCommandTest extends TestCase
             new FakeConfiguration(['source' => '']),
             $mockEventRunner,
             $this->createMock(Timezone::class),
-            $this->createMock(Schedule\ScheduleFactory::class),
+            $this->createMock(ScheduleFactory::class),
             $this->createTaskLoader()
         );
 
@@ -89,14 +90,11 @@ class ScheduleRunCommandTest extends TestCase
         );
     }
 
-    /**
-     * @return MockObject|Schedule\ScheduleFactory
-     */
-    private function mockScheduleFactory()
+    private function mockScheduleFactory(): ScheduleFactory
     {
         $mockEvent = $this->createMock(Event::class);
         $mockSchedule = $this->createConfiguredMock(Schedule::class, ['events' => [$mockEvent]]);
-        $mockScheduleFactory = $this->createMock(Schedule\ScheduleFactory::class);
+        $mockScheduleFactory = $this->createMock(ScheduleFactory::class);
         $mockScheduleFactory
             ->expects(self::once())
             ->method('singleTaskSchedule')
@@ -118,7 +116,7 @@ class ScheduleRunCommandTest extends TestCase
                 self::callback(
                     function ($schedules) {
                         $isArray = \is_array($schedules);
-                        $count = \count($schedules);
+                        $count = \is_countable($schedules) ? \count($schedules) : 0;
                         $schedule = \reset($schedules);
 
                         return $isArray
@@ -165,9 +163,7 @@ class ScheduleRunCommandTest extends TestCase
     private function mockTaskCollection(string ...$taskFiles): CollectionInterface
     {
         $mocksFileInfo = \array_map(
-            function ($taskFile) {
-                return $this->createConfiguredMock(\SplFileInfo::class, ['getRealPath' => $taskFile]);
-            },
+            fn ($taskFile) => $this->createConfiguredMock(\SplFileInfo::class, ['getRealPath' => $taskFile]),
             $taskFiles
         );
 
@@ -187,39 +183,39 @@ class ScheduleRunCommandTest extends TestCase
 
     private function taskContent(): string
     {
-        return <<<'PHP'
-<?php
-
-use Crunz\Schedule;
-
-$schedule = new Schedule();
-
-$schedule->run('php -v')
-    ->description('Show PHP version')
-    // Always skip
-    ->skip(static function () {return true;})
-;
-
-return $schedule;
-PHP;
+        return <<<'PHP_WRAP'
+            <?php
+            
+            use Crunz\Schedule;
+            
+            $schedule = new Schedule();
+            
+            $schedule->run('php -v')
+                ->description('Show PHP version')
+                // Always skip
+                ->skip(static function () {return true;})
+            ;
+            
+            return $schedule;
+            PHP_WRAP;
     }
 
     private function phpVersionTaskContent(): string
     {
-        return <<<'PHP'
-<?php
-
-use Crunz\Schedule;
-
-$schedule = new Schedule();
-
-$schedule->run('php -v')
-    ->everyMinute()
-    ->description('Show PHP version')
-;
-
-return $schedule;
-PHP;
+        return <<<'PHP_WRAP'
+            <?php
+            
+            use Crunz\Schedule;
+            
+            $schedule = new Schedule();
+            
+            $schedule->run('php -v')
+                ->everyMinute()
+                ->description('Show PHP version')
+            ;
+            
+            return $schedule;
+            PHP_WRAP;
     }
 
     private function createTaskLoader(): LoaderInterface

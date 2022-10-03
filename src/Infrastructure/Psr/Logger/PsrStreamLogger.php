@@ -13,41 +13,24 @@ final class PsrStreamLogger extends AbstractLogger
 {
     private const DATE_FORMAT = 'Y-m-d H:i:s';
 
-    /** @var string */
-    private $outputStreamPath;
-    /** @var string */
-    private $errorStreamPath;
+    private string $outputStreamPath;
+    private string $errorStreamPath;
     /** @var resource|null */
     private $outputHandler;
     /** @var resource|null */
     private $errorHandler;
-    /** @var bool */
-    private $ignoreEmptyContext;
-    /** @var bool */
-    private $timezoneLog;
-    /** @var bool */
-    private $allowLineBreaks;
-    /** @var \DateTimeZone */
-    private $timezone;
-    /** @var ClockInterface */
-    private $clock;
 
     public function __construct(
-        \DateTimeZone $timezone,
-        ClockInterface $clock,
+        private \DateTimeZone $timezone,
+        private ClockInterface $clock,
         ?string $outputStreamPath,
         ?string $errorStreamPath,
-        bool $ignoreEmptyContext = false,
-        bool $timezoneLog = false,
-        bool $allowLineBreaks = false
+        private bool $ignoreEmptyContext = false,
+        private bool $timezoneLog = false,
+        private bool $allowLineBreaks = false
     ) {
         $this->outputStreamPath = $outputStreamPath ?? '';
         $this->errorStreamPath = $errorStreamPath ?? '';
-        $this->ignoreEmptyContext = $ignoreEmptyContext;
-        $this->timezoneLog = $timezoneLog;
-        $this->allowLineBreaks = $allowLineBreaks;
-        $this->timezone = $timezone;
-        $this->clock = $clock;
     }
 
     public function __destruct()
@@ -62,18 +45,11 @@ final class PsrStreamLogger extends AbstractLogger
         $message,
         array $context = []
     ): void {
-        switch ($level) {
-            case LogLevel::INFO:
-                $resource = $this->createInfoHandler();
-
-                break;
-            case LogLevel::ERROR:
-                $resource = $this->createErrorHandler();
-
-                break;
-            default:
-                $resource = null;
-        }
+        $resource = match ($level) {
+            LogLevel::INFO => $this->createInfoHandler(),
+            LogLevel::ERROR => $this->createErrorHandler(),
+            default => null,
+        };
 
         if (null === $resource) {
             return;
@@ -162,7 +138,7 @@ final class PsrStreamLogger extends AbstractLogger
             return \dirname($stream);
         }
 
-        if (0 === \mb_strpos($stream, 'file://')) {
+        if (\str_starts_with($stream, 'file://')) {
             return \dirname(
                 \mb_substr(
                     $stream,
@@ -181,13 +157,7 @@ final class PsrStreamLogger extends AbstractLogger
             return '';
         }
 
-        $encodedData = \json_encode($data);
-
-        if (false === $encodedData) {
-            throw new CrunzException('Unable to encode context data.');
-        }
-
-        return $encodedData;
+        return \json_encode($data, JSON_THROW_ON_ERROR);
     }
 
     private function formatDate(): string
@@ -206,7 +176,7 @@ final class PsrStreamLogger extends AbstractLogger
     private function replaceNewlines(string $message): string
     {
         if ($this->allowLineBreaks) {
-            if (0 === \mb_strpos($message, '{')) {
+            if (\str_starts_with($message, '{')) {
                 return \str_replace(
                     ['\r', '\n'],
                     ["\r", "\n"],

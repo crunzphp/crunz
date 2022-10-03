@@ -15,12 +15,9 @@ class Mailer
 {
     /** @var SymfonyMailer|null */
     protected $mailer;
-    /** @var ConfigurationInterface */
-    private $configuration;
 
-    public function __construct(ConfigurationInterface $configuration)
+    public function __construct(private ConfigurationInterface $configuration)
     {
-        $this->configuration = $configuration;
     }
 
     /**

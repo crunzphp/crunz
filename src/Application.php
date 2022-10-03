@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace Crunz;
 
+use Crunz\Console\Command\ConfigGeneratorCommand;
+use Crunz\Console\Command\ScheduleListCommand;
+use Crunz\Console\Command\ScheduleRunCommand;
+use Crunz\Console\Command\TaskGeneratorCommand;
 use Crunz\EnvFlags\EnvFlags;
 use Crunz\Path\Path;
+use Crunz\UserInterface\Cli\DebugTaskCommand;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Application as SymfonyApplication;
@@ -30,33 +35,31 @@ class Application extends SymfonyApplication
         // It takes an optional argument which is the source directory for tasks
         // If the argument is not provided, the default in the configuratrion file
         // will be considered as the source path
-        \Crunz\Console\Command\ScheduleRunCommand::class,
+        ScheduleRunCommand::class,
 
         // This command (vendor/bin/schedule:list) lists the scheduled events in different task files
         // Just like schedule:run it gets the :source argument
-        \Crunz\Console\Command\ScheduleListCommand::class,
+        ScheduleListCommand::class,
 
         // This command generates a task from the command-line
         // This is often useful when you want to create a task file and start
         // adding tasks to it.
-        \Crunz\Console\Command\TaskGeneratorCommand::class,
+        TaskGeneratorCommand::class,
 
         // The modify the configuration, the user's own copy should be modified
         // This command creates a configuration file in Crunz installation directory
-        \Crunz\Console\Command\ConfigGeneratorCommand::class,
+        ConfigGeneratorCommand::class,
 
         // This command is used by Crunz itself for running serialized closures
         // It accepts an argument which is the serialized form of the closure to run.
         UserInterface\Cli\ClosureRunCommand::class,
 
         // Debug task command
-        \Crunz\UserInterface\Cli\DebugTaskCommand::class,
+        DebugTaskCommand::class,
     ];
 
-    /** @var Container */
-    private $container;
-    /** @var EnvFlags */
-    private $envFlags;
+    private Container $container;
+    private EnvFlags $envFlags;
 
     public function __construct(string $appName, string $appVersion)
     {

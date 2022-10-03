@@ -9,13 +9,9 @@ use Crunz\Task\LoaderInterface;
 
 final class FakeLoader implements LoaderInterface
 {
-    /** @var Schedule[] */
-    private array $schedules;
-
     /** @param Schedule[] $schedules */
-    public function __construct(array $schedules = [])
+    public function __construct(private array $schedules = [])
     {
-        $this->schedules = $schedules;
     }
 
     public function load(\SplFileInfo ...$files): array

@@ -8,23 +8,14 @@ use Crunz\Logger\ConsoleLoggerInterface;
 
 final class FallbackHttpClient implements HttpClientInterface
 {
-    /** @var StreamHttpClient */
-    private $streamHttpClient;
-    /** @var CurlHttpClient */
-    private $curlHttpClient;
     /** @var HttpClientInterface|null */
     private $httpClient;
-    /** @var ConsoleLoggerInterface */
-    private $consoleLogger;
 
     public function __construct(
-        StreamHttpClient $streamHttpClient,
-        CurlHttpClient $curlHttpClient,
-        ConsoleLoggerInterface $consoleLogger
+        private StreamHttpClient $streamHttpClient,
+        private CurlHttpClient $curlHttpClient,
+        private ConsoleLoggerInterface $consoleLogger
     ) {
-        $this->streamHttpClient = $streamHttpClient;
-        $this->curlHttpClient = $curlHttpClient;
-        $this->consoleLogger = $consoleLogger;
     }
 
     /**

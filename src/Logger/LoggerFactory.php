@@ -13,77 +13,65 @@ use Crunz\Task\Timezone;
 
 class LoggerFactory
 {
-    /** @var ConfigurationInterface */
-    private $configuration;
-    /** @var LoggerFactoryInterface */
-    private $loggerFactory;
-    /** @var Timezone */
-    private $timezoneProvider;
-    /** @var ClockInterface */
-    private $clock;
-    /** @var ConsoleLoggerInterface */
-    private $consoleLogger;
+    private ?LoggerFactoryInterface $loggerFactory = null;
 
     /**
      * @throws \Exception if the timezone supplied in configuration is not recognised as a valid timezone
      */
     public function __construct(
-        ConfigurationInterface $configuration,
-        Timezone $timezoneProvider,
-        ConsoleLoggerInterface $consoleLogger,
-        ClockInterface $clock
+        private ConfigurationInterface $configuration,
+        private Timezone $timezoneProvider,
+        private ConsoleLoggerInterface $consoleLogger,
+        private ClockInterface $clock
     ) {
-        $this->configuration = $configuration;
-        $this->timezoneProvider = $timezoneProvider;
-        $this->clock = $clock;
-        $this->consoleLogger = $consoleLogger;
     }
 
     public function create(): Logger
     {
-        $this->initializeLoggerFactory();
+        $loggerFactory = $this->loggerFactory();
         $configuration = $this->configuration;
-        $innerLogger = $this->loggerFactory
-            ->create($configuration)
-        ;
+        $innerLogger = $loggerFactory->create($configuration);
 
         return new Logger($innerLogger);
     }
 
     public function createEvent(string $output): Logger
     {
-        $this->initializeLoggerFactory();
+        $loggerFactory = $this->loggerFactory();
         $eventConfiguration = $this->configuration->withNewEntry('output_log_file', $output);
-        $innerLogger = $this->loggerFactory
-            ->create($eventConfiguration)
-        ;
+        $innerLogger = $loggerFactory->create($eventConfiguration);
 
         return new Logger($innerLogger);
     }
 
-    private function initializeLoggerFactory(): void
+    private function loggerFactory(): LoggerFactoryInterface
     {
-        if (null === $this->loggerFactory) {
-            $timezoneLog = $this->configuration
-                ->get('timezone_log')
+        return $this->loggerFactory ??= $this->initializeLoggerFactory();
+    }
+
+    private function initializeLoggerFactory(): LoggerFactoryInterface
+    {
+        $timezoneLog = $this->configuration
+            ->get('timezone_log')
+        ;
+
+        if ($timezoneLog) {
+            $timezone = $this->timezoneProvider
+                ->timezoneForComparisons()
             ;
 
-            if ($timezoneLog) {
-                $timezone = $this->timezoneProvider
-                    ->timezoneForComparisons()
-                ;
-
-                $this->consoleLogger
-                    ->veryVerbose("Timezone for '<info>timezone_log</info>': '<info>{$timezone->getName()}</info>'")
-                ;
-            }
-
-            $this->loggerFactory = $this->createLoggerFactory(
-                $this->configuration,
-                $this->timezoneProvider,
-                $this->clock
-            );
+            $this->consoleLogger
+                ->veryVerbose("Timezone for '<info>timezone_log</info>': '<info>{$timezone->getName()}</info>'")
+            ;
         }
+
+        $this->loggerFactory = $this->createLoggerFactory(
+            $this->configuration,
+            $this->timezoneProvider,
+            $this->clock
+        );
+
+        return $this->loggerFactory;
     }
 
     private function createLoggerFactory(

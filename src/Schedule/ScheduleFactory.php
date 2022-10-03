@@ -30,9 +30,7 @@ class ScheduleFactory
     public function singleTask(TaskNumber $taskNumber, Schedule ...$schedules): Event
     {
         $events = \array_map(
-            static function (Schedule $schedule) {
-                return $schedule->events();
-            },
+            static fn (Schedule $schedule) => $schedule->events(),
             $schedules
         );
 

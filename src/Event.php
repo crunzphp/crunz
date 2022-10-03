@@ -65,13 +65,6 @@ class Event implements PingableInterface
      */
     public $logger;
 
-    /**
-     * The event's unique identifier.
-     *
-     * @var string|int
-     */
-    protected $id;
-
     /** @var string|Closure */
     protected $command;
 
@@ -153,14 +146,11 @@ class Event implements PingableInterface
 
     /**
      * Indicates if the command should not overlap itself.
-     *
-     * @var bool
      */
-    private $preventOverlapping = false;
+    private bool $preventOverlapping = false;
     /** @var ClockInterface */
     private static $clock;
-    /** @var ClosureSerializerInterface|null */
-    private static $closureSerializer = null;
+    private static ?ClosureSerializerInterface $closureSerializer = null;
 
     /**
      * The symfony lock factory that is used to acquire locks. If the value is null, but preventOverlapping = true
@@ -170,11 +160,11 @@ class Event implements PingableInterface
      */
     private $lockFactory;
     /** @var string[] */
-    private $wholeOutput = [];
+    private array $wholeOutput = [];
     /** @var Lock */
     private $lock;
     /** @var \Closure[] */
-    private $errorCallbacks = [];
+    private array $errorCallbacks = [];
 
     /**
      * Create a new event instance.
@@ -182,10 +172,9 @@ class Event implements PingableInterface
      * @param string|Closure $command
      * @param string|int     $id
      */
-    public function __construct($id, $command)
+    public function __construct(protected $id, $command)
     {
         $this->command = $command;
-        $this->id = $id;
         $this->output = $this->getDefaultOutput();
     }
 
@@ -394,9 +383,7 @@ class Event implements PingableInterface
         $segments = \array_intersect_key($parsedDate, $this->fieldsPosition);
 
         if ($parsedDate['year']) {
-            $this->skip(static function () use ($parsedDate) {
-                return (int) \date('Y') !== $parsedDate['year'];
-            });
+            $this->skip(static fn () => (int) \date('Y') !== $parsedDate['year']);
         }
 
         foreach ($segments as $key => $value) {
@@ -461,9 +448,7 @@ class Event implements PingableInterface
      */
     public function from($datetime)
     {
-        return $this->skip(function () use ($datetime) {
-            return $this->notYet($datetime);
-        });
+        return $this->skip(fn () => $this->notYet($datetime));
     }
 
     /**
@@ -475,9 +460,7 @@ class Event implements PingableInterface
      */
     public function to($datetime)
     {
-        return $this->skip(function () use ($datetime) {
-            return $this->past($datetime);
-        });
+        return $this->skip(fn () => $this->past($datetime));
     }
 
     /**
@@ -724,7 +707,7 @@ class Event implements PingableInterface
         if (null !== $store && !($store instanceof BlockingStoreInterface || $store instanceof StoreInterface)) {
             $legacyClass = StoreInterface::class;
             $newClass = BlockingStoreInterface::class;
-            $actualClass = \get_class($store);
+            $actualClass = $store::class;
 
             throw new \RuntimeException(
                 "Instance of '{$newClass}' or '{$legacyClass}' is expected, '{$actualClass}' provided"
@@ -1288,7 +1271,7 @@ class Event implements PingableInterface
             );
 
             $store = new FlockStore($lockPath->toString());
-        } catch (InvalidArgumentException $exception) {
+        } catch (InvalidArgumentException) {
             // Fallback to system temp dir
             $lockPath = Path::create([\sys_get_temp_dir()]);
             $store = new FlockStore($lockPath->toString());

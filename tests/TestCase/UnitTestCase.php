@@ -12,16 +12,14 @@ abstract class UnitTestCase extends TestCase
 {
     use PolyfillAssertTrait;
 
-    /** @var ClosureSerializerInterface|null */
-    private $closureSerializer = null;
+    private ?ClosureSerializerInterface $closureSerializer = null;
 
     public function createClosureSerializer(): ClosureSerializerInterface
     {
         return $this->closureSerializer ??= new LaravelClosureSerializer();
     }
 
-    /** @param mixed $data */
-    protected function encodeJson($data): string
+    protected function encodeJson(mixed $data): string
     {
         return \json_encode($data, JSON_THROW_ON_ERROR);
     }

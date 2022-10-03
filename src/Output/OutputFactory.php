@@ -10,12 +10,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class OutputFactory
 {
-    /** @var InputInterface */
-    private $input;
-
-    public function __construct(InputInterface $input)
+    public function __construct(private InputInterface $input)
     {
-        $this->input = $input;
     }
 
     public function createOutput(): OutputInterface

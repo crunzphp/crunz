@@ -12,15 +12,11 @@ final class Configuration implements ConfigurationInterface
 {
     /** @var array<string,mixed> */
     private $config;
-    /** @var ConfigurationParserInterface */
-    private $configurationParser;
-    /** @var FilesystemInterface */
-    private $filesystem;
 
-    public function __construct(ConfigurationParserInterface $configurationParser, FilesystemInterface $filesystem)
-    {
-        $this->configurationParser = $configurationParser;
-        $this->filesystem = $filesystem;
+    public function __construct(
+        private ConfigurationParserInterface $configurationParser,
+        private FilesystemInterface $filesystem
+    ) {
     }
 
     /**
