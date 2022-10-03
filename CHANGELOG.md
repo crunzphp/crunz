@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+## [v3.4.0] - 2022-10-03
+
+### Added
+
+- [crunzphp#31] Add format option to `schedule:list`
+
 ## [v3.3.0] - 2022-06-19
 
 ### Deprecated
@@ -495,6 +501,7 @@ In `v2` this will result in exception.
 [#16]: https://github.com/lavary/crunz/pull/16
 [crunzphp#5]: https://github.com/crunzphp/crunz/pull/5
 [crunzphp#24]: https://github.com/crunzphp/crunz/pull/24
+[crunzphp#31]: https://github.com/crunzphp/crunz/pull/31
 [v1.5.1]: https://github.com/crunzphp/crunz/compare/v1.5.0...v1.5.1
 [v1.6.0]: https://github.com/crunzphp/crunz/compare/v1.5.1...v1.6.0
 [v1.6.1]: https://github.com/crunzphp/crunz/compare/v1.6.0...v1.6.1
@@ -537,6 +544,7 @@ In `v2` this will result in exception.
 [v3.2.1]: https://github.com/crunzphp/crunz/compare/v3.2.0...v3.2.1
 [v3.2.2]: https://github.com/crunzphp/crunz/compare/v3.2.1...v3.2.2
 [v3.3.0]: https://github.com/crunzphp/crunz/compare/v3.2.2...v3.3.0
+[v3.4.0]: https://github.com/crunzphp/crunz/compare/v3.3.0...v3.4.0
 [@andrewmy]: https://github.com/andrewmy
 [@arthurbarros]: https://github.com/arthurbarros
 [@bashgeek]: https://github.com/bashgeek
