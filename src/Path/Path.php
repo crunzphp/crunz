@@ -19,8 +19,6 @@ final class Path
     /**
      * @param string[] $parts
      *
-     * @return Path
-     *
      * @throws CrunzException
      */
     public static function create(array $parts): self
@@ -39,8 +37,6 @@ final class Path
     }
 
     /**
-     * @return Path
-     *
      * @throws CrunzException
      */
     public static function fromStrings(string ...$parts): self

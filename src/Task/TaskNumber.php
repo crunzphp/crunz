@@ -13,9 +13,9 @@ class TaskNumber
     private $number;
 
     /**
-     * @throws WrongTaskNumberException
-     *
      * @param int $number
+     *
+     * @throws WrongTaskNumberException
      */
     private function __construct($number)
     {

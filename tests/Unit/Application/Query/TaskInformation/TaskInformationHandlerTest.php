@@ -20,6 +20,7 @@ final class TaskInformationHandlerTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider taskInformationProvider
      */
     public function handle_returns_task_information(

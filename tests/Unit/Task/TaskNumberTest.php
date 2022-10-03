@@ -14,6 +14,7 @@ class TaskNumberTest extends TestCase
      * @dataProvider nonStringValueProvider
      *
      * @param mixed $value
+     *
      * @test
      */
     public function can_not_create_task_number_with_non_string_value_by_from_string($value): void
@@ -26,6 +27,7 @@ class TaskNumberTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider nonNumericProvider
      */
     public function task_number_can_not_be_non_numeric_string(string $value): void
@@ -38,6 +40,7 @@ class TaskNumberTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider numericValueProvider
      */
     public function task_number_can_be_created_with_numeric_string_value(string $value, int $expectedNumber): void

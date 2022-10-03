@@ -13,6 +13,7 @@ abstract class AbstractCronExpressionTest extends TestCase
      * @test
      *
      * @param \DateTimeImmutable[] $expectedRunDates
+     *
      * @dataProvider multipleRunDatesProvider
      */
     public function multiple_run_dates(

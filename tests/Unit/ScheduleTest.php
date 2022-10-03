@@ -38,6 +38,7 @@ final class ScheduleTest extends UnitTestCase
 
     /**
      * @group legacy
+     *
      * @dataProvider nonStringParametersProvider
      */
     public function test_run_with_non_string_parameters(\Closure $paramsGenerator): void

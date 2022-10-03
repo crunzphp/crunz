@@ -11,6 +11,7 @@ class ProviderTest extends TestCase
 {
     /**
      * @runInSeparateProcess
+     *
      * @test
      */
     public function default_timezone_is_returned(): void

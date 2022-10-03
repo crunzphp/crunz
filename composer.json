@@ -51,12 +51,12 @@
     "require-dev": {
         "ext-json": "*",
         "ext-mbstring": "*",
-        "ergebnis/composer-normalize": "^2.28",
-        "friendsofphp/php-cs-fixer": "^2.19 || ^3.8",
-        "phpstan/phpstan": "^1.7",
-        "phpstan/phpstan-phpunit": "^1.1",
-        "phpstan/phpstan-strict-rules": "^1.2",
-        "phpunit/phpunit": "^9.5.5",
+        "ergebnis/composer-normalize": "2.28.3",
+        "friendsofphp/php-cs-fixer": "2.19.3 || 3.11",
+        "phpstan/phpstan": "1.8.6",
+        "phpstan/phpstan-phpunit": "1.1.1",
+        "phpstan/phpstan-strict-rules": "1.4.4",
+        "phpunit/phpunit": "9.5.25",
         "symfony/error-handler": "^4.4.30 || ^5.4 || ^6.0",
         "symfony/phpunit-bridge": "^5.4.0 || ^6.0"
     },
