@@ -66,18 +66,8 @@ parameters:
 			path: src/Console/Command/ScheduleListCommand.php
 
 		-
-			message: "#^Parameter \\#1 \\$source of method Crunz\\\\Task\\\\Collection\\:\\:all\\(\\) expects string, array\\|bool\\|float\\|int\\|string\\|null given\\.$#"
-			count: 1
-			path: src/Console/Command/ScheduleListCommand.php
-
-		-
 			message: "#^Only booleans are allowed in a negated boolean, int\\<0, max\\> given\\.$#"
 			count: 2
-			path: src/Console/Command/ScheduleRunCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$source of method Crunz\\\\Task\\\\Collection\\:\\:all\\(\\) expects string, array\\|bool\\|float\\|int\\|string\\|null given\\.$#"
-			count: 1
 			path: src/Console/Command/ScheduleRunCommand.php
 
 		-

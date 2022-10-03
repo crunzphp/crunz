@@ -138,8 +138,7 @@ final class EventTest extends UnitTestCase
             $event
                 ->between('2015-01-01', '2015-01-02')
                 ->isDue($timezone)
-            )
-        ;
+        );
 
         $futureDate = new \DateTimeImmutable('+1 year');
 
@@ -148,16 +147,14 @@ final class EventTest extends UnitTestCase
             $event
                 ->from($futureDate->format('Y-m-d'))
                 ->isDue($timezone)
-            )
-        ;
+        );
 
         $event = new Event($this->id, 'php foo');
         self::assertFalse(
             $event
                 ->to('2015-01-01')
                 ->isDue($timezone)
-            )
-        ;
+        );
     }
 
     public function test_cron_conditions(): void

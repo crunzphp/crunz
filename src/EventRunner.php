@@ -100,7 +100,7 @@ class EventRunner
         $this->pingBefore($event);
 
         // Running the before-callbacks
-        $event->outputStream = ($this->invoke($event->beforeCallbacks()));
+        $event->outputStream = $this->invoke($event->beforeCallbacks());
         $event->start();
     }
 
@@ -149,7 +149,7 @@ class EventRunner
                     $id = $event->description ?: $event->getId();
 
                     $this->consoleLogger
-                        ->debug("Task <info>${id}</info> status: {$runStatus}.");
+                        ->debug("Task <info>{$id}</info> status: {$runStatus}.");
 
                     // Dismiss the event if it's finished
                     $schedule->dismissEvent($eventKey);

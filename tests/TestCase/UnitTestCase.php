@@ -17,10 +17,12 @@ abstract class UnitTestCase extends TestCase
 
     public function createClosureSerializer(): ClosureSerializerInterface
     {
-        if (null === $this->closureSerializer) {
-            $this->closureSerializer = new LaravelClosureSerializer();
-        }
+        return $this->closureSerializer ??= new LaravelClosureSerializer();
+    }
 
-        return $this->closureSerializer;
+    /** @param mixed $data */
+    protected function encodeJson($data): string
+    {
+        return \json_encode($data, JSON_THROW_ON_ERROR);
     }
 }

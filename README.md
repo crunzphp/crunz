@@ -732,6 +732,26 @@ vendor/bin/crunz schedule:list
 +---+---------------+-------------+--------------------+
 ```
 
+By default, list is in text format, but format can be changed by `--format` option.
+
+List in `json` format, command:
+```bash
+vendor/bin/crunz schedule:list --format json
+```
+
+will output:
+
+```json
+[
+    {
+        "number": 1,
+        "task": "Sample Task",
+        "expression": "* * * * 1",
+        "command": "command/to/execute"
+    }
+]
+```
+
 ### Force run
 
 While in development it may be useful to force run all tasks regardless of their actual run time,

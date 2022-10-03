@@ -8,11 +8,12 @@ use Crunz\Console\Command\ScheduleRunCommand;
 use Crunz\Event;
 use Crunz\EventRunner;
 use Crunz\Schedule;
-use Crunz\Task\Collection;
+use Crunz\Task\CollectionInterface;
 use Crunz\Task\Loader;
 use Crunz\Task\LoaderInterface;
 use Crunz\Task\Timezone;
 use Crunz\Tests\TestCase\FakeConfiguration;
+use Crunz\Tests\TestCase\FakeTaskCollection;
 use Crunz\Tests\TestCase\TemporaryFile;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -161,11 +162,8 @@ class ScheduleRunCommandTest extends TestCase
         return $this->createConfiguredMock(Timezone::class, ['timezoneForComparisons' => $timeZone]);
     }
 
-    /** @return Collection|MockObject */
-    private function mockTaskCollection(string ...$taskFiles): Collection
+    private function mockTaskCollection(string ...$taskFiles): CollectionInterface
     {
-        $mockTaskCollection = $this->createMock(Collection::class);
-
         $mocksFileInfo = \array_map(
             function ($taskFile) {
                 return $this->createConfiguredMock(\SplFileInfo::class, ['getRealPath' => $taskFile]);
@@ -173,12 +171,7 @@ class ScheduleRunCommandTest extends TestCase
             $taskFiles
         );
 
-        $mockTaskCollection
-            ->method('all')
-            ->willReturn($mocksFileInfo)
-        ;
-
-        return $mockTaskCollection;
+        return new FakeTaskCollection($mocksFileInfo);
     }
 
     private function createTaskFile(string $taskContent, TemporaryFile $file): string

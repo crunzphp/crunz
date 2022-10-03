@@ -45,7 +45,7 @@ final class Faker
         }
 
         $normalizedElements = \array_values($elements);
-        $index = self::int(0, ($itemsCount - 1));
+        $index = self::int(0, $itemsCount - 1);
 
         return $normalizedElements[$index];
     }
@@ -79,5 +79,10 @@ final class Faker
         }
 
         return \implode(' ', $words);
+    }
+
+    public static function word(): string
+    {
+        return self::words(1);
     }
 }

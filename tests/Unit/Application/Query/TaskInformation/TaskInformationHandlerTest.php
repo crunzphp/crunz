@@ -9,11 +9,11 @@ use Crunz\Application\Query\TaskInformation\TaskInformationHandler;
 use Crunz\Event;
 use Crunz\Infrastructure\Dragonmantank\CronExpression\DragonmantankCronExpressionFactory;
 use Crunz\Schedule\ScheduleFactory;
-use Crunz\Task\Collection;
 use Crunz\Task\LoaderInterface;
 use Crunz\Task\TaskNumber;
 use Crunz\Task\Timezone;
 use Crunz\Tests\TestCase\FakeConfiguration;
+use Crunz\Tests\TestCase\FakeTaskCollection;
 use PHPUnit\Framework\TestCase;
 
 final class TaskInformationHandlerTest extends TestCase
@@ -111,11 +111,7 @@ final class TaskInformationHandlerTest extends TestCase
 
     private function createHandler(Event $event, \DateTimeZone $comparisonsTimeZone): TaskInformationHandler
     {
-        $taskCollectionMock = $this->createMock(Collection::class);
-        $taskCollectionMock
-            ->method('all')
-            ->willReturn([])
-        ;
+        $taskCollectionMock = new FakeTaskCollection();
         $scheduleFactoryMock = $this->createMock(ScheduleFactory::class);
         $scheduleFactoryMock
             ->method('singleTask')
