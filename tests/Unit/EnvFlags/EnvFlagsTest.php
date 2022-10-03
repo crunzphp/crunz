@@ -11,6 +11,7 @@ final class EnvFlagsTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider statusProvider
      */
     public function deprecation_handler_status_is_correct(string $flagValue, bool $expectedEnabled): void
@@ -41,6 +42,7 @@ final class EnvFlagsTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider containerDebugProvider
      */
     public function container_debug_flag_is_correct(string $flagValue, bool $expectedEnabled): void

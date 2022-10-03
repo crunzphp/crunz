@@ -46,6 +46,7 @@ final class FinderTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider tasksProvider
      */
     public function find_returns_spl_file_info_collection(string $suffix, Path ...$files): void

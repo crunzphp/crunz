@@ -14,6 +14,7 @@ final class ConsoleLoggerTest extends TestCase
 {
     /**
      * @test
+     *
      * @dataProvider verbosityProvider
      */
     public function logger_writes_normal_only_with_suitable_verbosity(int $ioVerbosity): void
@@ -31,6 +32,7 @@ final class ConsoleLoggerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider verbosityProvider
      */
     public function logger_writes_verbose_only_with_suitable_verbosity(int $ioVerbosity): void
@@ -48,6 +50,7 @@ final class ConsoleLoggerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider verbosityProvider
      */
     public function logger_writes_very_verbose_only_with_suitable_verbosity(int $ioVerbosity): void
@@ -65,6 +68,7 @@ final class ConsoleLoggerTest extends TestCase
 
     /**
      * @test
+     *
      * @dataProvider verbosityProvider
      */
     public function logger_writes_debug_only_with_suitable_verbosity(int $ioVerbosity): void

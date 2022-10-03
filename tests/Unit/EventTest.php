@@ -301,6 +301,7 @@ final class EventTest extends UnitTestCase
 
     /**
      * @test
+     *
      * @runInSeparateProcess
      */
     public function closure_command_have_full_binary_paths(): void

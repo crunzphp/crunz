@@ -14,6 +14,7 @@ final class PingableTest extends TestCase
      * @test
      *
      * @param mixed $url
+     *
      * @dataProvider nonStringProvider
      */
     public function before_url_must_be_string($url): void
@@ -54,6 +55,7 @@ final class PingableTest extends TestCase
      * @test
      *
      * @param mixed $url
+     *
      * @dataProvider nonStringProvider
      */
     public function after_url_must_be_string($url): void

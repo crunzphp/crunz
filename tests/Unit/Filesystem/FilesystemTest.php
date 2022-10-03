@@ -21,6 +21,7 @@ final class FilesystemTest extends UnitTestCase
 
     /**
      * @dataProvider fileExistsProvider
+     *
      * @test
      */
     public function file_exists_is_correct(string $path, bool $expectedExistence): void
