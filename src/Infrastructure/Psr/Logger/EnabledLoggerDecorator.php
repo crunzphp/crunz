@@ -11,13 +11,10 @@ use Psr\Log\LogLevel;
 
 final class EnabledLoggerDecorator extends AbstractLogger
 {
-    private $decoratedLogger;
-    private $configuration;
-
-    public function __construct(LoggerInterface $decoratedLogger, ConfigurationInterface $configuration)
-    {
-        $this->decoratedLogger = $decoratedLogger;
-        $this->configuration = $configuration;
+    public function __construct(
+        private LoggerInterface $decoratedLogger,
+        private ConfigurationInterface $configuration
+    ) {
     }
 
     public function log($level, $message, array $context = []): void

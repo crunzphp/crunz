@@ -9,7 +9,7 @@ use Psr\Log\AbstractLogger;
 final class SpyPsrLogger extends AbstractLogger
 {
     /** @var array<int,array> */
-    private $logs = [];
+    private array $logs = [];
 
     public function log($level, $message, array $context = []): void
     {

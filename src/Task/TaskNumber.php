@@ -9,15 +9,10 @@ use Crunz\Exception\WrongTaskNumberException;
 class TaskNumber
 {
     public const MIN_VALUE = 1;
-    /** @var int */
-    private $number;
+    private int $number;
 
-    /**
-     * @param int $number
-     *
-     * @throws WrongTaskNumberException
-     */
-    private function __construct($number)
+    /** @throws WrongTaskNumberException */
+    private function __construct(int $number)
     {
         if ($number < self::MIN_VALUE) {
             throw new WrongTaskNumberException('Passed task number must be greater or equal to 1.');
@@ -48,18 +43,12 @@ class TaskNumber
         return new self($number);
     }
 
-    /**
-     * @return int
-     */
-    public function asInt()
+    public function asInt(): int
     {
         return $this->number;
     }
 
-    /**
-     * @return int
-     */
-    public function asArrayIndex()
+    public function asArrayIndex(): int
     {
         return $this->number - 1;
     }

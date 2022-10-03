@@ -10,19 +10,12 @@ use Crunz\Logger\ConsoleLoggerInterface;
 
 class Timezone
 {
-    /** @var ConfigurationInterface */
-    private $configuration;
-    /** @var ConsoleLoggerInterface */
-    private $consoleLogger;
-    /** @var \DateTimeZone|null */
-    private $timezoneForComparisons;
+    private ?\DateTimeZone $timezoneForComparisons = null;
 
     public function __construct(
-        ConfigurationInterface $configuration,
-        ConsoleLoggerInterface $consoleLogger
+        private ConfigurationInterface $configuration,
+        private ConsoleLoggerInterface $consoleLogger
     ) {
-        $this->configuration = $configuration;
-        $this->consoleLogger = $consoleLogger;
     }
 
     /** @throws EmptyTimezoneException */

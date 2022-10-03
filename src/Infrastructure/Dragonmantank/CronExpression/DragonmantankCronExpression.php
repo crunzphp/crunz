@@ -9,12 +9,8 @@ use Crunz\Application\Cron\CronExpressionInterface;
 
 final class DragonmantankCronExpression implements CronExpressionInterface
 {
-    /** @var CronExpression */
-    private $innerCronExpression;
-
-    public function __construct(CronExpression $innerCronExpression)
+    public function __construct(private CronExpression $innerCronExpression)
     {
-        $this->innerCronExpression = $innerCronExpression;
     }
 
     /** {@inheritdoc} */
@@ -30,9 +26,7 @@ final class DragonmantankCronExpression implements CronExpressionInterface
         ;
 
         return \array_map(
-            static function (\DateTime $runDate): \DateTimeImmutable {
-                return \DateTimeImmutable::createFromMutable($runDate);
-            },
+            static fn (\DateTime $runDate): \DateTimeImmutable => \DateTimeImmutable::createFromMutable($runDate),
             $dates
         );
     }

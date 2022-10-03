@@ -17,16 +17,10 @@ final class Environment
         'timezone' => 'UTC',
     ];
 
-    /** @var string */
-    private $rootDirectory = '';
-    /** @var string[] */
-    private $tasks;
+    private string $rootDirectory = '';
     /** @var array<string,mixed> */
-    private $config;
-    /** @var string */
-    private $tasksDirectory;
-    /** @var FilesystemInterface */
-    private $filesystem;
+    private array $config;
+    private string $tasksDirectory;
 
     /**
      * @param string[]            $tasks
@@ -35,13 +29,11 @@ final class Environment
      * @throws \Exception
      */
     public function __construct(
-        FilesystemInterface $filesystem,
+        private FilesystemInterface $filesystem,
         Path $tasksDirectory,
         array $config = [],
-        array $tasks = []
+        private array $tasks = []
     ) {
-        $this->filesystem = $filesystem;
-        $this->tasks = $tasks;
         $this->config = \array_merge(self::DEFAULT_CONFIG, $config);
         $this->tasksDirectory = $tasksDirectory->toString();
 

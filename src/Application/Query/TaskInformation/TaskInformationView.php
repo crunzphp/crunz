@@ -6,42 +6,23 @@ namespace Crunz\Application\Query\TaskInformation;
 
 final class TaskInformationView
 {
-    /** @var string|object */
-    private $command;
-    /** @var string */
-    private $description;
-    /** @var string */
-    private $cronExpression;
-    /** @var \DateTimeZone|null */
-    private $timeZone;
-    /** @var \DateTimeZone */
-    private $configTimeZone;
     /** @var \DateTimeImmutable[] */
-    private $nextRuns;
-    /** @var bool */
-    private $preventOverlapping;
+    private array $nextRuns;
 
-    /** @param string|object $command */
     public function __construct(
-        $command,
-        string $description,
-        string $cronExpression,
-        bool $preventOverlapping,
-        ?\DateTimeZone $timeZone,
-        \DateTimeZone $configTimeZone,
+        private string|object $command,
+        private string $description,
+        private string $cronExpression,
+        private bool $preventOverlapping,
+        private ?\DateTimeZone $timeZone,
+        private \DateTimeZone $configTimeZone,
         \DateTimeImmutable ...$nextRuns
     ) {
-        $this->command = $command;
-        $this->description = $description;
-        $this->cronExpression = $cronExpression;
-        $this->timeZone = $timeZone;
-        $this->configTimeZone = $configTimeZone;
         $this->nextRuns = $nextRuns;
-        $this->preventOverlapping = $preventOverlapping;
     }
 
     /** @return string|object */
-    public function command()
+    public function command(): string|object
     {
         return $this->command;
     }

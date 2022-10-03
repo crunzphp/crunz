@@ -8,8 +8,7 @@ use Crunz\Path\Path;
 
 final class Filesystem implements FilesystemInterface
 {
-    /** @var string */
-    private $projectRootDir;
+    private ?string $projectRootDir = null;
 
     /** {@inheritdoc} */
     public function getCwd()

@@ -8,13 +8,9 @@ use Crunz\Task\CollectionInterface;
 
 final class FakeTaskCollection implements CollectionInterface
 {
-    /** @var \SplFileInfo[] */
-    private iterable $tasks;
-
     /** @param \SplFileInfo[] $tasks */
-    public function __construct(iterable $tasks = [])
+    public function __construct(private iterable $tasks = [])
     {
-        $this->tasks = $tasks;
     }
 
     public function all(string $source): iterable

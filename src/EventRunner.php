@@ -15,38 +15,19 @@ use Symfony\Component\Console\Output\OutputInterface;
 class EventRunner
 {
     /** @var Schedule[] */
-    protected $schedules = [];
-    /** @var \Crunz\Invoker */
-    protected $invoker;
+    protected array $schedules = [];
     /** @var \Crunz\Logger\Logger|null */
     protected $logger;
-    /** @var \Crunz\Mailer */
-    protected $mailer;
-    /** @var OutputInterface */
-    private $output;
-    /** @var ConfigurationInterface */
-    private $configuration;
-    /** @var LoggerFactory */
-    private $loggerFactory;
-    /** @var HttpClientInterface */
-    private $httpClient;
-    /** @var ConsoleLoggerInterface */
-    private $consoleLogger;
+    private ?OutputInterface $output = null;
 
     public function __construct(
-        Invoker $invoker,
-        ConfigurationInterface $configuration,
-        Mailer $mailer,
-        LoggerFactory $loggerFactory,
-        HttpClientInterface $httpClient,
-        ConsoleLoggerInterface $consoleLogger
+        protected Invoker $invoker,
+        private ConfigurationInterface $configuration,
+        protected Mailer $mailer,
+        private LoggerFactory $loggerFactory,
+        private HttpClientInterface $httpClient,
+        private ConsoleLoggerInterface $consoleLogger
     ) {
-        $this->invoker = $invoker;
-        $this->mailer = $mailer;
-        $this->configuration = $configuration;
-        $this->loggerFactory = $loggerFactory;
-        $this->httpClient = $httpClient;
-        $this->consoleLogger = $consoleLogger;
     }
 
     /** @param Schedule[] $schedules */
@@ -110,7 +91,7 @@ class EventRunner
             foreach ($this->schedules as $scheduleKey => $schedule) {
                 $events = $schedule->events();
                 // 10% chance that refresh will be called
-                $refreshLocks = (\mt_rand(1, 100) <= 10);
+                $refreshLocks = (\random_int(1, 100) <= 10);
 
                 /** @var Event $event */
                 foreach ($events as $eventKey => $event) {
@@ -217,7 +198,7 @@ class EventRunner
         ;
         if ($emailOutput && !empty($event->getOutputStream())) {
             $this->mailer->send(
-                'Crunz: output for event: ' . (($event->description) ? $event->description : $event->getId()),
+                'Crunz: output for event: ' . ($event->description ?? $event->getId()),
                 $this->formatEventOutput($event)
             );
         }
@@ -240,13 +221,14 @@ class EventRunner
             $output = $event->wholeOutput();
 
             $this->output
-                ->write("<error>{$output}</error>");
+                ?->write("<error>{$output}</error>")
+            ;
         }
 
         // Send error as email as configured
         if ($emailErrors) {
             $this->mailer->send(
-                'Crunz: reporting error for event:' . (($event->description) ? $event->description : $event->getId()),
+                'Crunz: reporting error for event:' . ($event->description ?? $event->getId()),
                 $this->formatEventError($event)
             );
         }
@@ -281,7 +263,7 @@ class EventRunner
     protected function display($output): void
     {
         $this->output
-            ->write(\is_string($output) ? $output : '')
+            ?->write(\is_string($output) ? $output : '')
         ;
     }
 

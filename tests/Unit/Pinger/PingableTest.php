@@ -13,11 +13,9 @@ final class PingableTest extends TestCase
     /**
      * @test
      *
-     * @param mixed $url
-     *
      * @dataProvider nonStringProvider
      */
-    public function before_url_must_be_string($url): void
+    public function before_url_must_be_string(mixed $url): void
     {
         $type = \gettype($url);
         $this->expectException(PingableException::class);
@@ -54,11 +52,9 @@ final class PingableTest extends TestCase
     /**
      * @test
      *
-     * @param mixed $url
-     *
      * @dataProvider nonStringProvider
      */
-    public function after_url_must_be_string($url): void
+    public function after_url_must_be_string(mixed $url): void
     {
         $type = \gettype($url);
         $this->expectException(PingableException::class);

@@ -26,9 +26,7 @@ final class Finder implements FinderInterface
 
         /** @var \SplFileInfo[] $files */
         $files = \array_map(
-            static function (array $file) {
-                return new \SplFileInfo(\reset($file));
-            },
+            static fn (array $file) => new \SplFileInfo(\reset($file)),
             \iterator_to_array($regexIterator)
         );
 

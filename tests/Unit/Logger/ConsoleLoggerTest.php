@@ -94,8 +94,8 @@ final class ConsoleLoggerTest extends TestCase
         yield 'debug' => [ConsoleLoggerInterface::VERBOSITY_DEBUG];
     }
 
-    /** @return MockObject|SymfonyStyle */
-    private function mockSymfonyStyle(int $ioVerbosity)
+    /** @return MockObject&SymfonyStyle */
+    private function mockSymfonyStyle(int $ioVerbosity): object
     {
         $mock = $this->createMock(SymfonyStyle::class);
 

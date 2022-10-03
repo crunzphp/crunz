@@ -9,13 +9,9 @@ use Symfony\Component\Process\Process as SymfonyProcess;
 /** @internal */
 final class Process
 {
-    /** @var SymfonyProcess|string[] */
-    private $process;
-
     /** @param SymfonyProcess|string[] $process */
-    private function __construct(SymfonyProcess $process)
+    private function __construct(private SymfonyProcess $process)
     {
-        $this->process = $process;
     }
 
     public static function fromStringCommand(string $command, ?string $cwd = null): self

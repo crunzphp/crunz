@@ -24,22 +24,11 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
         self::FORMAT_JSON,
     ];
 
-    /** @var ConfigurationInterface */
-    private $configuration;
-    /** @var CollectionInterface */
-    private $taskCollection;
-    /** @var LoaderInterface */
-    private $taskLoader;
-
     public function __construct(
-        ConfigurationInterface $configuration,
-        CollectionInterface $taskCollection,
-        LoaderInterface $taskLoader
+        private ConfigurationInterface $configuration,
+        private CollectionInterface $taskCollection,
+        private LoaderInterface $taskLoader
     ) {
-        $this->configuration = $configuration;
-        $this->taskCollection = $taskCollection;
-        $this->taskLoader = $taskLoader;
-
         parent::__construct();
     }
 

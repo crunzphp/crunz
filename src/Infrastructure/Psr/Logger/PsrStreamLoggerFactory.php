@@ -12,15 +12,8 @@ use Psr\Log\LoggerInterface;
 
 final class PsrStreamLoggerFactory implements LoggerFactoryInterface
 {
-    /** @var Timezone */
-    private $timezoneProvider;
-    /** @var ClockInterface */
-    private $clock;
-
-    public function __construct(Timezone $timezoneProvider, ClockInterface $clock)
+    public function __construct(private Timezone $timezoneProvider, private ClockInterface $clock)
     {
-        $this->timezoneProvider = $timezoneProvider;
-        $this->clock = $clock;
     }
 
     public function create(ConfigurationInterface $configuration): LoggerInterface

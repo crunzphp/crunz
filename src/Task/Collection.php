@@ -11,21 +11,11 @@ use Crunz\Path\Path;
 
 class Collection implements CollectionInterface
 {
-    /** @var ConfigurationInterface */
-    private $configuration;
-    /** @var FinderInterface */
-    private $finder;
-    /** @var ConsoleLoggerInterface */
-    private $consoleLogger;
-
     public function __construct(
-        ConfigurationInterface $configuration,
-        FinderInterface $finder,
-        ConsoleLoggerInterface $consoleLogger
+        private ConfigurationInterface $configuration,
+        private FinderInterface $finder,
+        private ConsoleLoggerInterface $consoleLogger
     ) {
-        $this->configuration = $configuration;
-        $this->finder = $finder;
-        $this->consoleLogger = $consoleLogger;
     }
 
     public function all(string $source): iterable

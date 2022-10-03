@@ -17,17 +17,13 @@ final class EventTest extends UnitTestCase
 {
     /**
      * The default configuration timezone.
-     *
-     * @var string
      */
-    protected $defaultTimezone;
+    protected string $defaultTimezone;
 
     /**
      * Unique identifier for the event.
-     *
-     * @var string
      */
-    protected $id;
+    protected string $id;
 
     public function setUp(): void
     {
@@ -162,16 +158,16 @@ final class EventTest extends UnitTestCase
         $timezone = new \DateTimeZone('UTC');
 
         $e = new Event($this->id, 'php foo');
-        self::assertFalse($e->cron('* * * * *')->when(function () { return false; })->isDue($timezone));
+        self::assertFalse($e->cron('* * * * *')->when(fn () => false)->isDue($timezone));
 
         $e = new Event($this->id, 'php foo');
-        self::assertTrue($e->cron('* * * * *')->when(function () { return true; })->isDue($timezone));
+        self::assertTrue($e->cron('* * * * *')->when(fn () => true)->isDue($timezone));
 
         $e = new Event($this->id, 'php foo');
-        self::assertFalse($e->cron('* * * * *')->skip(function () { return true; })->isDue($timezone));
+        self::assertFalse($e->cron('* * * * *')->skip(fn () => true)->isDue($timezone));
 
         $e = new Event($this->id, 'php foo');
-        self::assertTrue($e->cron('* * * * *')->skip(function () { return false; })->isDue($timezone));
+        self::assertTrue($e->cron('* * * * *')->skip(fn () => false)->isDue($timezone));
     }
 
     /** @test */
@@ -310,9 +306,7 @@ final class EventTest extends UnitTestCase
             \define('CRUNZ_BIN', __FILE__);
         }
 
-        $closure = function () {
-            return 0;
-        };
+        $closure = fn () => 0;
         $closureSerializer = $this->createClosureSerializer();
         $serializedClosure = $closureSerializer->serialize($closure);
         $queryClosure = \http_build_query([$serializedClosure]);

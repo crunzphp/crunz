@@ -8,14 +8,10 @@ use Crunz\Schedule;
 
 final class WrongTaskInstanceException extends TaskException
 {
-    /** @param mixed $schedule */
-    public static function fromFilePath(\SplFileInfo $filePath, $schedule): self
+    public static function fromFilePath(\SplFileInfo $filePath, mixed $schedule): self
     {
         $expectedInstance = Schedule::class;
-        $type = \is_object($schedule)
-            ? \get_class($schedule)
-            : \gettype($schedule)
-        ;
+        $type = \get_debug_type($schedule);
         $path = $filePath->getRealPath();
 
         return new self(

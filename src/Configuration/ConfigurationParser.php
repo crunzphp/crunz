@@ -13,34 +13,19 @@ use Symfony\Component\Config\Definition\Processor;
 
 final class ConfigurationParser implements ConfigurationParserInterface
 {
-    /** @var ConfigurationInterface */
-    private $configurationDefinition;
-    /** @var Processor */
-    private $definitionProcessor;
-    /** @var ConsoleLoggerInterface */
-    private $consoleLogger;
-    /** @var FileParser */
-    private $fileParser;
-    /** @var FilesystemInterface */
-    private $filesystem;
-
     public function __construct(
-        ConfigurationInterface $configurationDefinition,
-        Processor $definitionProcessor,
-        FileParser $fileParser,
-        ConsoleLoggerInterface $consoleLogger,
-        FilesystemInterface $filesystem
+        private ConfigurationInterface $configurationDefinition,
+        private Processor $definitionProcessor,
+        private FileParser $fileParser,
+        private ConsoleLoggerInterface $consoleLogger,
+        private FilesystemInterface $filesystem
     ) {
-        $this->consoleLogger = $consoleLogger;
-        $this->configurationDefinition = $configurationDefinition;
-        $this->definitionProcessor = $definitionProcessor;
-        $this->fileParser = $fileParser;
-        $this->filesystem = $filesystem;
     }
 
     /** {@inheritdoc} */
     public function parseConfig(): array
     {
+        $configFile = null;
         $parsedConfig = [];
         $configFileParsed = false;
 

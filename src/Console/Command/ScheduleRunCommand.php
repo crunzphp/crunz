@@ -19,34 +19,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ScheduleRunCommand extends Command
 {
-    /** @var CollectionInterface */
-    private $taskCollection;
-    /** @var ConfigurationInterface */
-    private $configuration;
-    /** @var EventRunner */
-    private $eventRunner;
-    /** @var Timezone */
-    private $taskTimezone;
-    /** @var Schedule\ScheduleFactory */
-    private $scheduleFactory;
-    /** @var LoaderInterface */
-    private $taskLoader;
-
     public function __construct(
-        CollectionInterface $taskCollection,
-        ConfigurationInterface $configuration,
-        EventRunner $eventRunner,
-        Timezone $taskTimezone,
-        Schedule\ScheduleFactory $scheduleFactory,
-        LoaderInterface $taskLoader
+        private CollectionInterface $taskCollection,
+        private ConfigurationInterface $configuration,
+        private EventRunner $eventRunner,
+        private Timezone $taskTimezone,
+        private Schedule\ScheduleFactory $scheduleFactory,
+        private LoaderInterface $taskLoader
     ) {
-        $this->taskCollection = $taskCollection;
-        $this->configuration = $configuration;
-        $this->eventRunner = $eventRunner;
-        $this->taskTimezone = $taskTimezone;
-        $this->scheduleFactory = $scheduleFactory;
-        $this->taskLoader = $taskLoader;
-
         parent::__construct();
     }
 
@@ -139,9 +119,7 @@ class ScheduleRunCommand extends Command
         );
         $schedules = \array_filter(
             $schedules,
-            static function (Schedule $schedule): bool {
-                return \count($schedule->events()) > 0;
-            }
+            static fn (Schedule $schedule): bool => \count($schedule->events()) > 0
         );
 
         if (!\count($schedules)) {

@@ -8,12 +8,8 @@ use Crunz\Task\TaskNumber;
 
 final class TaskInformation
 {
-    /** @var TaskNumber */
-    private $taskNumber;
-
-    public function __construct(TaskNumber $taskNumber)
+    public function __construct(private TaskNumber $taskNumber)
     {
-        $this->taskNumber = $taskNumber;
     }
 
     public function taskNumber(): TaskNumber

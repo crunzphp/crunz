@@ -12,7 +12,7 @@ $envFlags->disableDeprecationHandler();
 
 // Make sure current working directory is "tests"
 $filesystem = new \Crunz\Filesystem\Filesystem();
-if (\strpos($filesystem->getCwd(), 'tests') !== false) {
+if (\str_contains($filesystem->getCwd(), 'tests')) {
     return;
 }
 

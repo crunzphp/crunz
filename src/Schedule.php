@@ -160,9 +160,7 @@ class Schedule implements PingableInterface
     {
         return \array_filter(
             $this->events,
-            static function (Event $event) use ($timeZone) {
-                return $event->isDue($timeZone);
-            }
+            static fn (Event $event) => $event->isDue($timeZone)
         );
     }
 

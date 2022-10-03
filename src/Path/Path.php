@@ -8,12 +8,8 @@ use Crunz\Exception\CrunzException;
 
 final class Path
 {
-    /** @var string */
-    private $path;
-
-    private function __construct(string $path)
+    private function __construct(private string $path)
     {
-        $this->path = $path;
     }
 
     /**

@@ -11,12 +11,9 @@ use PHPUnit\Framework\TestCase;
 
 final class FinderTest extends TestCase
 {
-    /** @var Filesystem */
-    private $filesystem;
-    /** @var Path */
-    private $tasksDirectory;
-    /** @var Path */
-    private $fixtureDirectory;
+    private Filesystem $filesystem;
+    private Path $tasksDirectory;
+    private Path $fixtureDirectory;
 
     public function setUp(): void
     {
