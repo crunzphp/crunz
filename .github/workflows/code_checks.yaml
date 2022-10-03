@@ -10,6 +10,7 @@ jobs:
                 php:
                     - '8.0'
                     - '8.1'
+                    - '8.2'
                 dependencies:
                     - 'low'
                     - 'high'
@@ -22,6 +23,12 @@ jobs:
                       dependencies: 'low'
                       symfony_version: "~v6.1.0"
                     - php: '8.1'
+                      dependencies: 'high'
+                      symfony_version: "~v6.1.0"
+                    - php: '8.2'
+                      dependencies: 'low'
+                      symfony_version: "~v6.1.0"
+                    - php: '8.2'
                       dependencies: 'high'
                       symfony_version: "~v6.1.0"
 
