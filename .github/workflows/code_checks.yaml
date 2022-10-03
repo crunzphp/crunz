@@ -18,17 +18,12 @@ jobs:
                     - "~v4.4.30"
                     - "~v5.4.9"
                     - "~v6.0.9"
-                include:
-                    - php: '8.1'
+                    - "~v6.1.0"
+                exclude:
+                    - php: '8.0'
                       dependencies: 'low'
                       symfony_version: "~v6.1.0"
-                    - php: '8.1'
-                      dependencies: 'high'
-                      symfony_version: "~v6.1.0"
-                    - php: '8.2'
-                      dependencies: 'low'
-                      symfony_version: "~v6.1.0"
-                    - php: '8.2'
+                    - php: '8.0'
                       dependencies: 'high'
                       symfony_version: "~v6.1.0"
 
