@@ -58,11 +58,6 @@ jobs:
             matrix:
                 php:
                     - '8.0'
-                vars:
-                    - dependencies: "high"
-                      composerExtraFlags: ''
-                    - dependencies: "low"
-                      composerExtraFlags: '--prefer-lowest'
 
         name: PHP ${{ matrix.php }} tests on Windows
         steps:
@@ -86,7 +81,7 @@ jobs:
                     restore-keys: |
                         php-${{ matrix.php }}-windows-composer-
 
-            -   run: composer update -a --prefer-dist -n ${{ matrix.vars.composerExtraFlags }}
+            -   run: composer update -a --prefer-dist -n
 
             -   run: vendor/bin/phpunit
 
