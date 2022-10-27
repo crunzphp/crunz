@@ -165,7 +165,7 @@ class Event implements PingableInterface
      * The symfony lock factory that is used to acquire locks. If the value is null, but preventOverlapping = true
      * crunz falls back to filesystem locks.
      *
-     * @var Factory|LockFactory|null
+     * @var LockFactory|null
      */
     private $lockFactory;
     /** @var string[] */
@@ -731,10 +731,7 @@ class Event implements PingableInterface
 
         $lockStore = $store ?: $this->createDefaultLockStore();
         $this->preventOverlapping = true;
-        $this->lockFactory = \class_exists(Factory::class)
-            ? new Factory($lockStore)
-            : new LockFactory($lockStore)
-        ;
+        $this->lockFactory = new LockFactory($lockStore);
 
         // Skip the event if it's locked (processing)
         $this->skip(function () {
