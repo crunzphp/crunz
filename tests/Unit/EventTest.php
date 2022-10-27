@@ -10,7 +10,8 @@ use Crunz\Task\TaskException;
 use Crunz\Tests\TestCase\Faker;
 use Crunz\Tests\TestCase\TestClock;
 use Crunz\Tests\TestCase\UnitTestCase;
-use Symfony\Component\Lock\BlockingStoreInterface;
+use Symfony\Component\Lock\PersistingStoreInterface;
+use Symfony\Component\Lock\Store\PdoStore;
 use Symfony\Component\Lock\Store\SemaphoreStore;
 
 final class EventTest extends UnitTestCase
@@ -412,6 +413,19 @@ final class EventTest extends UnitTestCase
         $event->hourlyAt($minute);
     }
 
+    public function test_non_blocking_store_can_be_passed_to_prevent_overlapping(): void
+    {
+        // Arrange
+        $store = new PdoStore('');
+        $event = $this->createEvent();
+
+        // Expect
+        $this->expectNotToPerformAssertions();
+
+        // Act
+        $event->preventOverlapping($store);
+    }
+
     /** @return iterable<string,array> */
     public function deprecatedEveryProvider(): iterable
     {
@@ -452,7 +466,7 @@ final class EventTest extends UnitTestCase
         ];
     }
 
-    private function assertPreventOverlapping(BlockingStoreInterface $store = null): void
+    private function assertPreventOverlapping(PersistingStoreInterface $store = null): void
     {
         $event = $this->createPreventOverlappingEvent($store);
         $event2 = $this->createPreventOverlappingEvent($store);
@@ -462,7 +476,7 @@ final class EventTest extends UnitTestCase
         self::assertFalse($event2->isDue(new \DateTimeZone('UTC')));
     }
 
-    private function createPreventOverlappingEvent(BlockingStoreInterface $store = null): Event
+    private function createPreventOverlappingEvent(PersistingStoreInterface $store = null): Event
     {
         $command = "php -r 'sleep(2);'";
 
