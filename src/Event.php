@@ -18,13 +18,12 @@ use Crunz\Pinger\PingableInterface;
 use Crunz\Pinger\PingableTrait;
 use Crunz\Process\Process;
 use Crunz\Task\TaskException;
-use Symfony\Component\Lock\BlockingStoreInterface;
 use Symfony\Component\Lock\Exception\InvalidArgumentException;
 use Symfony\Component\Lock\Factory;
 use Symfony\Component\Lock\Lock;
 use Symfony\Component\Lock\LockFactory;
+use Symfony\Component\Lock\PersistingStoreInterface;
 use Symfony\Component\Lock\Store\FlockStore;
-use Symfony\Component\Lock\StoreInterface;
 
 class Event implements PingableInterface
 {
@@ -166,7 +165,7 @@ class Event implements PingableInterface
      * The symfony lock factory that is used to acquire locks. If the value is null, but preventOverlapping = true
      * crunz falls back to filesystem locks.
      *
-     * @var Factory|LockFactory|null
+     * @var LockFactory|null
      */
     private $lockFactory;
     /** @var string[] */
@@ -715,28 +714,24 @@ class Event implements PingableInterface
      * By default, the lock is acquired through file system locks. Alternatively, you can pass a symfony lock store
      * that will be responsible for the locking.
      *
-     * @param StoreInterface|BlockingStoreInterface $store
+     * @param PersistingStoreInterface|object $store
      *
      * @return $this
      */
     public function preventOverlapping(object $store = null)
     {
-        if (null !== $store && !($store instanceof BlockingStoreInterface || $store instanceof StoreInterface)) {
-            $legacyClass = StoreInterface::class;
-            $newClass = BlockingStoreInterface::class;
+        if (null !== $store && !($store instanceof PersistingStoreInterface)) {
+            $expectedClass = PersistingStoreInterface::class;
             $actualClass = \get_class($store);
 
             throw new \RuntimeException(
-                "Instance of '{$newClass}' or '{$legacyClass}' is expected, '{$actualClass}' provided"
+                "Instance of '{$expectedClass}' is expected, '{$actualClass}' provided"
             );
         }
 
         $lockStore = $store ?: $this->createDefaultLockStore();
         $this->preventOverlapping = true;
-        $this->lockFactory = \class_exists(Factory::class)
-            ? new Factory($lockStore)
-            : new LockFactory($lockStore)
-        ;
+        $this->lockFactory = new LockFactory($lockStore);
 
         // Skip the event if it's locked (processing)
         $this->skip(function () {
