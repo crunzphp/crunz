@@ -15,7 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 final class ConfigGeneratorCommand extends Command
 {
-    public const CONFIG_FILE_NAME = 'crunz.yml';
+    public static string $CONFIG_FILE_NAME = 'crunz.yml';
 
     public function __construct(
         private ProviderInterface $timezoneProvider,
@@ -45,7 +45,7 @@ final class ConfigGeneratorCommand extends Command
         $symfonyStyleIo = new SymfonyStyle($input, $output);
         $cwd = $this->filesystem
             ->getCwd();
-        $path = Path::create([$cwd, self::CONFIG_FILE_NAME])->toString();
+        $path = Path::create([$cwd, self::$CONFIG_FILE_NAME])->toString();
         $destination = \realpath($path) ?: $path;
         $configExists = $this->filesystem
             ->fileExists($destination)
@@ -70,7 +70,7 @@ final class ConfigGeneratorCommand extends Command
             $projectRoot,
             'resources',
             'config',
-            self::CONFIG_FILE_NAME
+            self::$CONFIG_FILE_NAME
         );
         $src = $srcPath->toString();
         $output->writeln(

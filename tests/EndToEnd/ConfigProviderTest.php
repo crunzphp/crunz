@@ -19,7 +19,7 @@ final class ConfigProviderTest extends EndToEndTestCase
         $environment = $environmentBuilder->createEnvironment();
         $process = $environment->runCrunzCommand('publish:config');
 
-        $configPath = Path::fromStrings($environment->rootDirectory(), ConfigGeneratorCommand::CONFIG_FILE_NAME);
+        $configPath = Path::fromStrings($environment->rootDirectory(), ConfigGeneratorCommand::$CONFIG_FILE_NAME);
         $filesystem = new Filesystem();
 
         self::assertTrue($process->isSuccessful(), "Process output: {$process->getOutput()}{$process->errorOutput()}");
