@@ -60,7 +60,7 @@
         "symfony/error-handler": "^4.4.30 || ^5.4.9 || ^6.0.9",
         "symfony/phpunit-bridge": "^5.4.9 || ^6.0.9"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "beta",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
