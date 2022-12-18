@@ -120,6 +120,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
                     'task' => $event->description ?? '',
                     'expression' => $event->getExpression(),
                     'command' => $event->getCommandForDisplay(),
+                    'source' => $schedule->getSource(),
                 ];
             }
         }
