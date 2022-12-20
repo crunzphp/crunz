@@ -170,6 +170,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
                         'Task',
                         'Expression',
                         'Command to Run',
+                        'Source',
                     ]
                 );
 
