@@ -15,7 +15,6 @@ jobs:
                     - 'low'
                     - 'high'
                 symfony_version:
-                    - "~v4.4.30"
                     - "~v5.4.9"
                     - "~v6.0.9"
                     - "~v6.1.0"
