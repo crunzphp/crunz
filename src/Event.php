@@ -235,7 +235,7 @@ class Event implements PingableInterface
     }
 
     /**
-     * Determine whether the passed value is a closure ot not.
+     * Determine whether the passed value is a closure or not.
      *
      * @return bool
      */
