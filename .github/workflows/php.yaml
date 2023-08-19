@@ -26,18 +26,11 @@ jobs:
                     - '~5.4.9'
                     - '~6.0.9'
                     - '~6.1.0'
-                    - '~6.2.0'
-                exclude:
-                    - php: '8.0'
+                include:
+                    - php: '8.2'
                       dependencies: 'lowestest'
-                      symfony_version: '~6.1.0'
-                    - php: '8.0'
-                      dependencies: 'highest'
-                      symfony_version: '~6.1.0'
-                    - php: '8.0'
-                      dependencies: 'lowest'
                       symfony_version: '~6.2.0'
-                    - php: '8.0'
+                    - php: '8.2'
                       dependencies: 'highest'
                       symfony_version: '~6.2.0'
         runs-on: ubuntu-22.04
