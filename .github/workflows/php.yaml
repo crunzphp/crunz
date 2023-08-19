@@ -30,15 +30,8 @@ jobs:
                     - '~5.4.9'
                     - '~6.0.9'
                     - '~6.1.0'
+                    - '~6.2.0'
                 include:
-                    - os: 'ubuntu-22.04'
-                      php: '8.2'
-                      dependencies: 'lowest'
-                      symfony_version: '~6.2.0'
-                    - os: 'ubuntu-22.04'
-                      php: '8.2'
-                      dependencies: 'highest'
-                      symfony_version: '~6.2.0'
                     - os: 'windows-2022'
                       php: '8.0'
                       dependencies: 'highest'
@@ -52,6 +45,14 @@ jobs:
                       php: '8.0'
                       dependencies: 'highest'
                       symfony_version: '~6.1.0'
+                    - os: 'ubuntu-22.04'
+                      php: '8.0'
+                      dependencies: 'lowest'
+                      symfony_version: '~6.2.0'
+                    - os: 'ubuntu-22.04'
+                      php: '8.0'
+                      dependencies: 'highest'
+                      symfony_version: '~6.2.0'
         runs-on: ${{ matrix.os }}
 
         steps:
