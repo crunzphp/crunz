@@ -36,10 +36,10 @@ jobs:
                 exclude:
                     - php: '8.0'
                       dependencies: 'lowest'
-                      symfony_version: '~v6.1.0'
+                      symfony_version: '~6.1.0'
                     - php: '8.0'
                       dependencies: 'highest'
-                      symfony_version: '~v6.1.0'
+                      symfony_version: '~6.1.0'
         runs-on: ubuntu-22.04
 
         steps:
