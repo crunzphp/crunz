@@ -1,8 +1,10 @@
 name: PHP
 
 on:
+    pull_request:
+        branches:
+            - '3.5'
     push: null
-    pull_request: null
 
 permissions: {}
 
@@ -12,9 +14,11 @@ concurrency:
 
 jobs:
     unit_tests:
-        name: 'PHP ${{ matrix.php }} / Symfony ${{ matrix.symfony_version }} / ${{ matrix.dependencies }} / Ubuntu'
+        name: '${{ matrix.php }} / Symfony ${{ matrix.symfony_version }} / ${{ matrix.dependencies }} / ${{ matrix.os }}'
         strategy:
             matrix:
+                os:
+                    - 'ubuntu-22.04'
                 php:
                     - '8.0'
                     - '8.1'
@@ -33,6 +37,10 @@ jobs:
                     - php: '8.2'
                       dependencies: 'highest'
                       symfony_version: '~6.2.0'
+                    - php: '8.0'
+                      dependencies: 'highest'
+                      symfony_version: '~6.0.9'
+                      os: 'windows-2022'
                 exclude:
                     - php: '8.0'
                       dependencies: 'lowest'
@@ -40,7 +48,7 @@ jobs:
                     - php: '8.0'
                       dependencies: 'highest'
                       symfony_version: '~6.1.0'
-        runs-on: ubuntu-22.04
+        runs-on: ${{ matrix.os }}
 
         steps:
             -   uses: actions/checkout@v3
@@ -54,29 +62,6 @@ jobs:
                 with:
                     dependency-versions: ${{ matrix.dependencies }}
                     composer-options: '--with=symfony/console:${{ matrix.symfony_version }}'
-
-            -   run: composer exec -- phpunit
-
-    unit_tests_windows:
-        name: 'PHP ${{ matrix.php }} tests / Windows'
-        strategy:
-            matrix:
-                php:
-                    - '8.0'
-        runs-on: windows-2022
-
-        steps:
-            -   uses: actions/checkout@v3
-
-            -   uses: shivammathur/setup-php@v2
-                with:
-                    php-version: ${{ matrix.php }}
-                    coverage: none
-                    extensions: 'curl'
-
-            -   uses: ramsey/composer-install@v2
-                with:
-                    dependency-versions: highest
 
             -   run: composer exec -- phpunit
 
