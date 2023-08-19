@@ -65,7 +65,7 @@ final class FallbackHttpClient implements HttpClientInterface
             ->debug('<error>Choosing HttpClient implementation failed.</error>');
 
         throw new HttpClientException(
-            "Unable to choose HttpClient. Enable cURL extension (preffered) or turn on 'allow_url_fopen' in php.ini."
+            "Unable to choose HttpClient. Enable cURL extension (preferred) or turn on 'allow_url_fopen' in php.ini."
         );
     }
 }
