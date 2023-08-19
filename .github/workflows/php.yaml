@@ -70,15 +70,15 @@ jobs:
             -   run: composer exec -- phpunit
 
     static_analysis:
-        runs-on: ubuntu-22.04
+        name: Static analysis
         strategy:
             matrix:
                 include:
                     - php: '8.1'
                       symfony_version: '~6.1.0'
                       dependencies: 'highest'
+        runs-on: ubuntu-22.04
 
-        name: Static analysis
         steps:
             -   uses: actions/checkout@v3
 
