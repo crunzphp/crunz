@@ -13,7 +13,7 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    unit_tests:
+    tests:
         name: '${{ matrix.php }} / Symfony ${{ matrix.symfony_version }} / ${{ matrix.dependencies }} / ${{ matrix.os }}'
         strategy:
             matrix:
@@ -68,7 +68,11 @@ jobs:
                     dependency-versions: ${{ matrix.dependencies }}
                     composer-options: '--with=symfony/console:${{ matrix.symfony_version }}'
 
-            -   run: composer exec -- phpunit
+            -   run: composer exec -- phpunit --testsuite EndToEnd
+
+            -   run: composer exec -- phpunit --testsuite Integration
+
+            -   run: composer exec -- phpunit --testsuite Unit
 
     static_analysis:
         name: Static analysis
