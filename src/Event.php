@@ -89,14 +89,14 @@ class Event implements PingableInterface
     protected $timezone;
 
     /**
-     * Datetime or time since the task is evaluated and possibly executed (only for display purposes)
+     * Datetime or time since the task is evaluated and possibly executed only for display purposes.
      *
      * @var \DateTime|null
      */
     protected $disply_from = null;
 
     /**
-     * Datetime or time until the task is evaluated and possibly executed (only for display purposes)
+     * Datetime or time until the task is evaluated and possibly executed only for display purposes.
      *
      * @var \DateTime|null
      */
@@ -474,7 +474,7 @@ class Event implements PingableInterface
      */
     public function to($datetime)
     {
-        $this->disply_to  = $datetime;
+        $this->disply_to = $datetime;
         return $this->skip(fn () => $this->past($datetime));
     }
 
