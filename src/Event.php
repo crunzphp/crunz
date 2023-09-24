@@ -91,14 +91,14 @@ class Event implements PingableInterface
     /**
      * Datetime or time since the task is evaluated and possibly executed only for display purposes.
      *
-     * @var \DateTime|null
+     * @var \DateTime|string|null
      */
     protected $disply_from = null;
 
     /**
      * Datetime or time until the task is evaluated and possibly executed only for display purposes.
      *
-     * @var \DateTime|null
+     * @var \DateTime|string|null
      */
     protected $disply_to = null;
 
@@ -942,7 +942,7 @@ class Event implements PingableInterface
     /**
      * Get the 'from' configuration for the event if present.
      *
-     * @return \DateTime|null
+     * @return \DateTime|string|null
      */
     public function getFrom()
     {
@@ -952,7 +952,7 @@ class Event implements PingableInterface
     /**
      * Get the 'to' configuration for the event if present.
      *
-     * @return \DateTime|null
+     * @return \DateTime|string|null
      */
     public function getTo()
     {
