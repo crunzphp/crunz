@@ -462,6 +462,7 @@ class Event implements PingableInterface
     public function from($datetime)
     {
         $this->disply_from = $datetime;
+
         return $this->skip(fn () => $this->notYet($datetime));
     }
 
@@ -475,6 +476,7 @@ class Event implements PingableInterface
     public function to($datetime)
     {
         $this->disply_to = $datetime;
+
         return $this->skip(fn () => $this->past($datetime));
     }
 
