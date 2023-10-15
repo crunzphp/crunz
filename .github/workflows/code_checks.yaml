@@ -16,7 +16,6 @@ jobs:
                     - 'high'
                 symfony_version:
                     - "~v5.4.9"
-                    - "~v6.0.9"
                     - "~v6.1.0"
                     - "~v6.2.0"
                 exclude:
