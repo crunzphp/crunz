@@ -4,6 +4,7 @@ on:
     pull_request:
         branches:
             - '3.5'
+            - '3.6'
     push: null
 
 permissions: {}
