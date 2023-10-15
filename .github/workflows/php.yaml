@@ -32,7 +32,7 @@ jobs:
                     - '~6.2.0'
                 include:
                     - os: 'windows-2022'
-                      php: '8.0'
+                      php: '8.1'
                       dependencies: 'highest'
                       symfony_version: '~6.1.0'
                 exclude:
