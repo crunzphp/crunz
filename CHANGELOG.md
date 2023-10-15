@@ -6,6 +6,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+## [v3.5.0] - 2023-10-15
+
+### Added
+
+- [crunzphp#39] Add PHP v8.2 support
+- [crunzphp#64] Test Symfony v6.3
+- [crunzphp#66] Add PHP v8.3 support
+
+### Removed
+
+- [crunzphp#38] Drop PHP v7.4 support
+- [crunzphp#54] Drop Symfony v6.0 support
+- [crunzphp#63] Drop Symfony v6.1 support
+- [crunzphp#65] Drop Symfony v6.2 support
+
 ## [v3.4.1] - 2022-11-01
 
 ### Fixed
@@ -508,7 +523,14 @@ In `v2` this will result in exception.
 [crunzphp#5]: https://github.com/crunzphp/crunz/pull/5
 [crunzphp#24]: https://github.com/crunzphp/crunz/pull/24
 [crunzphp#31]: https://github.com/crunzphp/crunz/pull/31
+[crunzphp#38]: https://github.com/crunzphp/crunz/pull/38
+[crunzphp#39]: https://github.com/crunzphp/crunz/pull/39
 [crunzphp#44]: https://github.com/crunzphp/crunz/pull/44
+[crunzphp#54]: https://github.com/crunzphp/crunz/pull/54
+[crunzphp#63]: https://github.com/crunzphp/crunz/pull/63
+[crunzphp#64]: https://github.com/crunzphp/crunz/pull/64
+[crunzphp#65]: https://github.com/crunzphp/crunz/pull/65
+[crunzphp#66]: https://github.com/crunzphp/crunz/pull/66
 [v1.5.1]: https://github.com/crunzphp/crunz/compare/v1.5.0...v1.5.1
 [v1.6.0]: https://github.com/crunzphp/crunz/compare/v1.5.1...v1.6.0
 [v1.6.1]: https://github.com/crunzphp/crunz/compare/v1.6.0...v1.6.1
@@ -553,6 +575,7 @@ In `v2` this will result in exception.
 [v3.3.0]: https://github.com/crunzphp/crunz/compare/v3.2.2...v3.3.0
 [v3.4.0]: https://github.com/crunzphp/crunz/compare/v3.3.0...v3.4.0
 [v3.4.1]: https://github.com/crunzphp/crunz/compare/v3.4.0...v3.4.1
+[v3.5.0]: https://github.com/crunzphp/crunz/compare/v3.4.1...v3.5.0
 [@andrewmy]: https://github.com/andrewmy
 [@arthurbarros]: https://github.com/arthurbarros
 [@bashgeek]: https://github.com/bashgeek
