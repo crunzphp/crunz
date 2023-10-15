@@ -487,7 +487,7 @@ final class EventTest extends UnitTestCase
         $reflection = new \ReflectionClass(Event::class);
         $property = $reflection->getProperty('clock');
         $property->setAccessible(true);
-        $property->setValue($testClock);
+        $property->setValue(null, $testClock);
     }
 
     private function isWindows(): bool
