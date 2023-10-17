@@ -60,7 +60,7 @@ jobs:
                     {
                         printf 'with_string='
                         while read -r PACKAGE; do
-                            printf -- '--with=%s:%s' "${PACKAGE}" "${{ matrix.symfony_version }}"
+                            printf -- '--with=%s:%s\n' "${PACKAGE}" "${{ matrix.symfony_version }}"
                         done < <(jq --raw-output '(."require" + ."require-dev") | keys[] | select(contains("symfony/"))' composer.json) \
                              | paste --serial --delimiters=" "
                     } >>"$GITHUB_OUTPUT"
@@ -99,7 +99,7 @@ jobs:
                     {
                         printf 'with_string='
                         while read -r PACKAGE; do
-                            printf -- '--with=%s:%s' "${PACKAGE}" "${{ matrix.symfony_version }}"
+                            printf -- '--with=%s:%s\n' "${PACKAGE}" "${{ matrix.symfony_version }}"
                         done < <(jq --raw-output '(."require" + ."require-dev") | keys[] | select(contains("symfony/"))' composer.json) \
                              | paste --serial --delimiters=" "
                     } >>"$GITHUB_OUTPUT"
