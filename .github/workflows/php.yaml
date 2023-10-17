@@ -58,7 +58,7 @@ jobs:
             -   id: symfony_packages
                 shell: bash
                 run: |
-                    jq --raw-output '"with_string=" + (["--with=" + ((."require" + ."require-dev") | keys[] | select(contains("symfony/"))) + ":~6.3.0"] | join(" "))' composer.json \
+                    jq --raw-output '"with_string=" + (["--with=" + ((."require" + ."require-dev") | keys[] | select(contains("symfony/"))) + ":${{ matrix.symfony_version }}"] | join(" "))' composer.json \
                         >>"$GITHUB_OUTPUT"
 
             -   uses: ramsey/composer-install@v2
@@ -93,7 +93,7 @@ jobs:
             -   id: symfony_packages
                 shell: bash
                 run: |
-                    jq --raw-output '"with_string=" + (["--with=" + ((."require" + ."require-dev") | keys[] | select(contains("symfony/"))) + ":~6.3.0"] | join(" "))' composer.json \
+                    jq --raw-output '"with_string=" + (["--with=" + ((."require" + ."require-dev") | keys[] | select(contains("symfony/"))) + ":${{ matrix.symfony_version }}"] | join(" "))' composer.json \
                         >>"$GITHUB_OUTPUT"
 
             -   uses: ramsey/composer-install@v2
