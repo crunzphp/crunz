@@ -55,10 +55,20 @@ jobs:
                     php-version: ${{ matrix.php }}
                     coverage: none
 
+            -   id: symfony_packages
+                run: |
+                    {
+                        printf 'with_string='
+                        while read -r PACKAGE; do
+                            printf -- '--with=%s:%s' "${PACKAGE}" "${{ matrix.symfony_version }}"
+                        done < <(jq --raw-output '(."require" + ."require-dev") | keys[] | select(contains("symfony/"))' composer.json) \
+                             | paste --serial --delimiters=" "
+                    } >>"$GITHUB_OUTPUT"
+
             -   uses: ramsey/composer-install@v2
                 with:
                     dependency-versions: ${{ matrix.dependencies }}
-                    composer-options: '--with=symfony/console:${{ matrix.symfony_version }}'
+                    composer-options: ${{ steps.symfony_packages.outputs.with_string }}
 
             -   run: composer exec -- phpunit --testsuite EndToEnd
 
@@ -84,10 +94,20 @@ jobs:
                     php-version: ${{ matrix.php }}
                     coverage: none
 
+            -   id: symfony_packages
+                run: |
+                    {
+                        printf 'with_string='
+                        while read -r PACKAGE; do
+                            printf -- '--with=%s:%s' "${PACKAGE}" "${{ matrix.symfony_version }}"
+                        done < <(jq --raw-output '(."require" + ."require-dev") | keys[] | select(contains("symfony/"))' composer.json) \
+                             | paste --serial --delimiters=" "
+                    } >>"$GITHUB_OUTPUT"
+
             -   uses: ramsey/composer-install@v2
                 with:
                     dependency-versions: ${{ matrix.dependencies }}
-                    composer-options: '--with=symfony/console:${{ matrix.symfony_version }}'
+                    composer-options: ${{ steps.symfony_packages.outputs.with_string }}
 
             -   run: composer normalize --dry-run
 
