@@ -76,7 +76,7 @@ parameters:
 			path: src/Console/Command/TaskGeneratorCommand.php
 
 		-
-			message: "#^Cannot call method ask\\(\\) on mixed\\.$#"
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Console\\\\Helper\\\\HelperInterface\\:\\:ask\\(\\)\\.$#"
 			count: 1
 			path: src/Console/Command/TaskGeneratorCommand.php
 
@@ -116,18 +116,8 @@ parameters:
 			path: src/Event.php
 
 		-
-			message: "#^Call to method createLock\\(\\) on an unknown class Symfony\\\\Component\\\\Lock\\\\Factory\\.$#"
-			count: 1
-			path: src/Event.php
-
-		-
 			message: "#^Cannot cast mixed to string\\.$#"
 			count: 1
-			path: src/Event.php
-
-		-
-			message: "#^Class Symfony\\\\Component\\\\Lock\\\\StoreInterface not found\\.$#"
-			count: 2
 			path: src/Event.php
 
 		-
@@ -137,11 +127,6 @@ parameters:
 
 		-
 			message: "#^Instanceof between DateTimeZone and DateTimeZone will always evaluate to true\\.$#"
-			count: 1
-			path: src/Event.php
-
-		-
-			message: "#^Instanceof between Symfony\\\\Component\\\\Lock\\\\StoreInterface and Symfony\\\\Component\\\\Lock\\\\StoreInterface will always evaluate to true\\.$#"
 			count: 1
 			path: src/Event.php
 
@@ -166,17 +151,7 @@ parameters:
 			path: src/Event.php
 
 		-
-			message: "#^Parameter \\$store of method Crunz\\\\Event\\:\\:preventOverlapping\\(\\) has invalid type Symfony\\\\Component\\\\Lock\\\\StoreInterface\\.$#"
-			count: 1
-			path: src/Event.php
-
-		-
 			message: "#^Property Crunz\\\\Event\\:\\:\\$lock \\(Symfony\\\\Component\\\\Lock\\\\Lock\\) does not accept Symfony\\\\Component\\\\Lock\\\\SharedLockInterface\\.$#"
-			count: 1
-			path: src/Event.php
-
-		-
-			message: "#^Property Crunz\\\\Event\\:\\:\\$lockFactory has unknown class Symfony\\\\Component\\\\Lock\\\\Factory as its type\\.$#"
 			count: 1
 			path: src/Event.php
 
@@ -396,12 +371,12 @@ parameters:
 			path: tests/EndToEnd/WrongTaskTest.php
 
 		-
-			message: "#^Call to function method_exists\\(\\) with Symfony\\\\Component\\\\Console\\\\Tester\\\\CommandTester and 'setInputs' will always evaluate to true\\.$#"
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Console\\\\Helper\\\\HelperInterface\\:\\:setInputStream\\(\\)\\.$#"
 			count: 1
 			path: tests/Functional/TaskGeneratorTest.php
 
 		-
-			message: "#^Cannot call method setInputStream\\(\\) on mixed\\.$#"
+			message: "#^Call to function method_exists\\(\\) with Symfony\\\\Component\\\\Console\\\\Tester\\\\CommandTester and 'setInputs' will always evaluate to true\\.$#"
 			count: 1
 			path: tests/Functional/TaskGeneratorTest.php
 

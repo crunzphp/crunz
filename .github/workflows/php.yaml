@@ -1,0 +1,104 @@
+name: PHP
+
+on:
+    pull_request:
+        branches:
+            - '3.5'
+            - '3.6'
+    push: null
+
+permissions: {}
+
+concurrency:
+    group: '${{ github.workflow }}-${{ github.ref }}'
+    cancel-in-progress: true
+
+jobs:
+    tests:
+        name: '${{ matrix.php }} / Symfony ${{ matrix.symfony_version }} / ${{ matrix.dependencies }} / ${{ matrix.os }}'
+        strategy:
+            matrix:
+                os:
+                    - 'ubuntu-22.04'
+                php:
+                    - '8.0'
+                    - '8.1'
+                    - '8.2'
+                    - '8.3'
+                dependencies:
+                    - 'lowest'
+                    - 'highest'
+                symfony_version:
+                    - '~5.4.9'
+                    - '~6.3.0'
+                include:
+                    - os: 'windows-2022'
+                      php: '8.1'
+                      dependencies: 'highest'
+                      symfony_version: '~6.3.0'
+                exclude:
+                    - os: 'ubuntu-22.04'
+                      php: '8.0'
+                      dependencies: 'lowest'
+                      symfony_version: '~6.3.0'
+                    - os: 'ubuntu-22.04'
+                      php: '8.0'
+                      dependencies: 'highest'
+                      symfony_version: '~6.3.0'
+        runs-on: ${{ matrix.os }}
+
+        steps:
+            -   uses: actions/checkout@v3
+
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    coverage: none
+
+            -   uses: ramsey/composer-install@v2
+                with:
+                    dependency-versions: ${{ matrix.dependencies }}
+                    composer-options: '--with=symfony/console:${{ matrix.symfony_version }}'
+
+            -   run: composer exec -- phpunit --testsuite EndToEnd
+
+            -   run: composer exec -- phpunit --testsuite Integration
+
+            -   run: composer exec -- phpunit --testsuite Unit
+
+    static_analysis:
+        name: Static analysis
+        strategy:
+            matrix:
+                include:
+                    - php: '8.1'
+                      symfony_version: '~6.3.0'
+                      dependencies: 'highest'
+        runs-on: ubuntu-22.04
+
+        steps:
+            -   uses: actions/checkout@v3
+
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    coverage: none
+
+            -   uses: ramsey/composer-install@v2
+                with:
+                    dependency-versions: ${{ matrix.dependencies }}
+                    composer-options: '--with=symfony/console:${{ matrix.symfony_version }}'
+
+            -   run: composer normalize --dry-run
+
+            -   uses: actions/cache@v3
+                with:
+                    path: .php-cs-fixer.cache
+                    key: php-cs-fixer-cache
+
+            -   uses: actions/cache@v3
+                with:
+                    path: /tmp/phpstan
+                    key: phpstan-cache
+
+            -   run: composer run crunz:analyze
