@@ -59,7 +59,7 @@ jobs:
                 shell: bash
                 run: |
                     printf 'with_string=%s\n' \
-                        "$(jq --raw-output '"--with=" + ((."require" + ."require-dev") | keys[] | select(contains("symfony/"))) + ":${{ matrix.symfony_version }}"')" \
+                        "$(jq --raw-output '"--with=" + ((."require" + ."require-dev") | keys[] | select(contains("symfony/"))) + ":${{ matrix.symfony_version }}"' composer.json)" \
                         >>"$GITHUB_OUTPUT"
 
             -   uses: ramsey/composer-install@v2
@@ -95,7 +95,7 @@ jobs:
                 shell: bash
                 run: |
                     printf 'with_string=%s\n' \
-                        "$(jq --raw-output '"--with=" + ((."require" + ."require-dev") | keys[] | select(contains("symfony/"))) + ":${{ matrix.symfony_version }}"')" \
+                        "$(jq --raw-output '"--with=" + ((."require" + ."require-dev") | keys[] | select(contains("symfony/"))) + ":${{ matrix.symfony_version }}"' composer.json)" \
                         >>"$GITHUB_OUTPUT"
 
             -   uses: ramsey/composer-install@v2
