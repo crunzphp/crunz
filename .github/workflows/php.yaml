@@ -55,10 +55,16 @@ jobs:
                     php-version: ${{ matrix.php }}
                     coverage: none
 
+            -   id: symfony_packages
+                shell: bash
+                run: |
+                    jq --raw-output '"with_string=" + (["--with=" + ((."require" + ."require-dev") | keys[] | select(contains("symfony/"))) + ":${{ matrix.symfony_version }}"] | join(" "))' composer.json \
+                        >>"$GITHUB_OUTPUT"
+
             -   uses: ramsey/composer-install@v2
                 with:
                     dependency-versions: ${{ matrix.dependencies }}
-                    composer-options: '--with=symfony/console:${{ matrix.symfony_version }}'
+                    composer-options: ${{ steps.symfony_packages.outputs.with_string }}
 
             -   run: composer exec -- phpunit --testsuite EndToEnd
 
@@ -84,10 +90,16 @@ jobs:
                     php-version: ${{ matrix.php }}
                     coverage: none
 
+            -   id: symfony_packages
+                shell: bash
+                run: |
+                    jq --raw-output '"with_string=" + (["--with=" + ((."require" + ."require-dev") | keys[] | select(contains("symfony/"))) + ":${{ matrix.symfony_version }}"] | join(" "))' composer.json \
+                        >>"$GITHUB_OUTPUT"
+
             -   uses: ramsey/composer-install@v2
                 with:
                     dependency-versions: ${{ matrix.dependencies }}
-                    composer-options: '--with=symfony/console:${{ matrix.symfony_version }}'
+                    composer-options: ${{ steps.symfony_packages.outputs.with_string }}
 
             -   run: composer normalize --dry-run
 
