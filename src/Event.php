@@ -93,14 +93,14 @@ class Event implements PingableInterface
      *
      * @var \DateTime|string|null
      */
-    protected $disply_from = null;
+    protected $from = null;
 
     /**
      * Datetime or time until the task is evaluated and possibly executed only for display purposes.
      *
      * @var \DateTime|string|null
      */
-    protected $disply_to = null;
+    protected $to = null;
 
     /**
      * The user the command should run as.
@@ -461,7 +461,7 @@ class Event implements PingableInterface
      */
     public function from($datetime)
     {
-        $this->disply_from = $datetime;
+        $this->from = $datetime;
 
         return $this->skip(fn () => $this->notYet($datetime));
     }
@@ -475,7 +475,7 @@ class Event implements PingableInterface
      */
     public function to($datetime)
     {
-        $this->disply_to = $datetime;
+        $this->to = $datetime;
 
         return $this->skip(fn () => $this->past($datetime));
     }
@@ -946,7 +946,7 @@ class Event implements PingableInterface
      */
     public function getFrom()
     {
-        return $this->disply_from;
+        return $this->from;
     }
 
     /**
@@ -956,7 +956,7 @@ class Event implements PingableInterface
      */
     public function getTo()
     {
-        return $this->disply_to;
+        return $this->to;
     }
 
     /**
