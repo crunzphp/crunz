@@ -154,6 +154,35 @@ final class EventTest extends UnitTestCase
         );
     }
 
+    public function test_cron_life_time_getters(): void
+    {
+        $timezone = new \DateTimeZone('UTC');
+
+        $date_from = '2023-10-01';
+        $date_to = '2023-10-30';
+
+        $event = new Event($this->id, 'php foo');
+        $event->between($date_from, $date_to);
+
+        self::assertTrue(
+            ($date_from == $event->getFrom() && $date_to == $event->getTo())
+        );
+
+        $event = new Event($this->id, 'php foo');
+        $event->from($date_from);
+
+        self::assertTrue(
+            ($date_from == $event->getFrom())
+        );
+
+        $event = new Event($this->id, 'php foo');
+        $event->to($date_to);
+
+        self::assertTrue(
+            ($date_to == $event->getTo())
+        );
+    }
+
     public function test_cron_conditions(): void
     {
         $timezone = new \DateTimeZone('UTC');
