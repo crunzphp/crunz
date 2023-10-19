@@ -90,17 +90,13 @@ class Event implements PingableInterface
 
     /**
      * Datetime or time since the task is evaluated and possibly executed only for display purposes.
-     *
-     * @var \DateTime|string|null
      */
-    protected $from = null;
+    protected \DateTime|string|null $from = null;
 
     /**
      * Datetime or time until the task is evaluated and possibly executed only for display purposes.
-     *
-     * @var \DateTime|string|null
      */
-    protected $to = null;
+    protected \DateTime|string|null $to = null;
 
     /**
      * The user the command should run as.
@@ -941,20 +937,16 @@ class Event implements PingableInterface
 
     /**
      * Get the 'from' configuration for the event if present.
-     *
-     * @return \DateTime|string|null
      */
-    public function getFrom()
+    public function getFrom() : \DateTime | string | null
     {
         return $this->from;
     }
 
     /**
      * Get the 'to' configuration for the event if present.
-     *
-     * @return \DateTime|string|null
      */
-    public function getTo()
+    public function getTo() : \DateTime | string | null
     {
         return $this->to;
     }
