@@ -154,7 +154,7 @@ final class EventTest extends UnitTestCase
         );
     }
 
-    public function test_cron_life_time_getFrom(): void
+    public function test_cron_life_time_get_from(): void
     {
         $timezone = new \DateTimeZone('UTC');
 
@@ -176,7 +176,7 @@ final class EventTest extends UnitTestCase
         );
     }
 
-    public function test_cron_life_time_getTo(): void
+    public function test_cron_life_time_get_to(): void
     {
         $timezone = new \DateTimeZone('UTC');
 

@@ -938,7 +938,7 @@ class Event implements PingableInterface
     /**
      * Get the 'from' configuration for the event if present.
      */
-    public function getFrom() : \DateTime | string | null
+    public function getFrom(): \DateTime|string|null
     {
         return $this->from;
     }
@@ -946,7 +946,7 @@ class Event implements PingableInterface
     /**
      * Get the 'to' configuration for the event if present.
      */
-    public function getTo() : \DateTime | string | null
+    public function getTo(): \DateTime|string|null
     {
         return $this->to;
     }
