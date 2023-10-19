@@ -165,21 +165,21 @@ final class EventTest extends UnitTestCase
         $event->between($date_from, $date_to);
 
         self::assertTrue(
-            ($date_from == $event->getFrom() && $date_to == $event->getTo())
+            ($date_from === $event->getFrom() && $date_to === $event->getTo())
         );
 
         $event = new Event($this->id, 'php foo');
         $event->from($date_from);
 
         self::assertTrue(
-            ($date_from == $event->getFrom())
+            ($date_from === $event->getFrom())
         );
 
         $event = new Event($this->id, 'php foo');
         $event->to($date_to);
 
         self::assertTrue(
-            ($date_to == $event->getTo())
+            ($date_to === $event->getTo())
         );
     }
 
