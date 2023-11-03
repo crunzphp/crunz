@@ -176,8 +176,6 @@ final class EventTest extends UnitTestCase
 
     public function test_get_between(): void
     {
-        $timezone = new \DateTimeZone('UTC');
-
         $dateFrom = '2023-10-01';
         $dateTo = '2023-10-30';
 
