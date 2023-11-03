@@ -261,7 +261,7 @@ class Event implements PingableInterface
      */
     public function isDue(\DateTimeZone $timeZone)
     {
-        return $this->expressionPasses($timeZone) && $this->filtersPass();
+        return $this->expressionPasses($timeZone) && $this->filtersPass($timeZone);
     }
 
     /**
@@ -269,7 +269,7 @@ class Event implements PingableInterface
      *
      * @return bool
      */
-    public function filtersPass()
+    public function filtersPass(\DateTimeZone $timeZone)
     {
         $invoker = new Invoker();
 
@@ -280,7 +280,7 @@ class Event implements PingableInterface
         }
 
         foreach ($this->rejects as $callback) {
-            if ($invoker->call($callback)) {
+            if ($invoker->call($callback, [$timeZone])) {
                 return false;
             }
         }
@@ -1205,24 +1205,26 @@ class Event implements PingableInterface
      * Check if time hasn't arrived.
      *
      * @param string $datetime
-     *
-     * @return bool
      */
-    protected function notYet($datetime)
+    protected function notYet($datetime, \DateTimeZone $timeZone): bool
     {
-        return \time() < \strtotime($datetime);
+        $timeZonedNow = $this->timeZonedNow($timeZone);
+        $testedDateTime = new \DateTimeImmutable($datetime, $timeZone);
+
+        return $timeZonedNow < $testedDateTime;
     }
 
     /**
      * Check if the time has passed.
      *
      * @param string $datetime
-     *
-     * @return bool
      */
-    protected function past($datetime)
+    protected function past($datetime, \DateTimeZone $timeZone): bool
     {
-        return \time() > \strtotime($datetime);
+        $timeZonedNow = $this->timeZonedNow($timeZone);
+        $testedDateTime = new \DateTimeImmutable($datetime, $timeZone);
+
+        return $timeZonedNow > $testedDateTime;
     }
 
     /**
@@ -1356,5 +1358,13 @@ class Event implements PingableInterface
         );
 
         return 'WIN' === $osCode;
+    }
+
+    private function timeZonedNow(\DateTimeZone $timeZone): \DateTimeImmutable
+    {
+        $clock = $this->getClock();
+        $now = $clock->now();
+
+        return $now->setTimezone($timeZone);
     }
 }
