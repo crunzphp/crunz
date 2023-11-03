@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+## [v3.5.1] - 2023-11-03
+
+### Fixed
+
+- [crunzphp#62] Task Life Time functions don't respect the timezone
+
 ## [v3.5.0] - 2023-10-15
 
 ### Added
@@ -527,6 +533,7 @@ In `v2` this will result in exception.
 [crunzphp#39]: https://github.com/crunzphp/crunz/pull/39
 [crunzphp#44]: https://github.com/crunzphp/crunz/pull/44
 [crunzphp#54]: https://github.com/crunzphp/crunz/pull/54
+[crunzphp#62]: https://github.com/crunzphp/crunz/pull/62
 [crunzphp#63]: https://github.com/crunzphp/crunz/pull/63
 [crunzphp#64]: https://github.com/crunzphp/crunz/pull/64
 [crunzphp#65]: https://github.com/crunzphp/crunz/pull/65
@@ -576,6 +583,7 @@ In `v2` this will result in exception.
 [v3.4.0]: https://github.com/crunzphp/crunz/compare/v3.3.0...v3.4.0
 [v3.4.1]: https://github.com/crunzphp/crunz/compare/v3.4.0...v3.4.1
 [v3.5.0]: https://github.com/crunzphp/crunz/compare/v3.4.1...v3.5.0
+[v3.5.1]: https://github.com/crunzphp/crunz/compare/v3.5.0...v3.5.1
 [@andrewmy]: https://github.com/andrewmy
 [@arthurbarros]: https://github.com/arthurbarros
 [@bashgeek]: https://github.com/bashgeek
