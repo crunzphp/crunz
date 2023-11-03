@@ -154,48 +154,43 @@ final class EventTest extends UnitTestCase
         );
     }
 
-    public function test_cron_life_time_get_from(): void
+    public function test_get_from(): void
     {
         $timezone = new \DateTimeZone('UTC');
 
-        $date_from = '2023-10-01';
-        $date_to = '2023-10-30';
+        $dateFrom = '2023-10-01';
 
         $event = new Event($this->id, 'php foo');
-        $event->between($date_from, $date_to);
+        $event->from($dateFrom);
 
-        self::assertTrue(
-            $date_from === $event->getFrom()
-        );
-
-        $event = new Event($this->id, 'php foo');
-        $event->from($date_from);
-
-        self::assertTrue(
-            $date_from === $event->getFrom()
-        );
+        self::assertSame($dateFrom, $event->getFrom());
     }
 
-    public function test_cron_life_time_get_to(): void
+    public function test_get_to(): void
     {
         $timezone = new \DateTimeZone('UTC');
 
-        $date_from = '2023-10-01';
-        $date_to = '2023-10-30';
+        $dateTo = '2023-10-30';
 
         $event = new Event($this->id, 'php foo');
-        $event->between($date_from, $date_to);
+        $event->to($dateTo);
 
-        self::assertTrue(
-            $date_to === $event->getTo()
-        );
+        self::assertSame($dateTo, $event->getTo());
+    }
+
+    public function test_get_between(): void
+    {
+        $timezone = new \DateTimeZone('UTC');
+
+        $dateFrom = '2023-10-01';
+        $dateTo = '2023-10-30';
 
         $event = new Event($this->id, 'php foo');
-        $event->to($date_to);
+        $event->between($dateFrom, $dateTo);
 
-        self::assertTrue(
-            $date_to === $event->getTo()
-        );
+        self::assertSame($dateFrom, $event->getTo());
+
+        self::assertSame($dateTo, $event->getTo());
     }
 
     public function test_cron_conditions(): void
