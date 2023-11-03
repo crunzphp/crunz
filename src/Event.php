@@ -1179,10 +1179,8 @@ class Event implements PingableInterface
      * Check if time hasn't arrived.
      *
      * @param string $datetime
-     *
-     * @return bool
      */
-    protected function notYet($datetime, \DateTimeZone $timeZone)
+    protected function notYet($datetime, \DateTimeZone $timeZone): bool
     {
         $timeZonedNow = $this->timeZonedNow($timeZone);
         $testedDateTime = new \DateTimeImmutable($datetime, $timeZone);
