@@ -420,6 +420,66 @@ final class EventTest extends UnitTestCase
         $event->preventOverlapping($store);
     }
 
+    /**
+     * @param \Closure(): array{
+     *     now: \DateTimeImmutable,
+     *     fromDateTime: string,
+     *     timeZone: \DateTimeZone,
+     *     expectedIsDue: bool,
+     * } $paramsGenerator
+     *
+     * @dataProvider fromTimeZoneProvider
+     */
+    public function test_from_respects_time_zone(\Closure $paramsGenerator): void
+    {
+        // Arrange
+        [
+            'now' => $now,
+            'fromDateTime' => $fromDateTime,
+            'timeZone' => $timeZone,
+            'expectedIsDue' => $expectedIsDue,
+        ] = $paramsGenerator();
+        $this->setClockNow($now);
+        $event = $this->createEvent();
+        $event->from($fromDateTime);
+
+        // Act
+        $isDue = $event->isDue($timeZone);
+
+        // Assert
+        self::assertSame($expectedIsDue, $isDue);
+    }
+
+    /**
+     * @param \Closure(): array{
+     *     now: \DateTimeImmutable,
+     *     toDateTime: string,
+     *     timeZone: \DateTimeZone,
+     *     expectedIsDue: bool,
+     * } $paramsGenerator
+     *
+     * @dataProvider toTimeZoneProvider
+     */
+    public function test_to_respects_timezone(\Closure $paramsGenerator): void
+    {
+        // Arrange
+        [
+            'now' => $now,
+            'toDateTime' => $toDateTime,
+            'timeZone' => $timeZone,
+            'expectedIsDue' => $expectedIsDue,
+        ] = $paramsGenerator();
+        $this->setClockNow($now);
+        $event = $this->createEvent();
+        $event->to($toDateTime);
+
+        // Act
+        $isDue = $event->isDue($timeZone);
+
+        // Assert
+        self::assertSame($expectedIsDue, $isDue);
+    }
+
     /** @return iterable<string,array> */
     public function deprecatedEveryProvider(): iterable
     {
@@ -444,6 +504,70 @@ final class EventTest extends UnitTestCase
         yield 'every three hours' => ['everyThreeHours', '0 */3 * * *'];
         yield 'every four hours' => ['everyFourHours', '0 */4 * * *'];
         yield 'every six hours' => ['everySixHours', '0 */6 * * *'];
+    }
+
+    /** @return iterable<string, array{\Closure}> */
+    public static function fromTimeZoneProvider(): iterable
+    {
+        yield 'same timezone' => [
+            static function (): array {
+                $timeZone = new \DateTimeZone('Europe/Warsaw');
+
+                return [
+                    'now' => new \DateTimeImmutable(
+                        '12:01',
+                        $timeZone,
+                    ),
+                    'fromDateTime' => '12:00',
+                    'timeZone' => $timeZone,
+                    'expectedIsDue' => true,
+                ];
+            },
+        ];
+
+        yield 'different timezones' => [
+            static fn (): array => [
+                'now' => new \DateTimeImmutable(
+                    '12:00',
+                    new \DateTimeZone('Europe/Warsaw'),
+                ),
+                'fromDateTime' => '11:01',
+                'timeZone' => new \DateTimeZone('Europe/Lisbon'),
+                'expectedIsDue' => false,
+            ],
+        ];
+    }
+
+    /** @return iterable<string, array{\Closure}> */
+    public static function toTimeZoneProvider(): iterable
+    {
+        yield 'same timezone' => [
+            static function (): array {
+                $timeZone = new \DateTimeZone('Europe/Warsaw');
+
+                return [
+                    'now' => new \DateTimeImmutable(
+                        '13:59',
+                        $timeZone,
+                    ),
+                    'toDateTime' => '14:00',
+                    'timeZone' => $timeZone,
+                    'expectedIsDue' => true,
+                ];
+            },
+        ];
+
+        yield 'different timezones' => [
+            static fn (): array => [
+                'now' => new \DateTimeImmutable(
+                    '17:01',
+                    new \DateTimeZone('Europe/Lisbon'),
+                ),
+                'toDateTime' => '18:00',
+                'timeZone' => new \DateTimeZone('Europe/Warsaw'),
+                'expectedIsDue' => false,
+            ],
+        ];
     }
 
     /** @return iterable<string,array> */
