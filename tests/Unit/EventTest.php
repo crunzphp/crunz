@@ -156,8 +156,6 @@ final class EventTest extends UnitTestCase
 
     public function test_get_from(): void
     {
-        $timezone = new \DateTimeZone('UTC');
-
         $dateFrom = '2023-10-01';
 
         $event = new Event($this->id, 'php foo');
@@ -168,8 +166,6 @@ final class EventTest extends UnitTestCase
 
     public function test_get_to(): void
     {
-        $timezone = new \DateTimeZone('UTC');
-
         $dateTo = '2023-10-30';
 
         $event = new Event($this->id, 'php foo');
