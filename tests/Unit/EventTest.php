@@ -188,7 +188,7 @@ final class EventTest extends UnitTestCase
         $event = new Event($this->id, 'php foo');
         $event->between($dateFrom, $dateTo);
 
-        self::assertSame($dateFrom, $event->getTo());
+        self::assertSame($dateFrom, $event->getFrom());
 
         self::assertSame($dateTo, $event->getTo());
     }
