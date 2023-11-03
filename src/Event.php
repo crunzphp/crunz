@@ -1192,10 +1192,8 @@ class Event implements PingableInterface
      * Check if the time has passed.
      *
      * @param string $datetime
-     *
-     * @return bool
      */
-    protected function past($datetime, \DateTimeZone $timeZone)
+    protected function past($datetime, \DateTimeZone $timeZone): bool
     {
         $timeZonedNow = $this->timeZonedNow($timeZone);
         $testedDateTime = new \DateTimeImmutable($datetime, $timeZone);
