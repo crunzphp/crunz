@@ -1243,9 +1243,16 @@ class Event implements PingableInterface
         $lock->acquire();
     }
 
-    private function addErrorCallback(Closure $closure): void
+    /**
+     * Register a callback to be called in event of an error.
+     *
+     * @return $this
+     */
+    public function addErrorCallback(Closure $closure): self
     {
         $this->errorCallbacks[] = $closure;
+
+        return $this;
     }
 
     /**
