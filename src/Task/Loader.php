@@ -22,6 +22,7 @@ final class Loader implements LoaderInterface
             if (!$schedule instanceof Schedule) {
                 throw WrongTaskInstanceException::fromFilePath($file, $schedule);
             }
+            $schedule->setSource($file->getRealPath());
 
             $schedules[] = $schedule;
         }

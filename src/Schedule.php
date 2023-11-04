@@ -41,6 +41,13 @@ class Schedule implements PingableInterface
     protected $errorCallbacks = [];
 
     /**
+     * The filename from where this Schedule instance was sourced
+     * 
+     * @var string
+     */
+    private $sourceFile = '';
+
+    /**
      * Add a new event to the schedule object.
      *
      * @param string|\Closure $command
@@ -176,6 +183,29 @@ class Schedule implements PingableInterface
         unset($this->events[$key]);
 
         return $this;
+    }
+
+    /**
+     * Set the source file of the schedule object.
+     *
+     * @param string $source
+     *
+     * @return self
+     */
+    public function setSource(string $source)
+    {
+        $this->sourceFile = $source;
+        return $this;
+    }
+
+    /**
+     * Get the source file of the schedule object.
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->sourceFile;
     }
 
     /**

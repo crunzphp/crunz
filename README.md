@@ -706,11 +706,11 @@ One of these commands is `crunz schedule:list`, which lists the defined tasks (i
 ```text
 vendor/bin/crunz schedule:list
 
-+---+---------------+-------------+--------------------+
-| # | Task          | Expression  | Command to Run     |
-+---+---------------+-------------+--------------------+
-| 1 | Sample Task   | * * * * 1 * | command/to/execute |
-+---+---------------+-------------+--------------------+
++---+---------------+-------------+--------------------+-------------------------------+
+| # | Task          | Expression  | Command to Run     | Source                        |
++---+---------------+-------------+--------------------+-------------------------------+
+| 1 | Sample Task   | * * * * 1 * | command/to/execute | /path/to/source/FileTasks.php |
++---+---------------+-------------+--------------------+-------------------------------+
 ```
 
 By default, list is in text format, but format can be changed by `--format` option.
@@ -728,7 +728,8 @@ will output:
         "number": 1,
         "task": "Sample Task",
         "expression": "* * * * 1",
-        "command": "command/to/execute"
+        "command": "command/to/execute",
+        "source": "/path/to/source/FileTasks.php"
     }
 ]
 ```
