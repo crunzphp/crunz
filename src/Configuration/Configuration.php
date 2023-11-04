@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Crunz\Configuration;
 
 use Crunz\Application\Service\ConfigurationInterface;
+use Crunz\Console\Command\ConfigGeneratorCommand;
 use Crunz\Filesystem\FilesystemInterface;
 use Crunz\Path\Path;
 

@@ -135,7 +135,7 @@ final class Environment
 
         $configPath = Path::fromStrings(
             $this->rootDirectory,
-            ConfigGeneratorCommand::CONFIG_FILE_NAME
+            ConfigGeneratorCommand::$CONFIG_FILE_NAME
         );
 
         $yamlConfig = Yaml::dump($this->config);

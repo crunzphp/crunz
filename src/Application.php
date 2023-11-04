@@ -16,6 +16,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Application as SymfonyApplication;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DependencyInjection\Container;
@@ -59,7 +60,7 @@ class Application extends SymfonyApplication
     ];
 
     private Container $container;
-    private EnvFlags $envFlags;
+    private EnvFlags  $envFlags;
 
     public function __construct(string $appName, string $appVersion)
     {
@@ -69,12 +70,11 @@ class Application extends SymfonyApplication
 
         $this->initializeContainer();
         $this->registerDeprecationHandler();
+        $this->setConfigPath();
 
         foreach (self::COMMANDS as $commandClass) {
             /** @var Command $command */
-            $command = $this->container
-                ->get($commandClass)
-            ;
+            $command = $this->container->get($commandClass);
 
             $this->add($command);
         }
@@ -82,6 +82,17 @@ class Application extends SymfonyApplication
 
     public function run(InputInterface $input = null, OutputInterface $output = null): int
     {
+        // Add config option to all commands
+        $this->getDefinition()->addOptions([
+            new InputOption(
+                'config',
+                '',
+                InputOption::VALUE_REQUIRED,
+                'Path to config file',
+                ConfigGeneratorCommand::$CONFIG_FILE_NAME
+            )
+        ]);
+
         if (null === $output) {
             /** @var OutputInterface $outputObject */
             $outputObject = $this->container
@@ -104,11 +115,11 @@ class Application extends SymfonyApplication
     private function initializeContainer(): void
     {
         $containerCacheDirWritable = $this->createBaseCacheDirectory();
-        $isContainerDebugEnabled = $this->envFlags
+        $isContainerDebugEnabled   = $this->envFlags
             ->isContainerDebugEnabled();
 
         if ($containerCacheDirWritable) {
-            $class = 'CrunzContainer';
+            $class     = 'CrunzContainer';
             $baseClass = 'Container';
             $cachePath = Path::create(
                 [
@@ -116,7 +127,7 @@ class Application extends SymfonyApplication
                     "{$class}.php",
                 ]
             );
-            $cache = new ConfigCache($cachePath->toString(), $isContainerDebugEnabled);
+            $cache     = new ConfigCache($cachePath->toString(), $isContainerDebugEnabled);
 
             if (!$cache->isFresh()) {
                 $containerBuilder = $this->buildContainer();
@@ -151,7 +162,7 @@ class Application extends SymfonyApplication
     private function buildContainer()
     {
         $containerBuilder = new ContainerBuilder();
-        $configDir = Path::create(
+        $configDir        = Path::create(
             [
                 __DIR__,
                 '..',
@@ -166,19 +177,20 @@ class Application extends SymfonyApplication
     }
 
     private function dumpContainer(
-        ConfigCache $cache,
+        ConfigCache      $cache,
         ContainerBuilder $container,
-        string $class,
-        string $baseClass
-    ): void {
+        string           $class,
+        string           $baseClass
+    ): void
+    {
         $dumper = new PhpDumper($container);
 
         /** @var string $content */
         $content = $dumper->dump(
             [
-                'class' => $class,
+                'class'      => $class,
                 'base_class' => $baseClass,
-                'file' => $cache->getPath(),
+                'file'       => $cache->getPath(),
             ]
         );
 
@@ -201,8 +213,7 @@ class Application extends SymfonyApplication
 
             return $makeDirResult
                 && \is_dir($baseCacheDir)
-                && \is_writable($baseCacheDir)
-            ;
+                && \is_writable($baseCacheDir);
         }
 
         return \is_writable($baseCacheDir);
@@ -254,10 +265,10 @@ class Application extends SymfonyApplication
 
         \set_error_handler(
             static function (
-                int $errorNumber,
+                int    $errorNumber,
                 string $errorString,
                 string $file,
-                int $line
+                int    $line
             ) use ($io): bool {
                 $io->block(
                     "{$errorString} File {$file}, line {$line}",
@@ -271,5 +282,24 @@ class Application extends SymfonyApplication
             },
             E_USER_DEPRECATED
         );
+    }
+
+    /**
+     * Get input before command's init because configuration is used in command init
+     *
+     * @return void
+     * @throws \Exception
+     */
+    private function setConfigPath(): void
+    {
+        /** @var \Symfony\Component\Console\Input\ArgvInput $input */
+        $input = $this->container->get(InputInterface::class);
+        
+        if ($input->hasParameterOption('--config')) {
+            $value = $input->getParameterOption('--config');
+            if (!empty($value) && is_string($value)) {
+                ConfigGeneratorCommand::$CONFIG_FILE_NAME = $value;
+            }
+        }
     }
 }
