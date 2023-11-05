@@ -154,37 +154,60 @@ final class EventTest extends UnitTestCase
         );
     }
 
-    public function test_get_from(): void
+    /**
+     * @param \Closure(): array{
+     *     dateFrom: string,
+     *     dateTo: string
+     * } $paramsGenerator
+     *
+     * @dataProvider dateFromToProvider
+     */
+    public function test_get_from(\Closure $paramsGenerator): void
     {
-        $dateFrom = '2023-10-01';
+        $params = $paramsGenerator();
 
         $event = new Event($this->id, 'php foo');
-        $event->from($dateFrom);
+        $event->from($params['dateFrom']);
 
-        self::assertSame($dateFrom, $event->getFrom());
+        self::assertSame($params['dateFrom'], $event->getFrom());
     }
 
-    public function test_get_to(): void
+    /**
+     * @param \Closure(): array{
+     *     dateFrom: string,
+     *     dateTo: string
+     * } $paramsGenerator
+     *
+     * @dataProvider dateFromToProvider
+     */
+    public function test_get_to(\Closure $paramsGenerator): void
     {
-        $dateTo = '2023-10-30';
+        $params = $paramsGenerator();
 
         $event = new Event($this->id, 'php foo');
-        $event->to($dateTo);
+        $event->to($params['dateTo']);
 
-        self::assertSame($dateTo, $event->getTo());
+        self::assertSame($params['dateTo'], $event->getTo());
     }
 
-    public function test_get_between(): void
+    /**
+     * @param \Closure(): array{
+     *     dateFrom: string,
+     *     dateTo: string
+     * } $paramsGenerator
+     *
+     * @dataProvider dateFromToProvider
+     */
+    public function test_get_between(\Closure $paramsGenerator): void
     {
-        $dateFrom = '2023-10-01';
-        $dateTo = '2023-10-30';
+        $params = $paramsGenerator();
 
         $event = new Event($this->id, 'php foo');
-        $event->between($dateFrom, $dateTo);
+        $event->between($params['dateFrom'], $params['dateTo']);
 
-        self::assertSame($dateFrom, $event->getFrom());
+        self::assertSame($params['dateFrom'], $event->getFrom());
 
-        self::assertSame($dateTo, $event->getTo());
+        self::assertSame($params['dateTo'], $event->getTo());
     }
 
     public function test_cron_conditions(): void
@@ -614,6 +637,31 @@ final class EventTest extends UnitTestCase
         yield 'minute above fifty nine' => [
             Faker::int(60, 120),
             "Minute cannot be greater than '59'.",
+        ];
+    }
+
+    /** @return iterable<string, array{\Closure}> */
+    public function dateFromToProvider(): iterable
+    {
+        yield 'dateFrom, dateTo with format yyyy-mm-dd' => [
+            static fn (): array => [
+                'dateFrom' => (new \DateTime('+'. rand(1,59) .' days'))->format('Y-m-d'),
+                'dateTo' => (new \DateTime('+'. rand(60,120) .' days'))->format('Y-m-d'),
+            ]
+        ];
+
+        yield 'dateFrom, dateTo with format H:i' => [
+            static fn (): array => [
+                'dateFrom' => (new \DateTime('+'. rand(1, 29) .' minutes'))->format('H:i'),
+                'dateTo' => (new \DateTime('+'. rand(30, 60) .' minutes'))->format('H:i'),
+            ]
+        ];
+
+        yield 'dateFrom, dateTo with format yyyy-mm-dd hh:mm' => [
+            static fn (): array => [
+                'dateFrom' => (new \DateTime('+'. rand(1,59) .' days +'. rand(1, 29) .' minutes'))->format('Y-m-d H:i'),
+                'dateTo' => (new \DateTime('+'. rand(60,120) .' days +'. rand(30, 60) .' minutes'))->format('Y-m-d H:i'),
+            ]
         ];
     }
 

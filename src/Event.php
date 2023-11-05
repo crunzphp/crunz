@@ -459,7 +459,9 @@ class Event implements PingableInterface
     {
         $this->from = $datetime;
 
-        return $this->skip(fn () => $this->notYet($datetime));
+        return $this->skip(
+            fn (\DateTimeZone $timeZone) => $this->notYet($datetime, $timeZone)
+        );
     }
 
     /**
@@ -473,7 +475,9 @@ class Event implements PingableInterface
     {
         $this->to = $datetime;
 
-        return $this->skip(fn () => $this->past($datetime));
+        return $this->skip(
+            fn (\DateTimeZone $timeZone) => $this->past($datetime, $timeZone),
+        );
     }
 
     /**
