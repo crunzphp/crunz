@@ -645,23 +645,23 @@ final class EventTest extends UnitTestCase
     {
         yield 'dateFrom, dateTo with format yyyy-mm-dd' => [
             static fn (): array => [
-                'dateFrom' => (new \DateTime('+'. rand(1,59) .' days'))->format('Y-m-d'),
-                'dateTo' => (new \DateTime('+'. rand(60,120) .' days'))->format('Y-m-d'),
-            ]
+                'dateFrom' => (new \DateTime('+' . \mt_rand(1, 59) . ' days'))->format('Y-m-d'),
+                'dateTo' => (new \DateTime('+' . \mt_rand(60, 120) . ' days'))->format('Y-m-d'),
+            ],
         ];
 
         yield 'dateFrom, dateTo with format H:i' => [
             static fn (): array => [
-                'dateFrom' => (new \DateTime('+'. rand(1, 29) .' minutes'))->format('H:i'),
-                'dateTo' => (new \DateTime('+'. rand(30, 60) .' minutes'))->format('H:i'),
-            ]
+                'dateFrom' => (new \DateTime('+' . \mt_rand(1, 29) . ' minutes'))->format('H:i'),
+                'dateTo' => (new \DateTime('+' . \mt_rand(30, 60) . ' minutes'))->format('H:i'),
+            ],
         ];
 
         yield 'dateFrom, dateTo with format yyyy-mm-dd hh:mm' => [
             static fn (): array => [
-                'dateFrom' => (new \DateTime('+'. rand(1,59) .' days +'. rand(1, 29) .' minutes'))->format('Y-m-d H:i'),
-                'dateTo' => (new \DateTime('+'. rand(60,120) .' days +'. rand(30, 60) .' minutes'))->format('Y-m-d H:i'),
-            ]
+                'dateFrom' => (new \DateTime('+' . \mt_rand(1, 59) . ' days +' . \mt_rand(1, 29) . ' minutes'))->format('Y-m-d H:i'),
+                'dateTo' => (new \DateTime('+' . \mt_rand(60, 120) . ' days +' . \mt_rand(30, 60) . ' minutes'))->format('Y-m-d H:i'),
+            ],
         ];
     }
 
