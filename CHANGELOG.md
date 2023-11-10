@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+## [v3.6.0] - 2023-11-10
+
+### Added
+
+- [crunzphp#68] Getter for 'from', 'to' event's configuration, thanks to [@lucatacconi]
+
 ## [v3.5.1] - 2023-11-03
 
 ### Fixed
@@ -538,6 +544,7 @@ In `v2` this will result in exception.
 [crunzphp#64]: https://github.com/crunzphp/crunz/pull/64
 [crunzphp#65]: https://github.com/crunzphp/crunz/pull/65
 [crunzphp#66]: https://github.com/crunzphp/crunz/pull/66
+[crunzphp#68]: https://github.com/crunzphp/crunz/pull/68
 [v1.5.1]: https://github.com/crunzphp/crunz/compare/v1.5.0...v1.5.1
 [v1.6.0]: https://github.com/crunzphp/crunz/compare/v1.5.1...v1.6.0
 [v1.6.1]: https://github.com/crunzphp/crunz/compare/v1.6.0...v1.6.1
@@ -584,6 +591,7 @@ In `v2` this will result in exception.
 [v3.4.1]: https://github.com/crunzphp/crunz/compare/v3.4.0...v3.4.1
 [v3.5.0]: https://github.com/crunzphp/crunz/compare/v3.4.1...v3.5.0
 [v3.5.1]: https://github.com/crunzphp/crunz/compare/v3.5.0...v3.5.1
+[v3.6.0]: https://github.com/crunzphp/crunz/compare/v3.5.1...v3.6.0
 [@andrewmy]: https://github.com/andrewmy
 [@arthurbarros]: https://github.com/arthurbarros
 [@bashgeek]: https://github.com/bashgeek
@@ -594,6 +602,7 @@ In `v2` this will result in exception.
 [@FallDi]: https://github.com/FallDi
 [@iluuu1994]: https://github.com/iluuu1994
 [@jhoughtelin]: https://github.com/jhoughtelin
+[@lucatacconi]: https://github.com/lucatacconi
 [@m-hume]: https://github.com/m-hume
 [@mareksuscak]: https://github.com/mareksuscak
 [@mindcreations]: https://github.com/mindcreations
