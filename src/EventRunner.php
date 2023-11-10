@@ -16,7 +16,7 @@ class EventRunner
 {
     /** @var Schedule[] */
     protected array $schedules = [];
-    /** @var \Crunz\Logger\Logger|null */
+    /** @var Logger|null */
     protected $logger;
     private ?OutputInterface $output = null;
 
@@ -26,7 +26,7 @@ class EventRunner
         protected Mailer $mailer,
         private readonly LoggerFactory $loggerFactory,
         private readonly HttpClientInterface $httpClient,
-        private readonly ConsoleLoggerInterface $consoleLogger
+        private readonly ConsoleLoggerInterface $consoleLogger,
     ) {
     }
 

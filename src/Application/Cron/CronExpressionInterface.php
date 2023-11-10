@@ -10,6 +10,6 @@ interface CronExpressionInterface
     public function multipleRunDates(
         int $total,
         \DateTimeImmutable $now,
-        ?\DateTimeZone $timeZone = null
+        ?\DateTimeZone $timeZone = null,
     ): array;
 }

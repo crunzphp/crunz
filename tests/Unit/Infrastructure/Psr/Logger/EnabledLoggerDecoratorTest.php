@@ -18,7 +18,7 @@ final class EnabledLoggerDecoratorTest extends UnitTestCase
     /** @dataProvider disabledChannelProvider */
     public function test_disabled_channels_not_log(
         ConfigurationInterface $configuration,
-        string $logLevel
+        string $logLevel,
     ): void {
         // Arrange
         $spyLogger = new SpyPsrLogger();
@@ -34,7 +34,7 @@ final class EnabledLoggerDecoratorTest extends UnitTestCase
     /** @dataProvider enabledChannelProvider */
     public function test_enabled_channels_log(
         ConfigurationInterface $configuration,
-        string $logLevel
+        string $logLevel,
     ): void {
         // Arrange
         $spyLogger = new SpyPsrLogger();
@@ -48,7 +48,7 @@ final class EnabledLoggerDecoratorTest extends UnitTestCase
     }
 
     /** @return iterable<string,array> */
-    public function disabledChannelProvider(): iterable
+    public static function disabledChannelProvider(): iterable
     {
         yield 'output' => [
             new FakeConfiguration(['log_output' => false]),
@@ -62,7 +62,7 @@ final class EnabledLoggerDecoratorTest extends UnitTestCase
     }
 
     /** @return iterable<string,array> */
-    public function enabledChannelProvider(): iterable
+    public static function enabledChannelProvider(): iterable
     {
         yield 'output' => [
             new FakeConfiguration(['log_output' => true]),
@@ -77,7 +77,7 @@ final class EnabledLoggerDecoratorTest extends UnitTestCase
 
     private function createEnabledLoggerDecorator(
         LoggerInterface $logger,
-        ConfigurationInterface $configuration
+        ConfigurationInterface $configuration,
     ): EnabledLoggerDecorator {
         return new EnabledLoggerDecorator($logger, $configuration);
     }

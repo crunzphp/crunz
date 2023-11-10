@@ -72,7 +72,7 @@ final class EnvFlagsTest extends TestCase
     }
 
     /** @return iterable<string,array> */
-    public function statusProvider(): iterable
+    public static function statusProvider(): iterable
     {
         yield 'true' => [
             '1',
@@ -86,7 +86,7 @@ final class EnvFlagsTest extends TestCase
     }
 
     /** @return iterable<string,array> */
-    public function containerDebugProvider(): iterable
+    public static function containerDebugProvider(): iterable
     {
         yield 'true' => [
             '1',

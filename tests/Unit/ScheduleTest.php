@@ -67,7 +67,7 @@ final class ScheduleTest extends UnitTestCase
     }
 
     /** @return iterable<string, array{\Closure}> */
-    public function runProvider(): iterable
+    public static function runProvider(): iterable
     {
         yield 'simple command' => [
             static fn (): array => [
@@ -111,7 +111,7 @@ final class ScheduleTest extends UnitTestCase
     }
 
     /** @return iterable<string, array{\Closure}> */
-    public function nonStringParametersProvider(): iterable
+    public static function nonStringParametersProvider(): iterable
     {
         yield 'boolean true parameter' => [
             static fn (): array => [

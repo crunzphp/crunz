@@ -450,7 +450,7 @@ final class EventTest extends UnitTestCase
     /** @dataProvider hourlyAtInvalidProvider */
     public function test_hourly_at_with_invalid_minute(
         int $minute,
-        string $expectedExceptionMessage
+        string $expectedExceptionMessage,
     ): void {
         // Arrange
         $event = $this->createEvent();
@@ -537,7 +537,7 @@ final class EventTest extends UnitTestCase
     }
 
     /** @return iterable<string,array> */
-    public function deprecatedEveryProvider(): iterable
+    public static function deprecatedEveryProvider(): iterable
     {
         yield 'every seven minutes' => ['everySevenMinutes'];
         yield 'every five hours' => ['everyFiveHours'];
@@ -546,7 +546,7 @@ final class EventTest extends UnitTestCase
     }
 
     /** @return iterable<string,array> */
-    public function everyMethodProvider(): iterable
+    public static function everyMethodProvider(): iterable
     {
         yield 'every minute' => ['everyMinute', '* * * * *'];
         yield 'every two minutes' => ['everyTwoMinutes', '*/2 * * * *'];
@@ -627,7 +627,7 @@ final class EventTest extends UnitTestCase
     }
 
     /** @return iterable<string,array> */
-    public function hourlyAtInvalidProvider(): iterable
+    public static function hourlyAtInvalidProvider(): iterable
     {
         yield 'minute below zero' => [
             Faker::int(-100, -1),
@@ -641,7 +641,7 @@ final class EventTest extends UnitTestCase
     }
 
     /** @return iterable<string, array{\Closure}> */
-    public function dateFromToProvider(): iterable
+    public static function dateFromToProvider(): iterable
     {
         yield 'dateFrom, dateTo with format yyyy-mm-dd' => [
             static fn (): array => [

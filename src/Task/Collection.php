@@ -14,7 +14,7 @@ class Collection implements CollectionInterface
     public function __construct(
         private readonly ConfigurationInterface $configuration,
         private readonly FinderInterface $finder,
-        private readonly ConsoleLoggerInterface $consoleLogger
+        private readonly ConsoleLoggerInterface $consoleLogger,
     ) {
     }
 

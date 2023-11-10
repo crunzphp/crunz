@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
+
 return (new PhpCsFixer\Config())
+    ->setParallelConfig(ParallelConfigFactory::detect())
     ->setRules([
         '@Symfony' => true,
         'array_syntax' => ['syntax' => 'short'],

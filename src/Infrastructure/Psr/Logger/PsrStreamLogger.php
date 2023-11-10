@@ -27,7 +27,7 @@ final class PsrStreamLogger extends AbstractLogger
         ?string $errorStreamPath,
         private readonly bool $ignoreEmptyContext = false,
         private readonly bool $timezoneLog = false,
-        private readonly bool $allowLineBreaks = false
+        private readonly bool $allowLineBreaks = false,
     ) {
         $this->outputStreamPath = $outputStreamPath ?? '';
         $this->errorStreamPath = $errorStreamPath ?? '';
@@ -42,7 +42,7 @@ final class PsrStreamLogger extends AbstractLogger
     public function log(
         $level,
         string|\Stringable $message,
-        array $context = []
+        array $context = [],
     ): void {
         $resource = match ($level) {
             LogLevel::INFO => $this->createInfoHandler(),

@@ -85,7 +85,7 @@ final class PingableTest extends TestCase
     }
 
     /** @return iterable<string,array> */
-    public function nonStringProvider(): iterable
+    public static function nonStringProvider(): iterable
     {
         yield 'null' => [null];
         yield 'array' => [[]];

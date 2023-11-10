@@ -16,6 +16,7 @@ use Crunz\Task\Timezone;
 use Crunz\Tests\TestCase\FakeConfiguration;
 use Crunz\Tests\TestCase\FakeTaskCollection;
 use Crunz\Tests\TestCase\TemporaryFile;
+use PHPUnit\Framework\MockObject\Generator\Generator as MockGenerator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\InputInterface;
@@ -79,7 +80,7 @@ class ScheduleRunCommandTest extends TestCase
             $mockTaskCollection,
             new FakeConfiguration(['source' => '']),
             $mockEventRunner,
-            $this->mockTimezoneProvider(),
+            self::mockTimezoneProvider(),
             $this->mockScheduleFactory(),
             $this->createTaskLoader()
         );
@@ -88,6 +89,23 @@ class ScheduleRunCommandTest extends TestCase
             $mockInput,
             $mockOutput
         );
+    }
+
+    public static function mockTimezoneProvider(): MockObject&Timezone
+    {
+        $timeZone = new \DateTimeZone('UTC');
+        /** @var MockObject&Timezone $timezoneProviderMock */
+        $timezoneProviderMock = (new MockGenerator())->testDouble(
+            Timezone::class,
+            true,
+            callOriginalConstructor: false,
+            callOriginalClone: false,
+            cloneArguments: false,
+            allowMockingUnknownTypes: false,
+        );
+        $timezoneProviderMock->method('timezoneForComparisons')->willReturn($timeZone);
+
+        return $timezoneProviderMock;
     }
 
     private function mockScheduleFactory(): ScheduleFactory
@@ -150,14 +168,6 @@ class ScheduleRunCommandTest extends TestCase
         ;
 
         return $mockInput;
-    }
-
-    /** @return Timezone|MockObject */
-    private function mockTimezoneProvider(): Timezone
-    {
-        $timeZone = new \DateTimeZone('UTC');
-
-        return $this->createConfiguredMock(Timezone::class, ['timezoneForComparisons' => $timeZone]);
     }
 
     private function mockTaskCollection(string ...$taskFiles): CollectionInterface

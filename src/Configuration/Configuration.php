@@ -15,7 +15,7 @@ final class Configuration implements ConfigurationInterface
 
     public function __construct(
         private readonly ConfigurationParserInterface $configurationParser,
-        private readonly FilesystemInterface $filesystem
+        private readonly FilesystemInterface $filesystem,
     ) {
     }
 

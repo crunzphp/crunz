@@ -50,7 +50,7 @@ final class ConfigurationParserTest extends TestCase
     /** @param array<string,string> $expectedProcessedConfig */
     private function createConfigurationParser(
         FileParser $fileParser,
-        array $expectedProcessedConfig
+        array $expectedProcessedConfig,
     ): ConfigurationParser {
         $definition = new Definition();
 

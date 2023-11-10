@@ -7,7 +7,7 @@ namespace Crunz\Tests\Unit\Application\Cron;
 use Crunz\Application\Cron\CronExpressionInterface;
 use PHPUnit\Framework\TestCase;
 
-abstract class AbstractCronExpressionTest extends TestCase
+abstract class AbstractCronExpressionTestCase extends TestCase
 {
     /**
      * @test
@@ -21,7 +21,7 @@ abstract class AbstractCronExpressionTest extends TestCase
         \DateTimeImmutable $now,
         int $total,
         ?\DateTimeZone $timeZone,
-        array $expectedRunDates
+        array $expectedRunDates,
     ): void {
         $cronExpression = $this->createExpression($cronExpressionString);
         $runDates = $cronExpression->multipleRunDates(
@@ -33,8 +33,19 @@ abstract class AbstractCronExpressionTest extends TestCase
         self::assertEquals($expectedRunDates, $runDates);
     }
 
-    /** @return iterable<string,array> */
-    public function multipleRunDatesProvider(): iterable
+    /**
+     * @return iterable<
+     *     string,
+     *     array{
+     *         string,
+     *         \DateTimeImmutable,
+     *         int,
+     *         null,
+     *         \DateTimeImmutable[],
+     *     },
+     * >
+     */
+    public static function multipleRunDatesProvider(): iterable
     {
         $now = new \DateTimeImmutable('2019-01-01 11:12:13');
         $nextRuns = [new \DateTimeImmutable('2019-01-01 11:13:00')];

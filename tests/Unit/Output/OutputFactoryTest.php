@@ -27,40 +27,40 @@ final class OutputFactoryTest extends TestCase
     }
 
     /** @return iterable<string,array> */
-    public function inputProvider(): iterable
+    public static function inputProvider(): iterable
     {
         yield 'quietShort' => [
-            $this->createInput('-q'),
+            self::createInput('-q'),
             OutputInterface::VERBOSITY_QUIET,
         ];
 
         yield 'quietLong' => [
-            $this->createInput('--quiet'),
+            self::createInput('--quiet'),
             OutputInterface::VERBOSITY_QUIET,
         ];
 
         yield 'normal' => [
-            $this->createInput('--filter'),
+            self::createInput('--filter'),
             OutputInterface::VERBOSITY_NORMAL,
         ];
 
         yield 'verbose' => [
-            $this->createInput('-v'),
+            self::createInput('-v'),
             OutputInterface::VERBOSITY_VERBOSE,
         ];
 
         yield 'veryVerbose' => [
-            $this->createInput('-vv'),
+            self::createInput('-vv'),
             OutputInterface::VERBOSITY_VERY_VERBOSE,
         ];
 
         yield 'debug' => [
-            $this->createInput('-vvv'),
+            self::createInput('-vvv'),
             OutputInterface::VERBOSITY_DEBUG,
         ];
     }
 
-    private function createInput(string $option): InputInterface
+    private static function createInput(string $option): InputInterface
     {
         return new ArgvInput(['', $option]);
     }

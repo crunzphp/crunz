@@ -29,7 +29,7 @@ final class TaskInformationHandlerTest extends TestCase
         string $expectedDescription = '',
         bool $expectedPreventOverlapping = false,
         string $expectedCronExpression = '* * * * *',
-        ?\DateTimeZone $expectedEventTimeZone = null
+        ?\DateTimeZone $expectedEventTimeZone = null,
     ): void {
         $comparisonsTimeZone = new \DateTimeZone('UTC');
         $taskInformationHandler = $this->createHandler($event, $comparisonsTimeZone);
@@ -48,7 +48,7 @@ final class TaskInformationHandlerTest extends TestCase
     }
 
     /** @return iterable<string, array> */
-    public function taskInformationProvider(): iterable
+    public static function taskInformationProvider(): iterable
     {
         $id = (string) \random_int(1, 9999);
         yield 'simple task' => [

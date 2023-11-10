@@ -63,7 +63,7 @@ final class FinderTest extends TestCase
      *
      * @throws \Crunz\Exception\CrunzException
      */
-    public function tasksProvider(): iterable
+    public static function tasksProvider(): iterable
     {
         $suffix = 'Here.php';
         $taskOne = Path::fromStrings('TestHere.php');

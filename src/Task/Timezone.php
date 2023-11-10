@@ -14,7 +14,7 @@ class Timezone
 
     public function __construct(
         private readonly ConfigurationInterface $configuration,
-        private readonly ConsoleLoggerInterface $consoleLogger
+        private readonly ConsoleLoggerInterface $consoleLogger,
     ) {
     }
 

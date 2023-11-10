@@ -154,14 +154,14 @@ final class PsrStreamLoggerTest extends TestCase
     }
 
     /** @return iterable<string,string[]> */
-    public function supportedLevelsProvider(): iterable
+    public static function supportedLevelsProvider(): iterable
     {
         yield 'info' => ['info'];
         yield 'error' => ['error'];
     }
 
     /** @return iterable<string,string[]> */
-    public function unsupportedLevelsProvider(): iterable
+    public static function unsupportedLevelsProvider(): iterable
     {
         yield 'emergency' => ['emergency'];
         yield 'alert' => ['alert'];
@@ -177,7 +177,7 @@ final class PsrStreamLoggerTest extends TestCase
         ?\DateTimeZone $timeZone = null,
         bool $ignoreEmptyContext = false,
         bool $timezoneLog = false,
-        bool $allowLineBreaks = false
+        bool $allowLineBreaks = false,
     ): LoggerInterface {
         $clock = new TestClock($now ?? Faker::dateTime());
 
@@ -199,7 +199,7 @@ final class PsrStreamLoggerTest extends TestCase
         bool $ignoreEmptyContext = false,
         bool $timeZoneLog = false,
         bool $allowLineBreaks = false,
-        ?\DateTimeZone $timeZone = null
+        ?\DateTimeZone $timeZone = null,
     ): string {
         $context = '[] []';
         if (true === $ignoreEmptyContext) {

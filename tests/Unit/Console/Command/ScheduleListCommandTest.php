@@ -54,7 +54,7 @@ final class ScheduleListCommandTest extends UnitTestCase
         $commandString = 'php -v';
         $cronExpression = '15 3 * * 1,3,5';
         $description = 'PHP version';
-        $schedule = $this->createScheduleWithTask(
+        $schedule = self::createScheduleWithTask(
             $commandString,
             $description,
             $cronExpression,
@@ -72,14 +72,14 @@ final class ScheduleListCommandTest extends UnitTestCase
     }
 
     /** @return iterable<string,array{\Closure}> */
-    public function formatProvider(): iterable
+    public static function formatProvider(): iterable
     {
         yield 'text' => [
             function (): array {
                 $commandString = 'php -v';
                 $cronExpression = '15 3 * * 1,3,5';
                 $description = 'PHP version';
-                $schedule = $this->createScheduleWithTask(
+                $schedule = self::createScheduleWithTask(
                     $commandString,
                     $description,
                     $cronExpression,
@@ -108,7 +108,7 @@ final class ScheduleListCommandTest extends UnitTestCase
                 $commandString = 'php -v';
                 $cronExpression = '15 3 * * 1,3,5';
                 $description = 'PHP version';
-                $schedule = $this->createScheduleWithTask(
+                $schedule = self::createScheduleWithTask(
                     $commandString,
                     $description,
                     $cronExpression,
@@ -117,7 +117,7 @@ final class ScheduleListCommandTest extends UnitTestCase
                 return [
                     'format' => 'json',
                     'schedule' => $schedule,
-                    'expectedOutput' => $this->encodeJson(
+                    'expectedOutput' => self::encodeJson(
                         [
                             [
                                 'command' => $commandString,
@@ -154,10 +154,10 @@ final class ScheduleListCommandTest extends UnitTestCase
         );
     }
 
-    private function createScheduleWithTask(
+    private static function createScheduleWithTask(
         string $command,
         string $description,
-        string $cronExpression
+        string $cronExpression,
     ): Schedule {
         $schedule = new Schedule();
         $schedule

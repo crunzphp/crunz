@@ -20,7 +20,7 @@ final class TaskInformationHandler
         private readonly CollectionInterface $taskCollection,
         private readonly LoaderInterface $taskLoader,
         private readonly ScheduleFactory $scheduleFactory,
-        private readonly CronExpressionFactoryInterface $cronExpressionFactory
+        private readonly CronExpressionFactoryInterface $cronExpressionFactory,
     ) {
     }
 

@@ -37,7 +37,7 @@ class TaskGeneratorCommand extends Command
 
     public function __construct(
         private readonly ConfigurationInterface $config,
-        private readonly FilesystemInterface $filesystem
+        private readonly FilesystemInterface $filesystem,
     ) {
         parent::__construct();
     }

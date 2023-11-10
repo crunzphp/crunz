@@ -69,7 +69,7 @@ final class LoggerTest extends EndToEndTestCase
     private function assertLogRecord(
         string $logRecord,
         string $level,
-        string $message
+        string $message,
     ): void {
         $levelFormatted = \mb_strtoupper($level);
 

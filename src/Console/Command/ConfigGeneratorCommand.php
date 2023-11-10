@@ -20,7 +20,7 @@ final class ConfigGeneratorCommand extends Command
     public function __construct(
         private readonly ProviderInterface $timezoneProvider,
         private readonly Filesystem $symfonyFilesystem,
-        private readonly FilesystemInterface $filesystem
+        private readonly FilesystemInterface $filesystem,
     ) {
         parent::__construct();
     }
@@ -123,7 +123,7 @@ final class ConfigGeneratorCommand extends Command
     private function updateTimezone(
         string $destination,
         string $src,
-        string $timezone
+        string $timezone,
     ): void {
         $this->symfonyFilesystem
             ->dumpFile(

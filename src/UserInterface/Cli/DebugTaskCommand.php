@@ -53,7 +53,7 @@ final class DebugTaskCommand extends Command
     private function createTable(
         TaskInformationView $taskInformation,
         OutputInterface $output,
-        TaskNumber $taskNumber
+        TaskNumber $taskNumber,
     ): Table {
         $command = $taskInformation->command();
         $timeZone = $taskInformation->timeZone();

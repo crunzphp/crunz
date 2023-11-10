@@ -13,7 +13,7 @@ final class EnabledLoggerDecorator extends AbstractLogger
 {
     public function __construct(
         private readonly LoggerInterface $decoratedLogger,
-        private readonly ConfigurationInterface $configuration
+        private readonly ConfigurationInterface $configuration,
     ) {
     }
 

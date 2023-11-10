@@ -16,7 +16,7 @@ final class TaskInformationView
         private readonly bool $preventOverlapping,
         private readonly ?\DateTimeZone $timeZone,
         private readonly \DateTimeZone $configTimeZone,
-        \DateTimeImmutable ...$nextRuns
+        \DateTimeImmutable ...$nextRuns,
     ) {
         $this->nextRuns = $nextRuns;
     }

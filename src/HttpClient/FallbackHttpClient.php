@@ -14,7 +14,7 @@ final class FallbackHttpClient implements HttpClientInterface
     public function __construct(
         private readonly StreamHttpClient $streamHttpClient,
         private readonly CurlHttpClient $curlHttpClient,
-        private readonly ConsoleLoggerInterface $consoleLogger
+        private readonly ConsoleLoggerInterface $consoleLogger,
     ) {
     }
 

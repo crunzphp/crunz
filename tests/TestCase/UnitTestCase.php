@@ -10,8 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 abstract class UnitTestCase extends TestCase
 {
-    use PolyfillAssertTrait;
-
     private ?ClosureSerializerInterface $closureSerializer = null;
 
     public function createClosureSerializer(): ClosureSerializerInterface
@@ -19,7 +17,7 @@ abstract class UnitTestCase extends TestCase
         return $this->closureSerializer ??= new LaravelClosureSerializer();
     }
 
-    protected function encodeJson(mixed $data): string
+    protected static function encodeJson(mixed $data): string
     {
         return \json_encode($data, JSON_THROW_ON_ERROR);
     }

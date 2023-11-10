@@ -32,7 +32,7 @@ final class Environment
         private readonly FilesystemInterface $filesystem,
         Path $tasksDirectory,
         array $config = [],
-        private readonly array $tasks = []
+        private readonly array $tasks = [],
     ) {
         $this->config = [...self::DEFAULT_CONFIG, ...$config];
         $this->tasksDirectory = $tasksDirectory->toString();
@@ -69,7 +69,7 @@ final class Environment
     public function runCrunzCommand(
         string $command,
         ?string $cwd = null,
-        bool $wait = true
+        bool $wait = true,
     ): Process {
         $cwd = !empty($cwd)
             ? $cwd

@@ -25,7 +25,7 @@ class ScheduleRunCommand extends Command
         private readonly EventRunner $eventRunner,
         private readonly Timezone $taskTimezone,
         private readonly Schedule\ScheduleFactory $scheduleFactory,
-        private readonly LoaderInterface $taskLoader
+        private readonly LoaderInterface $taskLoader,
     ) {
         parent::__construct();
     }

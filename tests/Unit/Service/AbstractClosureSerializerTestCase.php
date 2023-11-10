@@ -7,7 +7,7 @@ namespace Crunz\Tests\Unit\Service;
 use Crunz\Application\Service\ClosureSerializerInterface;
 use Crunz\Tests\TestCase\UnitTestCase;
 
-abstract class AbstractClosureSerializerTest extends UnitTestCase
+abstract class AbstractClosureSerializerTestCase extends UnitTestCase
 {
     public function test_closure_code_can_be_extracted(): void
     {

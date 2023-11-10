@@ -29,10 +29,7 @@ final class StreamHttpClient implements HttpClientInterface
         );
 
         if (false === $resource) {
-            $error = \error_get_last();
-            $errorMessage = $error['message'] ?? 'Unknown error';
-
-            throw new HttpClientException("Ping failed with message: \"{$errorMessage}\".");
+            throw new HttpClientException('Ping failed.');
         }
 
         \fclose($resource);

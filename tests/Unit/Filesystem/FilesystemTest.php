@@ -150,7 +150,7 @@ final class FilesystemTest extends UnitTestCase
      *
      * @throws \Crunz\Exception\CrunzException
      */
-    public function fileExistsProvider(): iterable
+    public static function fileExistsProvider(): iterable
     {
         $tempFile = new TemporaryFile();
 

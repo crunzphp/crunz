@@ -57,7 +57,7 @@ class TaskNumberTest extends TestCase
     }
 
     /** @return iterable<string,array> */
-    public function nonStringValueProvider(): iterable
+    public static function nonStringValueProvider(): iterable
     {
         yield 'null' => [null];
         yield 'float' => [3.14];
@@ -67,7 +67,7 @@ class TaskNumberTest extends TestCase
     }
 
     /** @return iterable<string,array> */
-    public function numericValueProvider(): iterable
+    public static function numericValueProvider(): iterable
     {
         yield 'int' => [
             '155',
@@ -80,7 +80,7 @@ class TaskNumberTest extends TestCase
     }
 
     /** @return iterable<string,array> */
-    public function nonNumericProvider(): iterable
+    public static function nonNumericProvider(): iterable
     {
         yield 'chars' => ['abc'];
         yield 'charsWithNumber' => ['1a2b3'];

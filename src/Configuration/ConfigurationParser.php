@@ -18,7 +18,7 @@ final class ConfigurationParser implements ConfigurationParserInterface
         private readonly Processor $definitionProcessor,
         private readonly FileParser $fileParser,
         private readonly ConsoleLoggerInterface $consoleLogger,
-        private readonly FilesystemInterface $filesystem
+        private readonly FilesystemInterface $filesystem,
     ) {
     }
 

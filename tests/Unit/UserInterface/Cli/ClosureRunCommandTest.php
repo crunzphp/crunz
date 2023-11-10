@@ -34,7 +34,7 @@ final class ClosureRunCommandTest extends UnitTestCase
     }
 
     /** @return iterable<string,array<int>> */
-    public function closureValueProvider(): iterable
+    public static function closureValueProvider(): iterable
     {
         yield '0' => [0];
         yield '1' => [1];

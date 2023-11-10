@@ -6,7 +6,7 @@ namespace Crunz\Tests\Unit\Service;
 
 use Crunz\Infrastructure\Laravel\LaravelClosureSerializer;
 
-final class LaravelClosureSerializerTest extends AbstractClosureSerializerTest
+final class LaravelClosureSerializerTestCase extends AbstractClosureSerializerTestCase
 {
     protected function createSerializer(): LaravelClosureSerializer
     {

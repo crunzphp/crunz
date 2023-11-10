@@ -82,7 +82,7 @@ class TaskGeneratorTest extends TestCase
     private function provideAnswer(
         string $answer,
         CommandTester $commandTester,
-        Command $command
+        Command $command,
     ): void {
         if (\method_exists($commandTester, 'setInputs')) {
             $commandTester->setInputs([$answer]);

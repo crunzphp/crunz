@@ -85,7 +85,7 @@ final class ConsoleLoggerTest extends TestCase
     }
 
     /** @return iterable<string,array<int>> */
-    public function verbosityProvider(): iterable
+    public static function verbosityProvider(): iterable
     {
         yield 'quiet' => [ConsoleLoggerInterface::VERBOSITY_QUIET];
         yield 'normal' => [ConsoleLoggerInterface::VERBOSITY_NORMAL];

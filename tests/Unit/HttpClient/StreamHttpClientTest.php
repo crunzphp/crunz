@@ -16,20 +16,13 @@ final class StreamHttpClientTest extends TestCase
         // Arrange
         $url = 'http://www.wrong-address.tld';
         $client = new StreamHttpClient();
-        $expectedExceptionMessage = "Ping failed with message: \"fopen({$url}): failed to open stream";
-        if (PHP_MAJOR_VERSION >= 8) {
-            $expectedExceptionMessage = \str_replace(
-                'failed to open',
-                'Failed to open',
-                $expectedExceptionMessage
-            );
-        }
+        $expectedExceptionMessage = 'Ping failed.';
 
         // Expect
         $this->expectException(HttpClientException::class);
         $this->expectExceptionMessage($expectedExceptionMessage);
 
         // Act
-        $client->ping('http://www.wrong-address.tld');
+        $client->ping($url);
     }
 }
