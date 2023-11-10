@@ -13,8 +13,8 @@ class Timezone
     private ?\DateTimeZone $timezoneForComparisons = null;
 
     public function __construct(
-        private ConfigurationInterface $configuration,
-        private ConsoleLoggerInterface $consoleLogger
+        private readonly ConfigurationInterface $configuration,
+        private readonly ConsoleLoggerInterface $consoleLogger
     ) {
     }
 

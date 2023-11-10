@@ -10,7 +10,7 @@ use Symfony\Component\Process\Process as SymfonyProcess;
 final class Process
 {
     /** @param SymfonyProcess|string[] $process */
-    private function __construct(private SymfonyProcess $process)
+    private function __construct(private readonly SymfonyProcess $process)
     {
     }
 

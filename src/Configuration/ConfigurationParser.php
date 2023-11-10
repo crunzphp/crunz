@@ -14,11 +14,11 @@ use Symfony\Component\Config\Definition\Processor;
 final class ConfigurationParser implements ConfigurationParserInterface
 {
     public function __construct(
-        private ConfigurationInterface $configurationDefinition,
-        private Processor $definitionProcessor,
-        private FileParser $fileParser,
-        private ConsoleLoggerInterface $consoleLogger,
-        private FilesystemInterface $filesystem
+        private readonly ConfigurationInterface $configurationDefinition,
+        private readonly Processor $definitionProcessor,
+        private readonly FileParser $fileParser,
+        private readonly ConsoleLoggerInterface $consoleLogger,
+        private readonly FilesystemInterface $filesystem
     ) {
     }
 

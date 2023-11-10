@@ -12,12 +12,12 @@ use Psr\Log\LogLevel;
 final class EnabledLoggerDecorator extends AbstractLogger
 {
     public function __construct(
-        private LoggerInterface $decoratedLogger,
-        private ConfigurationInterface $configuration
+        private readonly LoggerInterface $decoratedLogger,
+        private readonly ConfigurationInterface $configuration
     ) {
     }
 
-    public function log($level, $message, array $context = []): void
+    public function log($level, string|\Stringable $message, array $context = []): void
     {
         $loggingEnabled = true;
         switch ($level) {

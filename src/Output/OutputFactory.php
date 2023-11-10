@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class OutputFactory
 {
-    public function __construct(private InputInterface $input)
+    public function __construct(private readonly InputInterface $input)
     {
     }
 

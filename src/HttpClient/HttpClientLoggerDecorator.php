@@ -8,7 +8,7 @@ use Crunz\Logger\ConsoleLoggerInterface;
 
 final class HttpClientLoggerDecorator implements HttpClientInterface
 {
-    public function __construct(private HttpClientInterface $httpClient, private ConsoleLoggerInterface $logger)
+    public function __construct(private readonly HttpClientInterface $httpClient, private readonly ConsoleLoggerInterface $logger)
     {
     }
 

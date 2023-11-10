@@ -59,7 +59,7 @@ class Application extends SymfonyApplication
     ];
 
     private Container $container;
-    private EnvFlags $envFlags;
+    private readonly EnvFlags $envFlags;
 
     public function __construct(string $appName, string $appVersion)
     {

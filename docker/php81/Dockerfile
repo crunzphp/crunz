@@ -1,4 +1,4 @@
-FROM php:8.0.19-cli-alpine
+FROM php:8.1.30-cli-alpine
 
 RUN apk add --no-cache \
         shadow \
@@ -18,5 +18,5 @@ RUN mkdir -p \
         /var/log/php/error.log \
         /var/www/.composer
 
-COPY --from=composer:2.3.5 /usr/bin/composer /usr/bin/composer
+COPY --from=composer/composer:2.8.2-bin /composer /usr/bin/composer
 ENV COMPOSER_HOME /var/www/.composer

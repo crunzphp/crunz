@@ -12,14 +12,14 @@ abstract class AbstractClosureSerializerTest extends UnitTestCase
     public function test_closure_code_can_be_extracted(): void
     {
         // Arrange
-        $testClosure = static function (): \stdClass {return new \stdClass(); };
+        $testClosure = static fn (): \stdClass => new \stdClass();
         $serializer = $this->createSerializer();
 
         // Act
         $code = $serializer->closureCode($testClosure);
 
         // Assert
-        self::assertSame('static function (): \stdClass {return new \stdClass(); }', $code);
+        self::assertSame('static fn (): \stdClass => new \stdClass()', $code);
     }
 
     abstract protected function createSerializer(): ClosureSerializerInterface;

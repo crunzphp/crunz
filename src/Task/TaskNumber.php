@@ -8,8 +8,8 @@ use Crunz\Exception\WrongTaskNumberException;
 
 class TaskNumber
 {
-    public const MIN_VALUE = 1;
-    private int $number;
+    final public const MIN_VALUE = 1;
+    private readonly int $number;
 
     /** @throws WrongTaskNumberException */
     private function __construct(int $number)

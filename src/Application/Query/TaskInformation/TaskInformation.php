@@ -8,7 +8,7 @@ use Crunz\Task\TaskNumber;
 
 final class TaskInformation
 {
-    public function __construct(private TaskNumber $taskNumber)
+    public function __construct(private readonly TaskNumber $taskNumber)
     {
     }
 

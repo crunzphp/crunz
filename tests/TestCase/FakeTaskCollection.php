@@ -9,7 +9,7 @@ use Crunz\Task\CollectionInterface;
 final class FakeTaskCollection implements CollectionInterface
 {
     /** @param \SplFileInfo[] $tasks */
-    public function __construct(private iterable $tasks = [])
+    public function __construct(private readonly iterable $tasks = [])
     {
     }
 

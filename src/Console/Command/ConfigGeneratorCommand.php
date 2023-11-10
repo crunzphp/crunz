@@ -18,9 +18,9 @@ final class ConfigGeneratorCommand extends Command
     public const CONFIG_FILE_NAME = 'crunz.yml';
 
     public function __construct(
-        private ProviderInterface $timezoneProvider,
-        private Filesystem $symfonyFilesystem,
-        private FilesystemInterface $filesystem
+        private readonly ProviderInterface $timezoneProvider,
+        private readonly Filesystem $symfonyFilesystem,
+        private readonly FilesystemInterface $filesystem
     ) {
         parent::__construct();
     }

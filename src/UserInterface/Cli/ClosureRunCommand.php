@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ClosureRunCommand extends SymfonyCommand
 {
-    public function __construct(private ClosureSerializerInterface $closureSerializer)
+    public function __construct(private readonly ClosureSerializerInterface $closureSerializer)
     {
         parent::__construct();
     }

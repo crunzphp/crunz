@@ -8,7 +8,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 final class ConsoleLogger implements ConsoleLoggerInterface
 {
-    public function __construct(private SymfonyStyle $symfonyStyle)
+    public function __construct(private readonly SymfonyStyle $symfonyStyle)
     {
     }
 

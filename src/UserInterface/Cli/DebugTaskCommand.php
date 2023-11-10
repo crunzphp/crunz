@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class DebugTaskCommand extends Command
 {
-    public function __construct(private TaskInformationHandler $taskInformationHandler)
+    public function __construct(private readonly TaskInformationHandler $taskInformationHandler)
     {
         parent::__construct('task:debug');
     }

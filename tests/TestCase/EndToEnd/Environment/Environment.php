@@ -19,8 +19,8 @@ final class Environment
 
     private string $rootDirectory = '';
     /** @var array<string,mixed> */
-    private array $config;
-    private string $tasksDirectory;
+    private readonly array $config;
+    private readonly string $tasksDirectory;
 
     /**
      * @param string[]            $tasks
@@ -29,12 +29,12 @@ final class Environment
      * @throws \Exception
      */
     public function __construct(
-        private FilesystemInterface $filesystem,
+        private readonly FilesystemInterface $filesystem,
         Path $tasksDirectory,
         array $config = [],
-        private array $tasks = []
+        private readonly array $tasks = []
     ) {
-        $this->config = \array_merge(self::DEFAULT_CONFIG, $config);
+        $this->config = [...self::DEFAULT_CONFIG, ...$config];
         $this->tasksDirectory = $tasksDirectory->toString();
 
         $this->setUp();

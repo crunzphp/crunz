@@ -10,7 +10,7 @@ use Crunz\Task\LoaderInterface;
 final class FakeLoader implements LoaderInterface
 {
     /** @param Schedule[] $schedules */
-    public function __construct(private array $schedules = [])
+    public function __construct(private readonly array $schedules = [])
     {
     }
 

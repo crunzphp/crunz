@@ -25,9 +25,9 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
     ];
 
     public function __construct(
-        private ConfigurationInterface $configuration,
-        private CollectionInterface $taskCollection,
-        private LoaderInterface $taskLoader
+        private readonly ConfigurationInterface $configuration,
+        private readonly CollectionInterface $taskCollection,
+        private readonly LoaderInterface $taskLoader
     ) {
         parent::__construct();
     }

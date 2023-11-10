@@ -8,7 +8,7 @@ use Crunz\Exception\CrunzException;
 
 final class TemporaryFile
 {
-    private string $filePath;
+    private readonly string $filePath;
 
     public function __construct()
     {

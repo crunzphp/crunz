@@ -164,10 +164,8 @@ class Event implements PingableInterface
     /**
      * The symfony lock factory that is used to acquire locks. If the value is null, but preventOverlapping = true
      * crunz falls back to filesystem locks.
-     *
-     * @var LockFactory|null
      */
-    private $lockFactory;
+    private ?LockFactory $lockFactory = null;
     /** @var string[] */
     private array $wholeOutput = [];
     /** @var Lock */
@@ -571,10 +569,9 @@ class Event implements PingableInterface
     /**
      * Schedule the event to run weekly on a given day and time.
      *
-     * @param int|string $day
-     * @param string     $time
+     * @param string $time
      */
-    public function weeklyOn($day, $time = '0:0'): self
+    public function weeklyOn(int|string $day, $time = '0:0'): self
     {
         $this->dailyAt($time);
 
@@ -668,11 +665,9 @@ class Event implements PingableInterface
     /**
      * Set the timezone the date should be evaluated on.
      *
-     * @param \DateTimeZone|string $timezone
-     *
      * @return $this
      */
-    public function timezone($timezone)
+    public function timezone(\DateTimeZone|string $timezone)
     {
         $this->timezone = $timezone;
 
@@ -885,10 +880,8 @@ class Event implements PingableInterface
 
     /**
      * Return the event's command.
-     *
-     * @return string|int
      */
-    public function getId()
+    public function getId(): string|int
     {
         return $this->id;
     }
@@ -959,10 +952,8 @@ class Event implements PingableInterface
 
     /**
      * Return the event's command.
-     *
-     * @return string|\Closure
      */
-    public function getCommand()
+    public function getCommand(): string|\Closure
     {
         return $this->command;
     }

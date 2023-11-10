@@ -11,7 +11,7 @@ final class SpyPsrLogger extends AbstractLogger
     /** @var array<int,array> */
     private array $logs = [];
 
-    public function log($level, $message, array $context = []): void
+    public function log($level, string|\Stringable $message, array $context = []): void
     {
         $this->logs[] = [
             'level' => $level,

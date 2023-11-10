@@ -13,21 +13,21 @@ final class PsrStreamLogger extends AbstractLogger
 {
     private const DATE_FORMAT = 'Y-m-d H:i:s';
 
-    private string $outputStreamPath;
-    private string $errorStreamPath;
+    private readonly string $outputStreamPath;
+    private readonly string $errorStreamPath;
     /** @var resource|null */
     private $outputHandler;
     /** @var resource|null */
     private $errorHandler;
 
     public function __construct(
-        private \DateTimeZone $timezone,
-        private ClockInterface $clock,
+        private readonly \DateTimeZone $timezone,
+        private readonly ClockInterface $clock,
         ?string $outputStreamPath,
         ?string $errorStreamPath,
-        private bool $ignoreEmptyContext = false,
-        private bool $timezoneLog = false,
-        private bool $allowLineBreaks = false
+        private readonly bool $ignoreEmptyContext = false,
+        private readonly bool $timezoneLog = false,
+        private readonly bool $allowLineBreaks = false
     ) {
         $this->outputStreamPath = $outputStreamPath ?? '';
         $this->errorStreamPath = $errorStreamPath ?? '';
@@ -41,7 +41,7 @@ final class PsrStreamLogger extends AbstractLogger
 
     public function log(
         $level,
-        $message,
+        string|\Stringable $message,
         array $context = []
     ): void {
         $resource = match ($level) {
@@ -54,6 +54,7 @@ final class PsrStreamLogger extends AbstractLogger
             return;
         }
 
+        /** @var string $level */
         $date = $this->formatDate();
         $levelFormatted = \mb_strtoupper($level);
         $extraString = $this->formatContext([]);

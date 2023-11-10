@@ -20,12 +20,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ScheduleRunCommand extends Command
 {
     public function __construct(
-        private CollectionInterface $taskCollection,
-        private ConfigurationInterface $configuration,
-        private EventRunner $eventRunner,
-        private Timezone $taskTimezone,
-        private Schedule\ScheduleFactory $scheduleFactory,
-        private LoaderInterface $taskLoader
+        private readonly CollectionInterface $taskCollection,
+        private readonly ConfigurationInterface $configuration,
+        private readonly EventRunner $eventRunner,
+        private readonly Timezone $taskTimezone,
+        private readonly Schedule\ScheduleFactory $scheduleFactory,
+        private readonly LoaderInterface $taskLoader
     ) {
         parent::__construct();
     }

@@ -12,7 +12,7 @@ use Psr\Log\LoggerInterface;
 
 final class PsrStreamLoggerFactory implements LoggerFactoryInterface
 {
-    public function __construct(private Timezone $timezoneProvider, private ClockInterface $clock)
+    public function __construct(private readonly Timezone $timezoneProvider, private readonly ClockInterface $clock)
     {
     }
 

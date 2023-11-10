@@ -15,12 +15,12 @@ use Crunz\Task\Timezone;
 final class TaskInformationHandler
 {
     public function __construct(
-        private Timezone $timezone,
-        private ConfigurationInterface $configuration,
-        private CollectionInterface $taskCollection,
-        private LoaderInterface $taskLoader,
-        private ScheduleFactory $scheduleFactory,
-        private CronExpressionFactoryInterface $cronExpressionFactory
+        private readonly Timezone $timezone,
+        private readonly ConfigurationInterface $configuration,
+        private readonly CollectionInterface $taskCollection,
+        private readonly LoaderInterface $taskLoader,
+        private readonly ScheduleFactory $scheduleFactory,
+        private readonly CronExpressionFactoryInterface $cronExpressionFactory
     ) {
     }
 

@@ -7,7 +7,7 @@ use Crunz\Schedule;
 $scheduler = new Schedule();
 $scheduler
     ->run(
-        function (): void {
+        function (): never {
             throw new RuntimeException('Task failed.');
         }
     )

@@ -8,7 +8,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class FileParser
 {
-    public function __construct(private Yaml $yamlParser)
+    public function __construct(private readonly Yaml $yamlParser)
     {
     }
 

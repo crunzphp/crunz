@@ -20,7 +20,7 @@ class TaskGeneratorCommand extends Command
      *
      * @var array<string,string>
      */
-    public const DEFAULTS = [
+    final public const DEFAULTS = [
         'frequency' => 'everyThirtyMinutes',
         'constraint' => 'weekdays',
         'in' => 'path/to/your/command',
@@ -36,8 +36,8 @@ class TaskGeneratorCommand extends Command
     protected $stub;
 
     public function __construct(
-        private ConfigurationInterface $config,
-        private FilesystemInterface $filesystem
+        private readonly ConfigurationInterface $config,
+        private readonly FilesystemInterface $filesystem
     ) {
         parent::__construct();
     }

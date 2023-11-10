@@ -8,7 +8,7 @@ use Crunz\Exception\CrunzException;
 
 final class Path
 {
-    private function __construct(private string $path)
+    private function __construct(private readonly string $path)
     {
     }
 

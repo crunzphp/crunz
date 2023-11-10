@@ -9,7 +9,7 @@ use Crunz\Application\Cron\CronExpressionInterface;
 
 final class DragonmantankCronExpression implements CronExpressionInterface
 {
-    public function __construct(private CronExpression $innerCronExpression)
+    public function __construct(private readonly CronExpression $innerCronExpression)
     {
     }
 

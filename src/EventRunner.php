@@ -22,11 +22,11 @@ class EventRunner
 
     public function __construct(
         protected Invoker $invoker,
-        private ConfigurationInterface $configuration,
+        private readonly ConfigurationInterface $configuration,
         protected Mailer $mailer,
-        private LoggerFactory $loggerFactory,
-        private HttpClientInterface $httpClient,
-        private ConsoleLoggerInterface $consoleLogger
+        private readonly LoggerFactory $loggerFactory,
+        private readonly HttpClientInterface $httpClient,
+        private readonly ConsoleLoggerInterface $consoleLogger
     ) {
     }
 

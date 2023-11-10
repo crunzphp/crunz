@@ -12,9 +12,9 @@ use Crunz\Path\Path;
 class Collection implements CollectionInterface
 {
     public function __construct(
-        private ConfigurationInterface $configuration,
-        private FinderInterface $finder,
-        private ConsoleLoggerInterface $consoleLogger
+        private readonly ConfigurationInterface $configuration,
+        private readonly FinderInterface $finder,
+        private readonly ConsoleLoggerInterface $consoleLogger
     ) {
     }
 

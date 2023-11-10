@@ -1,9 +1,7 @@
-version: '3'
-
 services:
-    php80:
+    php81:
         build:
-            context: ./docker/php80
+            context: ./docker/php81
         working_dir: /var/www/html
         environment:
             CRUNZ_CONTAINER_DEBUG: 1
@@ -16,5 +14,5 @@ services:
             "
         volumes:
             - .:/var/www/html
-            - ./docker/php80/php.ini:/usr/local/etc/php/php.ini:ro
+            - ./docker/php81/php.ini:/usr/local/etc/php/php.ini:ro
         stop_grace_period: 1s

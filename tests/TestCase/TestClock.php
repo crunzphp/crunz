@@ -8,7 +8,7 @@ use Crunz\Clock\ClockInterface;
 
 final class TestClock implements ClockInterface
 {
-    public function __construct(private \DateTimeImmutable $now)
+    public function __construct(private readonly \DateTimeImmutable $now)
     {
     }
 

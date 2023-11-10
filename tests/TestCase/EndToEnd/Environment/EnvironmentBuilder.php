@@ -15,7 +15,7 @@ final class EnvironmentBuilder
     private array $config = [];
     private Path $taskDirectory;
 
-    public function __construct(private FilesystemInterface $filesystem)
+    public function __construct(private readonly FilesystemInterface $filesystem)
     {
         $this->taskDirectory = Path::fromStrings('tasks');
     }
