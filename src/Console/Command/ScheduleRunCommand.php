@@ -89,7 +89,7 @@ class ScheduleRunCommand extends Command
 
         // List of schedules
         $schedules = $this->taskLoader
-            ->load(...\array_values($files))
+            ->load($source, ...\array_values($files))
         ;
         $tasksTimezone = $this->taskTimezone
             ->timezoneForComparisons()

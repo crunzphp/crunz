@@ -106,7 +106,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
             ->all($source)
         ;
         $schedules = $this->taskLoader
-            ->load(...\array_values($tasks))
+            ->load($source, ...\array_values($tasks))
         ;
 
         $tasksList = [];

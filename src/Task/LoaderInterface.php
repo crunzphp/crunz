@@ -9,5 +9,5 @@ use Crunz\Schedule;
 interface LoaderInterface
 {
     /** @return Schedule[] */
-    public function load(\SplFileInfo ...$files): array;
+    public function load(string $source, \SplFileInfo ...$files): array;
 }
