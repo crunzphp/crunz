@@ -95,6 +95,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
      *         number: int,
      *         task: string,
      *         expression: string,
+     *         eventUniqueKey: string,
      *         command: string,
      *     },
      * >
@@ -119,6 +120,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
                     'number' => ++$number,
                     'task' => $event->description ?? '',
                     'expression' => $event->getExpression(),
+                    'eventUniqueKey' => $event->getEventUniqueKey(),
                     'command' => $event->getCommandForDisplay(),
                 ];
             }
@@ -151,6 +153,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
      *         number: int,
      *         task: string,
      *         expression: string,
+     *         eventUniqueKey: string,
      *         command: string,
      *     },
      * > $tasks
@@ -168,6 +171,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
                         '#',
                         'Task',
                         'Expression',
+                        'Task Unique Key',
                         'Command to Run',
                     ]
                 );
