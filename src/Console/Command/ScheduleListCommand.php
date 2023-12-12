@@ -95,7 +95,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
      *         number: int,
      *         task: string,
      *         expression: string,
-     *         eventUniqueKey: string,
+     *         eventUniqueKey: int|string,
      *         command: string,
      *     },
      * >
@@ -153,7 +153,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
      *         number: int,
      *         task: string,
      *         expression: string,
-     *         eventUniqueKey: string,
+     *         eventUniqueKey: int|string,
      *         command: string,
      *     },
      * > $tasks
