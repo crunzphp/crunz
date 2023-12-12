@@ -25,7 +25,7 @@ final class Loader implements LoaderInterface
 
             $events = $schedule->events();
             foreach ($events as $event_key => $event) {
-                $events[$event_key]->sourceFile( str_replace($source, '', $file->getRealPath() ));
+                $events[$event_key]->sourceFile(\str_replace($source, '', $file->getRealPath()));
             }
 
             $schedule->events($events);

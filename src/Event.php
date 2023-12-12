@@ -203,7 +203,7 @@ class Event implements PingableInterface
      */
     public function sourceFile($sourceFile)
     {
-        if ($sourceFile !== null) {
+        if (null !== $sourceFile) {
             return $this->sourceFile = $sourceFile;
         }
 
@@ -929,13 +929,13 @@ class Event implements PingableInterface
     }
 
     /**
-     * Return the event's unique key, constant value over time even if new tasks are inserted
+     * Return the event's unique key, constant value over time even if new tasks are inserted.
      *
      * @return string|int
      */
     public function getEventUniqueKey()
     {
-        return md5($this->sourceFile . $this->description . $this->expression);
+        return \md5($this->sourceFile . $this->description . $this->expression);
     }
 
     /**

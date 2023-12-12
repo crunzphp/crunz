@@ -14,7 +14,7 @@ final class FakeLoader implements LoaderInterface
     {
     }
 
-    public function load(\SplFileInfo ...$files): array
+    public function load(string $source, \SplFileInfo ...$files): array
     {
         return $this->schedules;
     }
