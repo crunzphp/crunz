@@ -199,7 +199,7 @@ class Event implements PingableInterface
      *
      * @param string|null $sourceFile
      *
-     * @return string
+     * @return string|null
      */
     public function sourceFile($sourceFile)
     {
