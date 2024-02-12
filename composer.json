@@ -52,7 +52,7 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "ergebnis/composer-normalize": "2.28.3",
-        "friendsofphp/php-cs-fixer": "2.19.3 || 3.11",
+        "friendsofphp/php-cs-fixer": "3.49",
         "phpstan/phpstan": "1.8.6",
         "phpstan/phpstan-phpunit": "1.1.1",
         "phpstan/phpstan-strict-rules": "1.4.4",

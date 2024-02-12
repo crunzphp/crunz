@@ -8,9 +8,6 @@ use Crunz\Path\Path;
 
 final class Finder implements FinderInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function find(Path $directory, $suffix)
     {
         $quotedSuffix = \preg_quote($suffix, '/');

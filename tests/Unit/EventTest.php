@@ -665,7 +665,7 @@ final class EventTest extends UnitTestCase
         ];
     }
 
-    private function assertPreventOverlapping(PersistingStoreInterface $store = null): void
+    private function assertPreventOverlapping(?PersistingStoreInterface $store = null): void
     {
         $event = $this->createPreventOverlappingEvent($store);
         $event2 = $this->createPreventOverlappingEvent($store);
@@ -675,7 +675,7 @@ final class EventTest extends UnitTestCase
         self::assertFalse($event2->isDue(new \DateTimeZone('UTC')));
     }
 
-    private function createPreventOverlappingEvent(PersistingStoreInterface $store = null): Event
+    private function createPreventOverlappingEvent(?PersistingStoreInterface $store = null): Event
     {
         $command = "php -r 'sleep(2);'";
 

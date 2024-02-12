@@ -80,7 +80,7 @@ class Application extends SymfonyApplication
         }
     }
 
-    public function run(InputInterface $input = null, OutputInterface $output = null): int
+    public function run(?InputInterface $input = null, ?OutputInterface $output = null): int
     {
         if (null === $output) {
             /** @var OutputInterface $outputObject */

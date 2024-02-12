@@ -65,8 +65,6 @@ class ScheduleRunCommand extends Command
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws WrongTaskInstanceException
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
