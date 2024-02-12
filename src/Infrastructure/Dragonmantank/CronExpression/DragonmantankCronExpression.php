@@ -13,7 +13,6 @@ final class DragonmantankCronExpression implements CronExpressionInterface
     {
     }
 
-    /** {@inheritdoc} */
     public function multipleRunDates(int $total, \DateTimeImmutable $now, ?\DateTimeZone $timeZone = null): array
     {
         $timeZoneNow = null !== $timeZone

@@ -6,9 +6,6 @@ namespace Crunz\HttpClient;
 
 final class CurlHttpClient implements HttpClientInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function ping($url): void
     {
         $curlResource = \curl_init();

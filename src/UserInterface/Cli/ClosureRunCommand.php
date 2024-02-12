@@ -39,7 +39,6 @@ class ClosureRunCommand extends SymfonyCommand
         ;
     }
 
-    /** {@inheritdoc} */
     protected function execute(InputInterface $input, OutputInterface $output): ?int
     {
         $args = [];

@@ -46,7 +46,7 @@ class Schedule implements PingableInterface
      * @param string|\Closure $command
      * @param string[]        $parameters
      *
-     * @return \Crunz\Event
+     * @return Event
      */
     public function run($command, array $parameters = [])
     {
@@ -142,7 +142,7 @@ class Schedule implements PingableInterface
      *
      * @return Event[]
      */
-    public function events(array $events = null)
+    public function events(?array $events = null)
     {
         if (null !== $events) {
             return $this->events = $events;

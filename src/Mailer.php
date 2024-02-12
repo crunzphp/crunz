@@ -111,8 +111,7 @@ class Mailer
         return $messageObject;
     }
 
-    /** @return mixed */
-    private function config(string $key)
+    private function config(string $key): mixed
     {
         return $this->configuration
             ->get($key)

@@ -11,9 +11,6 @@ trait PingableTrait
     /** @var string */
     private $pingAfterUrl = '';
 
-    /**
-     * {@inheritdoc}
-     */
     public function pingBefore($url)
     {
         $this->checkUrl($url);
@@ -23,17 +20,11 @@ trait PingableTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasPingBefore()
     {
         return '' !== $this->pingBeforeUrl;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function thenPing($url)
     {
         $this->checkUrl($url);
@@ -43,17 +34,11 @@ trait PingableTrait
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function hasPingAfter()
     {
         return '' !== $this->pingAfterUrl;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPingBeforeUrl()
     {
         if (!$this->hasPingBefore()) {
@@ -63,9 +48,6 @@ trait PingableTrait
         return $this->pingBeforeUrl;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPingAfterUrl()
     {
         if (!$this->hasPingAfter()) {

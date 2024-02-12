@@ -37,9 +37,6 @@ final class ConfigGeneratorCommand extends Command
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $symfonyStyleIo = new SymfonyStyle($input, $output);

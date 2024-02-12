@@ -21,7 +21,6 @@ final class TaskInformationView
         $this->nextRuns = $nextRuns;
     }
 
-    /** @return string|object */
     public function command(): string|object
     {
         return $this->command;
