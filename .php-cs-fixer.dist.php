@@ -9,7 +9,7 @@ return (new PhpCsFixer\Config())
         'protected_to_private' => false,
         'combine_consecutive_unsets' => true,
         'combine_consecutive_issets' => true,
-        'compact_nullable_typehint' => true,
+        'compact_nullable_type_declaration' => true,
         'declare_strict_types' => true,
         'dir_constant' => true,
         'ereg_to_preg' => true,
