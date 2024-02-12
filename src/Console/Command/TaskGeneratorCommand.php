@@ -104,12 +104,7 @@ class TaskGeneratorCommand extends Command
             ->setHelp('This command makes a task file skeleton.');
     }
 
-    /**
-     * Executes the current command.
-     *
-     * @return int|null null or 0 if everything went fine, or an error code
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->input = $input;
         $this->output = $output;
