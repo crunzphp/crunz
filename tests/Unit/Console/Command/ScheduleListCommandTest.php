@@ -89,12 +89,12 @@ final class ScheduleListCommandTest extends UnitTestCase
                     'format' => 'text',
                     'schedule' => $schedule,
                     'expectedOutput' => <<<TXT
-                        +---+-------------+----------------+----------------+
-                        | # | Task        | Expression     | Command to Run |
-                        +---+-------------+----------------+----------------+
-                        | 1 | PHP version | 15 3 * * 1,3,5 | php -v         |
-                        +---+-------------+----------------+----------------+
-                        
+                        +---+-------------+----------------+----------------------------------+----------------+
+                        | # | Task        | Expression     | Task Unique Key                  | Command to Run |
+                        +---+-------------+----------------+----------------------------------+----------------+
+                        | 1 | PHP version | 15 3 * * 1,3,5 | 088942db8529faec5392514970a88bfa | php -v         |
+                        +---+-------------+----------------+----------------------------------+----------------+
+
                         TXT,
                     'assert' => static function (string $expectedOutput, string $actualOutput): void {
                         self::assertSame($expectedOutput, $actualOutput);
@@ -121,6 +121,7 @@ final class ScheduleListCommandTest extends UnitTestCase
                         [
                             [
                                 'command' => $commandString,
+                                'eventUniqueKey' => '088942db8529faec5392514970a88bfa',
                                 'expression' => $cronExpression,
                                 'number' => 1,
                                 'task' => $description,

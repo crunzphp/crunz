@@ -9,7 +9,7 @@ use Crunz\Schedule;
 final class Loader implements LoaderInterface
 {
     /** @return Schedule[] */
-    public function load(\SplFileInfo ...$files): array
+    public function load(string $source, \SplFileInfo ...$files): array
     {
         $schedules = [];
         foreach ($files as $file) {
@@ -22,6 +22,13 @@ final class Loader implements LoaderInterface
             if (!$schedule instanceof Schedule) {
                 throw WrongTaskInstanceException::fromFilePath($file, $schedule);
             }
+
+            $events = $schedule->events();
+            foreach ($events as $event_key => $event) {
+                $events[$event_key]->sourceFile(\str_replace($source, '', $file->getRealPath()));
+            }
+
+            $schedule->events($events);
 
             $schedules[] = $schedule;
         }

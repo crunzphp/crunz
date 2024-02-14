@@ -75,6 +75,13 @@ class Event implements PingableInterface
     protected $process;
 
     /**
+     * Event source file.
+     *
+     * @var string|null
+     */
+    protected $sourceFile;
+
+    /**
      * The cron expression representing the event's frequency.
      *
      * @var string
@@ -185,6 +192,22 @@ class Event implements PingableInterface
     {
         $this->command = $command;
         $this->output = $this->getDefaultOutput();
+    }
+
+    /**
+     * Get or set the source file of the event.
+     *
+     * @param string|null $sourceFile
+     *
+     * @return string|null
+     */
+    public function sourceFile($sourceFile)
+    {
+        if (null !== $sourceFile) {
+            return $this->sourceFile = $sourceFile;
+        }
+
+        return $this->sourceFile;
     }
 
     /**
@@ -891,6 +914,16 @@ class Event implements PingableInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Return the event's unique key, constant value over time even if new tasks are inserted.
+     *
+     * @return string|int
+     */
+    public function getEventUniqueKey()
+    {
+        return \md5($this->sourceFile . $this->description . $this->expression);
     }
 
     /**
