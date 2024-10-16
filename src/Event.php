@@ -702,10 +702,11 @@ class Event implements PingableInterface
      * that will be responsible for the locking.
      *
      * @param PersistingStoreInterface|object $store
-     *
+     * @param int|null $ttl
      * @return $this
+     * @throws \Crunz\Exception\CrunzException
      */
-    public function preventOverlapping(?object $store = null)
+    public function preventOverlapping(?object $store = null, ?int $ttl = 30)
     {
         if (null !== $store && !($store instanceof PersistingStoreInterface)) {
             $expectedClass = PersistingStoreInterface::class;
@@ -721,8 +722,8 @@ class Event implements PingableInterface
         $this->lockFactory = new LockFactory($lockStore);
 
         // Skip the event if it's locked (processing)
-        $this->skip(function () {
-            $lock = $this->createLockObject();
+        $this->skip(function () use ($ttl) {
+            $lock = $this->createLockObject($ttl);
             $lock->acquire();
 
             return !$lock->isAcquired();
@@ -1094,15 +1095,14 @@ class Event implements PingableInterface
     /**
      * Get the symfony lock object for the task.
      *
+     * @param int|null $ttl
      * @return Lock
      */
-    protected function createLockObject()
+    protected function createLockObject(?int $ttl = 30)
     {
         $this->checkLockFactory();
 
         if (null === $this->lock && null !== $this->lockFactory) {
-            $ttl = 30;
-
             $this->lock = $this->lockFactory
                 ->createLock($this->lockKey(), $ttl);
         }
