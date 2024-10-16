@@ -508,6 +508,11 @@ $task
     ->preventOverlapping($store);
 
 ```
+Optionally, you can specify a TTL (Time To Live) for the lock
+
+```php
+$task->preventOverlapping($store, 60); // Lock expires after 60 seconds
+```
 
 ## Keeping the Output
 
