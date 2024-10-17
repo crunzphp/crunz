@@ -704,7 +704,7 @@ class Event implements PingableInterface
      * @param PersistingStoreInterface|object $store
      * @param int|null $ttl
      * @return $this
-     * @throws \Crunz\Exception\CrunzException
+     * @throws CrunzException
      */
     public function preventOverlapping(?object $store = null, ?int $ttl = 30)
     {
