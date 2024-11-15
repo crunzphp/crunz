@@ -40,14 +40,14 @@
         "dragonmantank/cron-expression": "^3.3.2",
         "laravel/serializable-closure": "^1.2.2",
         "psr/log": "^2.0 || ^3.0",
-        "symfony/config": "^5.4.9 || ^6.4.0 || ^7.0.0",
-        "symfony/console": "^5.4.9 || ^6.4.0 || ^7.0.0",
-        "symfony/dependency-injection": "^5.4.9 || ^6.4.0 || ^7.0.0",
-        "symfony/filesystem": "^5.4.9 || ^6.4.0 || ^7.0.0",
-        "symfony/lock": "^5.4.9 || ^6.4.0 || ^7.0.0",
-        "symfony/mailer": "^5.4.9 || ^6.4.0 || ^7.0.0",
-        "symfony/process": "^5.4.9 || ^6.4.0 || ^7.0.0",
-        "symfony/yaml": "^5.4.9 || ^6.4.0 || ^7.0.0"
+        "symfony/config": "^5.4.9 || ^6.4.0 || ^7.1.0",
+        "symfony/console": "^5.4.9 || ^6.4.0 || ^7.1.0",
+        "symfony/dependency-injection": "^5.4.9 || ^6.4.0 || ^7.1.0",
+        "symfony/filesystem": "^5.4.9 || ^6.4.0 || ^7.1.0",
+        "symfony/lock": "^5.4.9 || ^6.4.0 || ^7.1.0",
+        "symfony/mailer": "^5.4.9 || ^6.4.0 || ^7.1.0",
+        "symfony/process": "^5.4.9 || ^6.4.0 || ^7.1.0",
+        "symfony/yaml": "^5.4.9 || ^6.4.0 || ^7.1.0"
     },
     "require-dev": {
         "ext-json": "*",
@@ -58,8 +58,8 @@
         "phpstan/phpstan-phpunit": "1.1.1",
         "phpstan/phpstan-strict-rules": "1.4.4",
         "phpunit/phpunit": "9.5.25",
-        "symfony/error-handler": "^5.4.9 || ^6.4.0 || ^7.0.0",
-        "symfony/phpunit-bridge": "^5.4.9 || ^6.4.0 || ^7.0.0"
+        "symfony/error-handler": "^5.4.9 || ^6.4.0 || ^7.1.0",
+        "symfony/phpunit-bridge": "^5.4.9 || ^6.4.0 || ^7.1.0"
     },
     "minimum-stability": "beta",
     "prefer-stable": true,
