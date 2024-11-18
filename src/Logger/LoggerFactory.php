@@ -15,9 +15,6 @@ class LoggerFactory
 {
     private ?LoggerFactoryInterface $loggerFactory = null;
 
-    /**
-     * @throws \Exception if the timezone supplied in configuration is not recognised as a valid timezone
-     */
     public function __construct(
         private readonly ConfigurationInterface $configuration,
         private readonly Timezone $timezoneProvider,

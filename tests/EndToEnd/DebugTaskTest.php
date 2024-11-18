@@ -65,7 +65,7 @@ final class DebugTaskTest extends EndToEndTestCase
                 continue;
             }
 
-            $key = \trim($matches['key'] ?? '');
+            $key = \trim($matches['key']);
             $key = \mb_strtolower($key);
             $key = \str_replace(
                 [
@@ -81,7 +81,7 @@ final class DebugTaskTest extends EndToEndTestCase
                 $key
             );
 
-            $contentLines[$key] = \trim($matches['value'] ?? '');
+            $contentLines[$key] = \trim($matches['value']);
         }
 
         return $contentLines;

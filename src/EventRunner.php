@@ -163,8 +163,10 @@ class EventRunner
     {
         $output = '';
         foreach ($callbacks as $callback) {
+            /** @var string $callResult */
+            $callResult = $this->invoker->call($callback, $parameters, true);
             // Invoke the callback with buffering enabled
-            $output .= $this->invoker->call($callback, $parameters, true);
+            $output .= $callResult;
         }
 
         return $output;
@@ -276,8 +278,11 @@ class EventRunner
             return;
         }
 
+        /** @var non-empty-string $pingBeforeUrl */
+        $pingBeforeUrl = $schedule->getPingBeforeUrl();
         $this->httpClient
-            ->ping($schedule->getPingBeforeUrl());
+            ->ping($pingBeforeUrl)
+        ;
     }
 
     private function pingAfter(PingableInterface $schedule): void
@@ -289,8 +294,11 @@ class EventRunner
             return;
         }
 
+        /** @var non-empty-string $pingAfterUrl */
+        $pingAfterUrl = $schedule->getPingAfterUrl();
         $this->httpClient
-            ->ping($schedule->getPingAfterUrl());
+            ->ping($pingAfterUrl)
+        ;
     }
 
     private function logger(): Logger

@@ -7,7 +7,7 @@ namespace Crunz\HttpClient;
 interface HttpClientInterface
 {
     /**
-     * @param string $url
+     * @param non-empty-string $url
      *
      * @throws HttpClientException
      */

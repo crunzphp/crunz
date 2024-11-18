@@ -98,10 +98,16 @@ class ScheduleRunCommandTest extends TestCase
         $timezoneProviderMock = (new MockGenerator())->testDouble(
             Timezone::class,
             true,
-            callOriginalConstructor: false,
-            callOriginalClone: false,
-            cloneArguments: false,
-            allowMockingUnknownTypes: false,
+            [],
+            [],
+            '',
+            false,
+            false,
+            true,
+            false,
+            false,
+            null,
+            false,
         );
         $timezoneProviderMock->method('timezoneForComparisons')->willReturn($timeZone);
 

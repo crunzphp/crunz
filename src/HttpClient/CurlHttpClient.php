@@ -12,7 +12,7 @@ final class CurlHttpClient implements HttpClientInterface
         \curl_setopt(
             $curlResource,
             CURLOPT_RETURNTRANSFER,
-            1
+            true,
         );
         \curl_setopt(
             $curlResource,

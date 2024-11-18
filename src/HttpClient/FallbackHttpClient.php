@@ -18,23 +18,14 @@ final class FallbackHttpClient implements HttpClientInterface
     ) {
     }
 
-    /**
-     * @param string $url
-     *
-     * @throws HttpClientException
-     */
     public function ping($url): void
     {
         $httpClient = $this->chooseHttpClient();
         $httpClient->ping($url);
     }
 
-    /**
-     * @return HttpClientInterface
-     *
-     * @throws HttpClientException
-     */
-    private function chooseHttpClient()
+    /** @throws HttpClientException */
+    private function chooseHttpClient(): HttpClientInterface
     {
         if (null !== $this->httpClient) {
             return $this->httpClient;

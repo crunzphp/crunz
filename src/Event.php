@@ -327,13 +327,16 @@ class Event implements PingableInterface
      */
     public function cron(string $expression): self
     {
-        /** @var string[] $parts */
         $parts = \preg_split(
             '/\s/',
             $expression,
             -1,
             PREG_SPLIT_NO_EMPTY
         );
+        $parts = false === $parts
+            ? []
+            : $parts
+        ;
 
         if (\count($parts) > 5) {
             throw new TaskException("Expression '{$expression}' has more than five parts and this is not allowed.");
