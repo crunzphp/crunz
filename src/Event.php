@@ -1009,13 +1009,21 @@ class Event implements PingableInterface
     }
 
     /**
-     * If this event is prevented from overlapping, this method should be called regularly to refresh the lock.
+     * If this event is prevented from overlapping, this method should be called regularly to refresh the lock,
+     * UNLESS the lock store supports expiring (TTL), which means no refresh is needed.
      */
     public function refreshLock(): void
     {
         if (!$this->preventOverlapping) {
             return;
         }
+
+        // If the lock has remaining lifetime (i.e. the method returns a float and not NULL), that means the LockStore does support TTL [ 'MemcachedStore', 'MongoDbStore' , 'PdoStore', 'DoctrineDbalStore', 'RedisStore' ]
+        // @see https://symfony.com/doc/6.4/components/lock.html#available-stores
+        $remainingLifetime = $this->lock->getRemainingLifetime();
+        if (null !== $remainingLifetime) {
+            return;
+        };
 
         $lock = $this->createLockObject();
         $remainingLifetime = $lock->getRemainingLifetime();
