@@ -701,9 +701,11 @@ class Event implements PingableInterface
      * By default, the lock is acquired through file system locks. Alternatively, you can pass a symfony lock store
      * that will be responsible for the locking.
      *
-     * @param PersistingStoreInterface|object $store
-     * @param int|null $ttl
+     * @param PersistingStoreInterface|object|null $store A symfony lock store
+     * @param int|null                             $ttl   Time To Live of the lock in seconds
+     *
      * @return $this
+     *
      * @throws CrunzException
      */
     public function preventOverlapping(?object $store = null, ?int $ttl = 30)
@@ -1019,11 +1021,11 @@ class Event implements PingableInterface
         }
 
         // If the lock has remaining lifetime (i.e. the method returns a float and not NULL), that means the LockStore does support TTL [ 'MemcachedStore', 'MongoDbStore' , 'PdoStore', 'DoctrineDbalStore', 'RedisStore' ]
-        // @see https://symfony.com/doc/6.4/components/lock.html#available-stores
+        // @see https://symfony.com/doc/6.4/components/lock.html#available-stores for detailed information
         $remainingLifetime = $this->lock->getRemainingLifetime();
         if (null !== $remainingLifetime) {
             return;
-        };
+        }
 
         $lock = $this->createLockObject();
         $remainingLifetime = $lock->getRemainingLifetime();
@@ -1103,7 +1105,8 @@ class Event implements PingableInterface
     /**
      * Get the symfony lock object for the task.
      *
-     * @param int|null $ttl
+     * @param int|null $ttl Time To Live of the lock in seconds
+     *
      * @return Lock
      */
     protected function createLockObject(?int $ttl = 30)
