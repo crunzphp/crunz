@@ -48,7 +48,7 @@ jobs:
         runs-on: ${{ matrix.os }}
 
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v4
 
             -   uses: shivammathur/setup-php@v2
                 with:
@@ -61,7 +61,7 @@ jobs:
                     jq --raw-output '"with_string=" + (["--with=" + ((."require" + ."require-dev") | keys[] | select(contains("symfony/"))) + ":${{ matrix.symfony_version }}"] | join(" "))' composer.json \
                         >>"$GITHUB_OUTPUT"
 
-            -   uses: ramsey/composer-install@v2
+            -   uses: ramsey/composer-install@v3
                 with:
                     dependency-versions: ${{ matrix.dependencies }}
                     composer-options: ${{ steps.symfony_packages.outputs.with_string }}
@@ -83,7 +83,7 @@ jobs:
         runs-on: ubuntu-22.04
 
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v4
 
             -   uses: shivammathur/setup-php@v2
                 with:
@@ -96,19 +96,19 @@ jobs:
                     jq --raw-output '"with_string=" + (["--with=" + ((."require" + ."require-dev") | keys[] | select(contains("symfony/"))) + ":${{ matrix.symfony_version }}"] | join(" "))' composer.json \
                         >>"$GITHUB_OUTPUT"
 
-            -   uses: ramsey/composer-install@v2
+            -   uses: ramsey/composer-install@v3
                 with:
                     dependency-versions: ${{ matrix.dependencies }}
                     composer-options: ${{ steps.symfony_packages.outputs.with_string }}
 
             -   run: composer normalize --dry-run
 
-            -   uses: actions/cache@v3
+            -   uses: actions/cache@v4
                 with:
                     path: .php-cs-fixer.cache
                     key: php-cs-fixer-cache
 
-            -   uses: actions/cache@v3
+            -   uses: actions/cache@v4
                 with:
                     path: /tmp/phpstan
                     key: phpstan-cache
