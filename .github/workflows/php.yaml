@@ -3,8 +3,8 @@ name: PHP
 on:
     pull_request:
         branches:
-            - '3.7'
             - '3.8'
+            - '3.9'
     push: null
 
 permissions: {}
@@ -29,7 +29,6 @@ jobs:
                     - 'lowest'
                     - 'highest'
                 symfony_version:
-                    - '~5.4.9'
                     - '~6.4.0'
                     - '~7.1.0'
                 include:
