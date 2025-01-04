@@ -10,16 +10,6 @@ Crunz is capable of executing any kind of executable command as well as PHP clos
 [![Packagist](https://img.shields.io/packagist/dt/crunzphp/crunz.svg?style=flat-square)](https://packagist.org/packages/crunzphp/crunz/stats)
 [![Packagist](https://img.shields.io/packagist/dm/crunzphp/crunz.svg?style=flat-square)](https://packagist.org/packages/crunzphp/crunz/stats)
 
-| Version  | Supported PHP versions                                                                            |
-|----------|---------------------------------------------------------------------------------------------------|
-| v3.8-dev | ![8.1+](https://img.shields.io/badge/php-%3E=8.1-blue.svg?style=flat-square)                      |
-| v3.7     | ![8.0+](https://img.shields.io/badge/php-%3E=8.0-blue.svg?style=flat-square)                      |
-| v3.6     | ![8.0+](https://img.shields.io/badge/php-%3E=8.0-blue.svg?style=flat-square)                      |
-| v3.5     | ![8.0+](https://img.shields.io/badge/php-%3E=8.0-blue.svg?style=flat-square)                      |
-| v3.4     | ![7.4+](https://img.shields.io/badge/php-%3E=7.4-blue.svg?style=flat-square)                      |
-| v2.3     | ![7.2+](https://img.shields.io/badge/php-%3E=7.2-blue.svg?style=flat-square)                      |
-| v1.12    | ![5.6-7.0+](https://img.shields.io/badge/php-%5E5.6%20%7C%7C%20%5E7.0-blue.svg?style=flat-square) |
-
 ## Roadmap
 | Version | Release date | Active support until | Bug support until | Status         |
 |---------|--------------|----------------------|-------------------|----------------|
