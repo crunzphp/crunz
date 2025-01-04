@@ -930,7 +930,7 @@ You can support further Crunz development by [GitHub](https://github.com/sponsor
 
 ### Which branch should I choose?
 
-Bug fixes and readme changes should target `3.7`, new features should target `3.8`.
+Bug fixes and readme changes should target `3.8`, new features should target `3.9`.
 
 ## If You Need Help
 
