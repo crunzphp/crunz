@@ -8,14 +8,7 @@ use Psr\Log\AbstractLogger;
 
 final class SpyPsrLogger extends AbstractLogger
 {
-    /**
-     * Logs with an arbitrary level.
-     *
-     * @param mixed  $level   The log level (e.g., 'error', 'info').
-     * @param string $message The log message.
-     * @param array  $context Additional context for the log message.
-     */
-
+    /** @var array<int,string,array> */
     private array $logs = [];
 
     public function log($level, $message, array $context = []): void
