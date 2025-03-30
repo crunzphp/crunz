@@ -39,7 +39,6 @@ final class PsrStreamLogger extends AbstractLogger
         $this->closeStream($this->errorHandler);
     }
 
-    /** {@inheritdoc} */
     public function log(
         $level,
         $message,

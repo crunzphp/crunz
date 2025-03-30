@@ -64,7 +64,7 @@ class Event implements PingableInterface
      */
     public $logger;
 
-    /** @var string|Closure */
+    /** @var string|\Closure */
     protected $command;
 
     /**
@@ -185,8 +185,8 @@ class Event implements PingableInterface
     /**
      * Create a new event instance.
      *
-     * @param string|Closure $command
-     * @param string|int     $id
+     * @param string|\Closure $command
+     * @param string|int      $id
      */
     public function __construct(protected $id, $command)
     {
@@ -274,7 +274,7 @@ class Event implements PingableInterface
      */
     public function isClosure()
     {
-        return \is_object($this->command) && ($this->command instanceof Closure);
+        return \is_object($this->command) && ($this->command instanceof \Closure);
     }
 
     /**
@@ -630,10 +630,8 @@ class Event implements PingableInterface
 
     /**
      * Set the days of the week the command should run on.
-     *
-     * @param mixed $days
      */
-    public function days($days): self
+    public function days(mixed $days): self
     {
         $days = \is_array($days) ? $days : \func_get_args();
 
@@ -642,10 +640,8 @@ class Event implements PingableInterface
 
     /**
      * Set hour for the cron job.
-     *
-     * @param mixed $value
      */
-    public function hour($value): self
+    public function hour(mixed $value): self
     {
         $value = \is_array($value) ? $value : \func_get_args();
 
@@ -654,10 +650,8 @@ class Event implements PingableInterface
 
     /**
      * Set minute for the cron job.
-     *
-     * @param mixed $value
      */
-    public function minute($value): self
+    public function minute(mixed $value): self
     {
         $value = \is_array($value) ? $value : \func_get_args();
 
@@ -666,10 +660,8 @@ class Event implements PingableInterface
 
     /**
      * Set hour for the cron job.
-     *
-     * @param mixed $value
      */
-    public function dayOfMonth($value): self
+    public function dayOfMonth(mixed $value): self
     {
         $value = \is_array($value) ? $value : \func_get_args();
 
@@ -678,10 +670,8 @@ class Event implements PingableInterface
 
     /**
      * Set hour for the cron job.
-     *
-     * @param mixed $value
      */
-    public function month($value): self
+    public function month(mixed $value): self
     {
         $value = \is_array($value) ? $value : \func_get_args();
 
@@ -690,10 +680,8 @@ class Event implements PingableInterface
 
     /**
      * Set hour for the cron job.
-     *
-     * @param mixed $value
      */
-    public function dayOfWeek($value): self
+    public function dayOfWeek(mixed $value): self
     {
         $value = \is_array($value) ? $value : \func_get_args();
 
@@ -742,7 +730,7 @@ class Event implements PingableInterface
      *
      * @return $this
      */
-    public function preventOverlapping(object $store = null)
+    public function preventOverlapping(?object $store = null)
     {
         if (null !== $store && !($store instanceof PersistingStoreInterface)) {
             $expectedClass = PersistingStoreInterface::class;
@@ -782,7 +770,7 @@ class Event implements PingableInterface
      *
      * @return $this
      */
-    public function when(Closure $callback)
+    public function when(\Closure $callback)
     {
         $this->filters[] = $callback;
 
@@ -794,7 +782,7 @@ class Event implements PingableInterface
      *
      * @return $this
      */
-    public function skip(Closure $callback)
+    public function skip(\Closure $callback)
     {
         $this->rejects[] = $callback;
 
@@ -835,7 +823,7 @@ class Event implements PingableInterface
      *
      * @return $this
      */
-    public function before(Closure $callback)
+    public function before(\Closure $callback)
     {
         $this->beforeCallbacks[] = $callback;
 
@@ -847,7 +835,7 @@ class Event implements PingableInterface
      *
      * @return $this
      */
-    public function after(Closure $callback)
+    public function after(\Closure $callback)
     {
         return $this->then($callback);
     }
@@ -857,7 +845,7 @@ class Event implements PingableInterface
      *
      * @return $this
      */
-    public function then(Closure $callback)
+    public function then(\Closure $callback)
     {
         $this->afterCallbacks[] = $callback;
 
@@ -1199,7 +1187,7 @@ class Event implements PingableInterface
      *
      * @return string
      */
-    protected function serializeClosure(Closure $closure)
+    protected function serializeClosure(\Closure $closure)
     {
         $closure = $this->closureSerializer()
             ->serialize($closure)
@@ -1306,7 +1294,7 @@ class Event implements PingableInterface
         $lock->acquire();
     }
 
-    private function addErrorCallback(Closure $closure): void
+    private function addErrorCallback(\Closure $closure): void
     {
         $this->errorCallbacks[] = $closure;
     }
@@ -1322,7 +1310,7 @@ class Event implements PingableInterface
     /**
      * @return FlockStore
      *
-     * @throws Exception\CrunzException
+     * @throws CrunzException
      */
     private function createDefaultLockStore()
     {

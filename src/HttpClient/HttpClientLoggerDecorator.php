@@ -12,9 +12,6 @@ final class HttpClientLoggerDecorator implements HttpClientInterface
     {
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function ping($url): void
     {
         $this->logger

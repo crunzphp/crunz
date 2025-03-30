@@ -33,11 +33,9 @@ final class Faker
     /**
      * @param array<mixed> $elements
      *
-     * @return mixed
-     *
      * @throws CrunzException
      */
-    public static function elementFromArray(array $elements)
+    public static function elementFromArray(array $elements): mixed
     {
         $itemsCount = \count($elements);
         if (0 === $itemsCount) {

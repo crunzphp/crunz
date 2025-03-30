@@ -63,8 +63,6 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws WrongTaskInstanceException
      */
     protected function execute(InputInterface $input, OutputInterface $output): int

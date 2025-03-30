@@ -34,8 +34,7 @@ final class FakeConfiguration implements ConfigurationInterface
         $this->config = \array_merge(self::DEFAULT_CONFIG, $config);
     }
 
-    /** {@inheritdoc} */
-    public function get(string $key, $default = null)
+    public function get(string $key, mixed $default = null): mixed
     {
         if (\array_key_exists($key, $this->config)) {
             return $this->config[$key];
@@ -54,8 +53,7 @@ final class FakeConfiguration implements ConfigurationInterface
         return $value;
     }
 
-    /** {@inheritdoc} */
-    public function withNewEntry(string $key, $value): ConfigurationInterface
+    public function withNewEntry(string $key, mixed $value): ConfigurationInterface
     {
         $newConfiguration = clone $this;
 

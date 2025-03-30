@@ -8,19 +8,13 @@ interface ConfigurationInterface
 {
     /**
      * Return a parameter based on a key.
-     *
-     * @param mixed $default
-     *
-     * @return mixed
      */
-    public function get(string $key, $default = null);
+    public function get(string $key, mixed $default = null): mixed;
 
     /**
      * Set a parameter based on a key.
-     *
-     * @param mixed $value
      */
-    public function withNewEntry(string $key, $value): ConfigurationInterface;
+    public function withNewEntry(string $key, mixed $value): ConfigurationInterface;
 
     public function getSourcePath(): string;
 }

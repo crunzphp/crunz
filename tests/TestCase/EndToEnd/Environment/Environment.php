@@ -68,7 +68,7 @@ final class Environment
 
     public function runCrunzCommand(
         string $command,
-        string $cwd = null,
+        ?string $cwd = null,
         bool $wait = true
     ): Process {
         $cwd = !empty($cwd)

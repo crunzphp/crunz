@@ -22,7 +22,6 @@ final class ConfigurationParser implements ConfigurationParserInterface
     ) {
     }
 
-    /** {@inheritdoc} */
     public function parseConfig(): array
     {
         $configFile = null;

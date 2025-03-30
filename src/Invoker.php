@@ -12,10 +12,8 @@ class Invoker
      * @param callable           $closure
      * @param bool               $buffer
      * @param array<mixed,mixed> $parameters
-     *
-     * @return mixed
      */
-    public function call($closure, array $parameters = [], $buffer = false)
+    public function call($closure, array $parameters = [], $buffer = false): mixed
     {
         if ($buffer) {
             \ob_start();

@@ -10,7 +10,6 @@ final class Filesystem implements FilesystemInterface
 {
     private ?string $projectRootDir = null;
 
-    /** {@inheritdoc} */
     public function getCwd()
     {
         $cwd = \getcwd();
@@ -22,19 +21,16 @@ final class Filesystem implements FilesystemInterface
         return $cwd;
     }
 
-    /** {@inheritdoc} */
     public function fileExists($filePath)
     {
         return \file_exists($filePath);
     }
 
-    /** {@inheritdoc} */
     public function tempDir()
     {
         return \sys_get_temp_dir();
     }
 
-    /** {@inheritdoc} */
     public function removeDirectory($directoryPath, $ignoredPaths = []): void
     {
         $ignoredCount = 0;
@@ -71,7 +67,6 @@ final class Filesystem implements FilesystemInterface
         }
     }
 
-    /** {@inheritdoc} */
     public function dumpFile($filePath, $content): void
     {
         $directory = \pathinfo($filePath, \PATHINFO_DIRNAME);
@@ -80,7 +75,6 @@ final class Filesystem implements FilesystemInterface
         \file_put_contents($filePath, $content);
     }
 
-    /** {@inheritdoc} */
     public function createDirectory($directoryPath): void
     {
         if ($this->fileExists($directoryPath)) {
@@ -107,7 +101,6 @@ final class Filesystem implements FilesystemInterface
         \copy($sourceFile, $targetFile);
     }
 
-    /** {@inheritdoc} */
     public function projectRootDirectory()
     {
         if (null === $this->projectRootDir) {
