@@ -44,11 +44,11 @@ class Event implements PingableInterface
     public $shouldAppendOutput = false;
 
     /**
-     * The human readable description of the event.
+     * Event unique key.
      *
      * @var string|null
      */
-    public $description;
+    public $eventUniqueKey;
 
     /**
      * Event generated output.
@@ -865,6 +865,18 @@ class Event implements PingableInterface
     }
 
     /**
+     * Set event unique key of the event.
+     *
+     * @param string $eventUniqueKey
+     *
+     * @return $this
+     */
+    public function eventUniqueKey($eventUniqueKey)
+    {
+        return $this->eventUniqueKey($eventUniqueKey);
+    }
+
+    /**
      * Return the event's process.
      *
      * @return Process $process
@@ -923,7 +935,11 @@ class Event implements PingableInterface
      */
     public function getEventUniqueKey()
     {
-        return \md5($this->sourceFile . $this->description . $this->expression);
+        if(empty($this->eventUniqueKey)){
+            return $this->eventUniqueKey;
+        }else{
+            return \md5($this->sourceFile . $this->description . $this->expression);
+        }
     }
 
     /**
