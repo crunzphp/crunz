@@ -990,7 +990,7 @@ class Event implements PingableInterface
      */
     public function getEventID()
     {
-        if(empty($this->eventID)){
+        if(!empty($this->eventID)){
             return $this->eventID;
         }else{
             return \md5($this->sourceFile . $this->description . $this->expression);

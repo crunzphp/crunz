@@ -36,7 +36,7 @@ final class TaskInformationHandler
 
         // List of schedules
         $schedules = $this->taskLoader
-            ->load(...\array_values($files))
+            ->load($source, ...\array_values($files))
         ;
 
         $timezoneForComparisons = $this->timezone

@@ -93,6 +93,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
      *         number: int,
      *         task: string,
      *         expression: string,
+     *         eventID: int|string,
      *         command: string,
      *     },
      * >
@@ -104,7 +105,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
             ->all($source)
         ;
         $schedules = $this->taskLoader
-            ->load(...\array_values($tasks))
+            ->load($source, ...\array_values($tasks))
         ;
 
         $tasksList = [];
@@ -116,6 +117,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
                 $tasksList[] = [
                     'number' => ++$number,
                     'task' => $event->description ?? '',
+                    'eventID' => $event->getEventID(),
                     'expression' => $event->getExpression(),
                     'command' => $event->getCommandForDisplay(),
                 ];
@@ -148,6 +150,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
      *     array{
      *         number: int,
      *         task: string,
+     *         eventID: int|string,     *
      *         expression: string,
      *         command: string,
      *     },
@@ -165,6 +168,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
                     [
                         '#',
                         'Task',
+                        'Event ID',
                         'Expression',
                         'Command to Run',
                     ]
