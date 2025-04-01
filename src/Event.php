@@ -984,17 +984,17 @@ class Event implements PingableInterface
     }
 
     /**
-     * Get the event ID
+     * Get the event ID.
      *
      * @return string
      */
     public function getEventID()
     {
-        if(!empty($this->eventID)){
+        if (!empty($this->eventID)) {
             return $this->eventID;
-        }else{
-            return \md5($this->sourceFile . $this->description . $this->expression);
         }
+
+        return \md5($this->sourceFile . $this->description . $this->expression);
     }
 
     /**
