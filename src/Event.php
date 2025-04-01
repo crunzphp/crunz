@@ -51,6 +51,13 @@ class Event implements PingableInterface
     public $description;
 
     /**
+     * The event's unique identifier.
+     *
+     * @var string|int
+     */
+    public $eventID;
+
+    /**
      * Event generated output.
      *
      * @var string|null
@@ -141,6 +148,13 @@ class Event implements PingableInterface
     protected $cwd;
 
     /**
+     * Event source file.
+     *
+     * @var string|null
+     */
+    protected $sourceFile;
+
+    /**
      * Position of cron fields.
      *
      * @var array<string,int>
@@ -183,6 +197,22 @@ class Event implements PingableInterface
     {
         $this->command = $command;
         $this->output = $this->getDefaultOutput();
+    }
+
+    /**
+     * Get or set the source file of the event.
+     *
+     * @param string|null $sourceFile
+     *
+     * @return string|null
+     */
+    public function sourceFile($sourceFile)
+    {
+        if (null !== $sourceFile) {
+            return $this->sourceFile = $sourceFile;
+        }
+
+        return $this->sourceFile;
     }
 
     /**
@@ -864,6 +894,20 @@ class Event implements PingableInterface
     }
 
     /**
+     * Set event ID.
+     *
+     * @param string $eventID
+     *
+     * @return $this
+     */
+    public function eventID($eventID)
+    {
+        $this->eventID = $eventID;
+
+        return $this;
+    }
+
+    /**
      * Another way to the frequency of the cron job.
      *
      * @param string         $unit
@@ -937,6 +981,20 @@ class Event implements PingableInterface
     public function getTo(): \DateTime|string|null
     {
         return $this->to;
+    }
+
+    /**
+     * Get the event ID
+     *
+     * @return string
+     */
+    public function getEventID()
+    {
+        if(empty($this->eventID)){
+            return $this->eventID;
+        }else{
+            return \md5($this->sourceFile . $this->description . $this->expression);
+        }
     }
 
     /**
