@@ -150,7 +150,7 @@ class ScheduleListCommand extends \Symfony\Component\Console\Command\Command
      *     array{
      *         number: int,
      *         task: string,
-     *         eventID: int|string,     *
+     *         eventID: int|string,
      *         expression: string,
      *         command: string,
      *     },
