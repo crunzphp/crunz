@@ -89,13 +89,14 @@ final class ScheduleListCommandTest extends UnitTestCase
                     'format' => 'text',
                     'schedule' => $schedule,
                     'expectedOutput' => <<<TXT
-                        +---+-------------+----------------+----------------+
-                        | # | Task        | Expression     | Command to Run |
-                        +---+-------------+----------------+----------------+
-                        | 1 | PHP version | 15 3 * * 1,3,5 | php -v         |
-                        +---+-------------+----------------+----------------+
-                        
+                        +---+-------------+----------------------------------+----------------+----------------+
+                        | # | Task        | Event ID                         | Expression     | Command to Run |
+                        +---+-------------+----------------------------------+----------------+----------------+
+                        | 1 | PHP version | 088942db8529faec5392514970a88bfa | 15 3 * * 1,3,5 | php -v         |
+                        +---+-------------+----------------------------------+----------------+----------------+
+
                         TXT,
+
                     'assert' => static function (string $expectedOutput, string $actualOutput): void {
                         self::assertSame($expectedOutput, $actualOutput);
                     },
@@ -106,6 +107,7 @@ final class ScheduleListCommandTest extends UnitTestCase
         yield 'json' => [
             function (): array {
                 $commandString = 'php -v';
+                $eventID = '088942db8529faec5392514970a88bfa';
                 $cronExpression = '15 3 * * 1,3,5';
                 $description = 'PHP version';
                 $schedule = self::createScheduleWithTask(
@@ -121,6 +123,7 @@ final class ScheduleListCommandTest extends UnitTestCase
                         [
                             [
                                 'command' => $commandString,
+                                'eventID' => $eventID,
                                 'expression' => $cronExpression,
                                 'number' => 1,
                                 'task' => $description,
