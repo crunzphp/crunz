@@ -902,7 +902,7 @@ class Event implements PingableInterface
      */
     public function eventID($eventID)
     {
-        if (empty($eventID)) {
+        if (!isset($eventID) || $eventID === null || $eventID === '') {
             throw new CrunzException('Event ID cannot be empty.');
         }
         if (!\is_string($eventID) && !\is_int($eventID)) {
@@ -997,7 +997,7 @@ class Event implements PingableInterface
      */
     public function getEventID()
     {
-        if (!empty($this->eventID) && \is_string($this->eventID)) {
+        if (isset($this->eventID) && $this->eventID !== null && $this->eventID !== '') {
             return $this->eventID;
         }
 
