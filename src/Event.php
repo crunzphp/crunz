@@ -46,7 +46,7 @@ class Event implements PingableInterface
     /**
      * The human readable description of the event.
      *
-     * @var string|null
+     * @var string|null|null
      */
     public $description;
 
