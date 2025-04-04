@@ -46,16 +46,16 @@ class Event implements PingableInterface
     /**
      * The human readable description of the event.
      *
-     * @var string|null|null
+     * @var string|null
      */
     public $description;
 
     /**
      * The event's unique identifier.
      *
-     * @var string|int
+     * @var string|int|null
      */
-    public $eventID;
+    private $eventID;
 
     /**
      * Event generated output.
