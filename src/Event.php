@@ -896,7 +896,7 @@ class Event implements PingableInterface
     /**
      * Set event ID.
      *
-     * @param string $eventID
+     * @param string|int|null $eventID
      *
      * @return $this
      */
