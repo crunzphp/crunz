@@ -986,7 +986,7 @@ class Event implements PingableInterface
     /**
      * Get the event ID.
      *
-     * @return string
+     * @return string|int
      */
     public function getEventID()
     {
