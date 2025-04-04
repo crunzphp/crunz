@@ -51,13 +51,6 @@ class Event implements PingableInterface
     public $description;
 
     /**
-     * The event's unique identifier.
-     *
-     * @var string|int|null
-     */
-    private $eventID;
-
-    /**
      * Event generated output.
      *
      * @var string|null
@@ -166,6 +159,13 @@ class Event implements PingableInterface
         'month' => 4,
         'week' => 5,
     ];
+
+    /**
+     * The event's unique identifier.
+     *
+     * @var string|int|null
+     */
+    private $eventID;
 
     /**
      * Indicates if the command should not overlap itself.
