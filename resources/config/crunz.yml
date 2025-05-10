@@ -47,6 +47,10 @@ log_allow_line_breaks: false
 # Set the value to true to remove them.
 log_ignore_empty_context: false
 
+# To use your own logger create class implementing
+# \Crunz\Application\Service\LoggerFactoryInterface then set it bellow
+logger_factory: 'Crunz\Infrastructure\Psr\Logger\PsrStreamLoggerFactory'
+
 # This option determines whether the output should be emailed or not.
 email_output: false
 
