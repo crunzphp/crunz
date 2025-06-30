@@ -476,6 +476,21 @@ final class EventTest extends UnitTestCase
         $event->preventOverlapping($store);
     }
 
+    public function test_expiring_store_can_be_passed_to_prevent_overlapping_with_ttl(): void
+    {
+        // Arrange
+        $store = new PdoStore('');
+        $ttl = 3;
+
+        $event = $this->createEvent();
+
+        // Expect
+        $this->expectNotToPerformAssertions();
+
+        // Act
+        $event->preventOverlapping($store, $ttl);
+    }
+
     /**
      * @param \Closure(): array{
      *     now: \DateTimeImmutable,
