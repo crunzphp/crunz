@@ -1,3 +1,9 @@
+# Crunz needs your funding 💲
+
+## Support further Crunz development by [GitHub](https://github.com/sponsors/PabloKowalczyk).
+
+Check [more info](https://github.com/crunzphp/crunz/issues/111).
+
 # Crunz
 
 Install a cron job once and for all, manage the rest from the code.
