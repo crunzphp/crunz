@@ -79,7 +79,7 @@ class Application extends SymfonyApplication
                 ->get($commandClass)
             ;
 
-            $this->add($command);
+            $this->addCommand($command);
         }
     }
 
