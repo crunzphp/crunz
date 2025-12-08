@@ -19,7 +19,6 @@ use Crunz\Pinger\PingableTrait;
 use Crunz\Process\Process;
 use Crunz\Task\TaskException;
 use Symfony\Component\Lock\Exception\InvalidArgumentException;
-use Symfony\Component\Lock\Factory;
 use Symfony\Component\Lock\Lock;
 use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\PersistingStoreInterface;
