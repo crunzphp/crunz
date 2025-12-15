@@ -79,7 +79,12 @@ class Application extends SymfonyApplication
                 ->get($commandClass)
             ;
 
-            $this->add($command);
+            // @phpstan-ignore function.alreadyNarrowedType (backward compatibility with Symfony < 7.4)
+            if (\method_exists($this, 'addCommand')) {
+                $this->addCommand($command);
+            } else {
+                $this->add($command);
+            }
         }
     }
 
