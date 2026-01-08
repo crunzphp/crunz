@@ -35,7 +35,7 @@
         }
     ],
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.2",
         "composer-runtime-api": "^2.0",
         "dragonmantank/cron-expression": "^3.4.0",
         "laravel/serializable-closure": "^2.0",
