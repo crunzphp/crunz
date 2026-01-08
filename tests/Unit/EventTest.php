@@ -691,7 +691,6 @@ final class EventTest extends UnitTestCase
         $testClock = new TestClock($dateTime);
         $reflection = new \ReflectionClass(Event::class);
         $property = $reflection->getProperty('clock');
-        $property->setAccessible(true);
         $property->setValue(null, $testClock);
     }
 
