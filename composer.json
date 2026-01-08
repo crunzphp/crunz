@@ -54,7 +54,7 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "ergebnis/composer-normalize": "2.28.3",
-        "friendsofphp/php-cs-fixer": "3.64",
+        "friendsofphp/php-cs-fixer": "3.90.0",
         "phpstan/phpstan": "2.0.2",
         "phpstan/phpstan-phpunit": "2.0.1",
         "phpstan/phpstan-strict-rules": "2.0.0",
