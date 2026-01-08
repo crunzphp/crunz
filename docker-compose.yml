@@ -1,7 +1,7 @@
 services:
-    php81:
+    php82:
         build:
-            context: ./docker/php81
+            context: ./docker/php82
         working_dir: /var/www/html
         environment:
             CRUNZ_CONTAINER_DEBUG: 1
@@ -14,5 +14,5 @@ services:
             "
         volumes:
             - .:/var/www/html
-            - ./docker/php81/php.ini:/usr/local/etc/php/php.ini:ro
+            - ./docker/php82/php.ini:/usr/local/etc/php/php.ini:ro
         stop_grace_period: 1s
