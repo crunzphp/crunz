@@ -31,11 +31,29 @@ jobs:
                 symfony_version:
                     - '~6.4.0'
                     - '~7.4.0'
+                    - '~8.0.0'
                 include:
                     - os: 'windows-2022'
                       php: '8.2'
                       dependencies: 'highest'
                       symfony_version: '~6.4.0'
+                exclude:
+                    - os: 'ubuntu-22.04'
+                      php: '8.2'
+                      dependencies: 'lowest'
+                      symfony_version: '~8.0.0'
+                    - os: 'ubuntu-22.04'
+                      php: '8.2'
+                      dependencies: 'highest'
+                      symfony_version: '~8.0.0'
+                    - os: 'ubuntu-22.04'
+                      php: '8.3'
+                      dependencies: 'lowest'
+                      symfony_version: '~8.0.0'
+                    - os: 'ubuntu-22.04'
+                      php: '8.3'
+                      dependencies: 'highest'
+                      symfony_version: '~8.0.0'
         runs-on: ${{ matrix.os }}
 
         steps:
