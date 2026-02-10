@@ -157,6 +157,7 @@ class Event implements PingableInterface
      * Indicates if the command should not overlap itself.
      */
     private bool $preventOverlapping = false;
+    private int $lockTtl = 30;
     /** @var ClockInterface */
     private static $clock;
     private static ?ClosureSerializerInterface $closureSerializer = null;
@@ -702,11 +703,14 @@ class Event implements PingableInterface
      * that will be responsible for the locking.
      *
      * @param PersistingStoreInterface|object $store
+     * @param int $lockTtl TTL in seconds for the overlap-prevention lock (default: 30)
      *
      * @return $this
      */
-    public function preventOverlapping(?object $store = null)
+    public function preventOverlapping(?object $store = null, int $lockTtl = 30)
     {
+        $this->lockTtl = $lockTtl;
+
         if (null !== $store && !($store instanceof PersistingStoreInterface)) {
             $expectedClass = PersistingStoreInterface::class;
             $actualClass = $store::class;
@@ -1101,10 +1105,8 @@ class Event implements PingableInterface
         $this->checkLockFactory();
 
         if (null === $this->lock && null !== $this->lockFactory) {
-            $ttl = 30;
-
             $this->lock = $this->lockFactory
-                ->createLock($this->lockKey(), $ttl);
+                ->createLock($this->lockKey(), $this->lockTtl);
         }
 
         return $this->lock;

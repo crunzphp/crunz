@@ -665,6 +665,30 @@ final class EventTest extends UnitTestCase
         ];
     }
 
+    /** @test */
+    public function prevent_overlapping_default_lock_ttl_is_30(): void
+    {
+        $event = $this->createEvent();
+        $event->preventOverlapping();
+
+        $reflection = new \ReflectionProperty(Event::class, 'lockTtl');
+        $reflection->setAccessible(true);
+
+        self::assertSame(30, $reflection->getValue($event));
+    }
+
+    /** @test */
+    public function prevent_overlapping_accepts_custom_lock_ttl(): void
+    {
+        $event = $this->createEvent();
+        $event->preventOverlapping(null, 300);
+
+        $reflection = new \ReflectionProperty(Event::class, 'lockTtl');
+        $reflection->setAccessible(true);
+
+        self::assertSame(300, $reflection->getValue($event));
+    }
+
     private function assertPreventOverlapping(?PersistingStoreInterface $store = null): void
     {
         $event = $this->createPreventOverlappingEvent($store);
