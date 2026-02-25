@@ -58,7 +58,7 @@
         "phpstan/phpstan": "2.0.2",
         "phpstan/phpstan-phpunit": "2.0.1",
         "phpstan/phpstan-strict-rules": "2.0.0",
-        "phpunit/phpunit": "10.5.60",
+        "phpunit/phpunit": "10.5.63",
         "symfony/error-handler": "^6.4.25 || ^7.4.0 || ^8.0.0",
         "symfony/phpunit-bridge": "^6.4.25 || ^7.4.0 || ^8.0.0"
     },

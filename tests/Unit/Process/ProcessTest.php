@@ -31,14 +31,14 @@ final class ProcessTest extends UnitTestCase
 
     private function assertCommand(string $expectedCommand, Process $process): void
     {
+        $actualCommand = $process->commandLine();
+
         if (IS_WINDOWS === true) {
-            $expectedCommand = \str_replace(
-                "'",
-                '',
-                $expectedCommand,
-            );
+            // Symfony Process may wrap values containing "=" in double quotes on Windows.
+            $expectedCommand = \str_replace(["'", '"'], '', $expectedCommand);
+            $actualCommand = \str_replace(["'", '"'], '', $actualCommand);
         }
 
-        self::assertSame($expectedCommand, $process->commandLine());
+        self::assertSame($expectedCommand, $actualCommand);
     }
 }
