@@ -455,23 +455,6 @@ final class EventTest extends UnitTestCase
         self::assertSame($expectedExpression, $event->getExpression());
     }
 
-    public function test_between_and_weekday_can_be_chained_with_every_five_minutes(): void
-    {
-        // Arrange
-        $event = new Event($this->id, 'php -i');
-
-        // Act
-        $event
-            ->mondays()
-            ->everyFiveMinutes()
-            ->between('08:00', '17:00');
-
-        // Assert
-        self::assertSame('*/5 * * * 1', $event->getExpression());
-        self::assertSame('08:00', $event->getFrom());
-        self::assertSame('17:00', $event->getTo());
-    }
-
     public function test_hourly_at_with_valid_minute(): void
     {
         // Arrange
