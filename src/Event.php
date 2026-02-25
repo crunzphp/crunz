@@ -1248,10 +1248,6 @@ class Event implements PingableInterface
 
     /**
      * Preserve day-of-week constraints while applying every* frequency shortcuts.
-     *
-     * @param string $expression
-     *
-     * @return self
      */
     protected function cronPreservingCurrentDayOfWeek(string $expression): self
     {
