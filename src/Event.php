@@ -1250,18 +1250,23 @@ class Event implements PingableInterface
      * Preserve day-of-week constraints while applying every* frequency shortcuts.
      *
      * @param string $expression
+     *
+     * @return self
      */
-    protected function cronPreservingCurrentDayOfWeek($expression): self
+    protected function cronPreservingCurrentDayOfWeek(string $expression): self
     {
-        $currentExpressionParts = \explode(' ', $this->expression);
-        $newExpressionParts = \explode(' ', $expression);
+        $weekdayPosition = $this->fieldsPosition['week'] - 1;
+        $currentExpressionParts = \preg_split('/\s+/', $this->expression, -1, PREG_SPLIT_NO_EMPTY);
+        $newExpressionParts = \preg_split('/\s+/', $expression, -1, PREG_SPLIT_NO_EMPTY);
+        $currentExpressionParts = false === $currentExpressionParts ? [] : $currentExpressionParts;
+        $newExpressionParts = false === $newExpressionParts ? [] : $newExpressionParts;
 
         if (
-            isset($currentExpressionParts[4], $newExpressionParts[4])
-            && '*' !== $currentExpressionParts[4]
-            && '*' === $newExpressionParts[4]
+            isset($currentExpressionParts[$weekdayPosition], $newExpressionParts[$weekdayPosition])
+            && '*' !== $currentExpressionParts[$weekdayPosition]
+            && '*' === $newExpressionParts[$weekdayPosition]
         ) {
-            $newExpressionParts[4] = $currentExpressionParts[4];
+            $newExpressionParts[$weekdayPosition] = $currentExpressionParts[$weekdayPosition];
         }
 
         return $this->cron(\implode(' ', $newExpressionParts));

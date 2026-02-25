@@ -445,7 +445,30 @@ final class EventTest extends UnitTestCase
         $methodCallClosure = \Closure::fromCallable($methodCall);
 
         $expressionParts = \explode(' ', $expectedCronExpression);
-        $expressionParts[4] = '1';
+        $dayOfWeekPosition = \count($expressionParts) - 1;
+        $expressionParts[$dayOfWeekPosition] = '1';
+        $expectedExpression = \implode(' ', $expressionParts);
+
+        // Act
+        $methodCallClosure();
+
+        // Assert
+        self::assertSame($expectedExpression, $event->getExpression());
+    }
+
+    /** @dataProvider everyMethodProvider */
+    public function test_every_methods_keep_comma_separated_weekday_constraint(string $method, string $expectedCronExpression): void
+    {
+        // Arrange
+        $event = new Event($this->id, 'php -i');
+        $event->days(1, 3);
+        /** @var callable $methodCall */
+        $methodCall = [$event, $method];
+        $methodCallClosure = \Closure::fromCallable($methodCall);
+
+        $expressionParts = \explode(' ', $expectedCronExpression);
+        $dayOfWeekPosition = \count($expressionParts) - 1;
+        $expressionParts[$dayOfWeekPosition] = '1,3';
         $expectedExpression = \implode(' ', $expressionParts);
 
         // Act
