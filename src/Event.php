@@ -29,6 +29,9 @@ class Event implements PingableInterface
 {
     use PingableTrait;
 
+    private const LOCK_TTL = 120; // seconds
+    private const LOCK_REFRESH_THRESHOLD = 30; // seconds
+
     /**
      * The location that output should be sent to.
      *
@@ -1024,8 +1027,7 @@ class Event implements PingableInterface
             return;
         }
 
-        // Refresh 15s before lock expiration
-        $lockRefreshNeeded = $remainingLifetime < 15;
+        $lockRefreshNeeded = $remainingLifetime < self::LOCK_REFRESH_THRESHOLD;
         if ($lockRefreshNeeded) {
             $lock->refresh();
         }
@@ -1101,10 +1103,8 @@ class Event implements PingableInterface
         $this->checkLockFactory();
 
         if (null === $this->lock && null !== $this->lockFactory) {
-            $ttl = 30;
-
             $this->lock = $this->lockFactory
-                ->createLock($this->lockKey(), $ttl);
+                ->createLock($this->lockKey(), self::LOCK_TTL);
         }
 
         return $this->lock;
