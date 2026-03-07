@@ -373,7 +373,7 @@ final class EventTest extends UnitTestCase
 
         $command = $event->buildCommand();
 
-        self::assertSame(PHP_BINARY . " {$crunzBin} closure:run {$queryClosure}", $command);
+        self::assertSame(\escapeshellarg(PHP_BINARY) . ' ' . \escapeshellarg($crunzBin) . " closure:run {$queryClosure}", $command);
     }
 
     /** @test */
