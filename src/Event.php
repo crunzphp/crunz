@@ -1156,7 +1156,7 @@ class Event implements PingableInterface
         $serializedClosure = \http_build_query([$closure]);
         $crunzRoot = CRUNZ_BIN;
 
-        return PHP_BINARY . " {$crunzRoot} closure:run {$serializedClosure}";
+        return \escapeshellarg(PHP_BINARY) . ' ' . \escapeshellarg($crunzRoot) . " closure:run {$serializedClosure}";
     }
 
     /**
