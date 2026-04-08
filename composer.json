@@ -63,7 +63,7 @@
         "symfony/phpunit-bridge": "^6.4.25 || ^7.4.0 || ^8.0.0"
     },
     "conflict": {
-        "laravel/serializable-closure": ">=2.0.9"
+        "laravel/serializable-closure": ">=2.0.9, <2.0.11"
     },
     "minimum-stability": "beta",
     "prefer-stable": true,
