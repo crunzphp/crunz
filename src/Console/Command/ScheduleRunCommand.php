@@ -61,7 +61,13 @@ class ScheduleRunCommand extends Command
                 'Which task to run. Provide task number from <info>schedule:list</info> command.',
                 null
             )
-           ->setHelp('This command starts the Crunz event runner.');
+            ->addOption(
+                'fail-on-task-error',
+                null,
+                InputOption::VALUE_NONE,
+                'Return a non-zero code if any task fails.',
+            )
+            ->setHelp('This command starts the Crunz event runner.');
     }
 
     /**
@@ -126,11 +132,22 @@ class ScheduleRunCommand extends Command
             return 0;
         }
 
+        $returnCode = 0;
+
+        $failOnTaskError = \filter_var($this->options['fail-on-task-error'] ?? false, FILTER_VALIDATE_BOOLEAN);
+        if ($failOnTaskError) {
+            foreach ($schedules as $schedule) {
+                $schedule->onError(static function () use (&$returnCode): void {
+                    $returnCode = 1;
+                });
+            }
+        }
+
         // Running the events
         $this->eventRunner
             ->handle($output, $schedules)
         ;
 
-        return 0;
+        return $returnCode;
     }
 }
