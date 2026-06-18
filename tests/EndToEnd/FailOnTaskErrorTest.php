@@ -21,7 +21,7 @@ final class FailOnTaskErrorTest extends EndToEndTestCase
 
         $process = $environment->runCrunzCommand('schedule:run --force');
 
-        $this->assertTrue($process->isSuccessful(), 'Should be successful even if task fails when flag is not present.');
+        self::assertTrue($process->isSuccessful(), 'Should be successful even if task fails when flag is not present.');
     }
 
     /** @test */
@@ -37,7 +37,7 @@ final class FailOnTaskErrorTest extends EndToEndTestCase
 
         $process = $environment->runCrunzCommand('schedule:run --force --fail-on-task-error');
 
-        $this->assertFalse($process->isSuccessful(), 'Should not be successful when closure task fails and flag is present.');
+        self::assertFalse($process->isSuccessful(), 'Should not be successful when closure task fails and flag is present.');
     }
 
     /** @test */
@@ -53,6 +53,6 @@ final class FailOnTaskErrorTest extends EndToEndTestCase
 
         $process = $environment->runCrunzCommand('schedule:run --force --fail-on-task-error');
 
-        $this->assertFalse($process->isSuccessful(), 'Should not be successful when command task fails and flag is present.');
+        self::assertFalse($process->isSuccessful(), 'Should not be successful when command task fails and flag is present.');
     }
 }
