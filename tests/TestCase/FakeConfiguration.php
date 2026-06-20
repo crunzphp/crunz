@@ -18,6 +18,7 @@ final class FakeConfiguration implements ConfigurationInterface
         'errors_log_file' => null,
         'logger_factory' => PsrStreamLoggerFactory::class,
         'log_output' => false,
+        'output_realtime' => false,
         'output_log_file' => null,
         'log_allow_line_breaks' => false,
         'log_ignore_empty_context' => false,

@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+### Added
+
+- [crunzphp#83] Add `output_realtime` config option to stream task output to the console as it is produced instead of only after the task finishes
+
 ## [v3.7.0] - 2024-08-12
 
 ### Changed
@@ -556,6 +560,7 @@ In `v2` this will result in exception.
 [crunzphp#77]: https://github.com/crunzphp/crunz/pull/77
 [crunzphp#78]: https://github.com/crunzphp/crunz/pull/78
 [crunzphp#79]: https://github.com/crunzphp/crunz/pull/79
+[crunzphp#83]: https://github.com/crunzphp/crunz/issues/83
 [v1.5.1]: https://github.com/crunzphp/crunz/compare/v1.5.0...v1.5.1
 [v1.6.0]: https://github.com/crunzphp/crunz/compare/v1.5.1...v1.6.0
 [v1.6.1]: https://github.com/crunzphp/crunz/compare/v1.6.0...v1.6.1

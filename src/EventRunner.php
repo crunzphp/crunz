@@ -10,7 +10,9 @@ use Crunz\Logger\ConsoleLoggerInterface;
 use Crunz\Logger\Logger;
 use Crunz\Logger\LoggerFactory;
 use Crunz\Pinger\PingableInterface;
+use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Process as SymfonyProcess;
 
 class EventRunner
 {
@@ -73,6 +75,12 @@ class EventRunner
             }
             // Create an instance of the Logger specific to the event
             $event->logger = $this->loggerFactory->createEvent($event->output);
+        }
+
+        // When realtime output is enabled, stream the task's output to the
+        // console as it is produced instead of only after the process exits.
+        if ($this->realtimeOutputEnabled()) {
+            $event->setRealtimeCallback($this->createRealtimeCallback());
         }
 
         $this->consoleLogger
@@ -174,6 +182,17 @@ class EventRunner
 
     protected function handleOutput(Event $event): void
     {
+        // In realtime mode the task's successful output has already been
+        // streamed live to the console, so the end-of-job emission (per-event
+        // log, global log_output, and the console display fallback) is
+        // suppressed to avoid writing the same output twice. The buffer is
+        // still retained for email_output, and the error path is untouched.
+        if ($this->realtimeOutputEnabled()) {
+            $this->emailOutput($event);
+
+            return;
+        }
+
         $logged = false;
         $logOutput = $this->configuration
             ->get('log_output')
@@ -195,15 +214,7 @@ class EventRunner
             $this->display($event->getOutputStream());
         }
 
-        $emailOutput = $this->configuration
-            ->get('email_output')
-        ;
-        if ($emailOutput && !empty($event->getOutputStream())) {
-            $this->mailer->send(
-                'Crunz: output for event: ' . ($event->description ?? $event->getId()),
-                $this->formatEventOutput($event)
-            );
-        }
+        $this->emailOutput($event);
     }
 
     protected function handleError(Event $event): void
@@ -269,6 +280,26 @@ class EventRunner
         ;
     }
 
+    /**
+     * Email the event's output when email_output is enabled.
+     *
+     * Kept separate from the logging/display logic so it can run unchanged in
+     * realtime mode, where the live stream replaces the end-of-job logging but
+     * the retained buffer is still emailed.
+     */
+    private function emailOutput(Event $event): void
+    {
+        $emailOutput = $this->configuration
+            ->get('email_output')
+        ;
+        if ($emailOutput && !empty($event->getOutputStream())) {
+            $this->mailer->send(
+                'Crunz: output for event: ' . ($event->description ?? $event->getId()),
+                $this->formatEventOutput($event)
+            );
+        }
+    }
+
     private function pingBefore(PingableInterface $schedule): void
     {
         if (!$schedule->hasPingBefore()) {
@@ -310,5 +341,42 @@ class EventRunner
         }
 
         return $this->logger;
+    }
+
+    /** Whether realtime output streaming is enabled via configuration. */
+    private function realtimeOutputEnabled(): bool
+    {
+        return (bool) $this->configuration
+            ->get('output_realtime')
+        ;
+    }
+
+    /**
+     * Build a sink that writes each output chunk straight to the console as it
+     * is produced. Standard output goes to the main stream and error output to
+     * the console's error stream (when available). Chunks are written raw and
+     * without an added newline so task output is forwarded verbatim.
+     *
+     * @return \Closure(string, string):void
+     */
+    private function createRealtimeCallback(): \Closure
+    {
+        $output = $this->output;
+        if (null === $output) {
+            return static function (): void {};
+        }
+
+        $errorOutput = $output instanceof ConsoleOutputInterface
+            ? $output->getErrorOutput()
+            : $output
+        ;
+
+        return static function (string $type, string $content) use ($output, $errorOutput): void {
+            $stream = SymfonyProcess::ERR === $type
+                ? $errorOutput
+                : $output
+            ;
+            $stream->write($content, false, OutputInterface::OUTPUT_RAW);
+        };
     }
 }

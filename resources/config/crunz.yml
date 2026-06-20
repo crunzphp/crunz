@@ -34,6 +34,16 @@ errors_log_file: ~
 # Set this to true if you want to keep the outputs
 log_output: false
 
+# By default a task's output is buffered and only emitted once the task
+# finishes. Set this to true to stream the output to the console (stdout for
+# standard output, stderr for error output) as soon as it is produced. This is
+# useful for long-running tasks whose logs would otherwise be invisible until
+# completion (e.g. when monitored via Docker/CloudWatch). In realtime mode the
+# successful output is streamed live instead of being written again at the end
+# of the job, so it is not duplicated; error reporting and email_output are
+# unaffected.
+output_realtime: false
+
 # This is the absolute path to the global output log file
 # The events which have dedicated log files (defined with them), won't be
 # logged to this file though.

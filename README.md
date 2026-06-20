@@ -555,6 +555,38 @@ Method `appendOutputTo()` **appends** the output to the specified file. To overr
 
 It is also possible to send the errors as emails to a group of recipients by setting `email_output` and `mailer` settings in the configuration file.
 
+## Realtime Output
+
+By default a task's output is buffered and only emitted once the task has
+finished. For long-running tasks (for example a worker that polls a queue in a
+loop) this means no output is visible until the task ends, which makes
+monitoring and debugging difficult, especially when logs are collected from
+the process' standard output (e.g. Docker/CloudWatch).
+
+Setting `output_realtime` to `true` streams each task's output to the console
+as soon as it is produced: standard output is written to `stdout` and error
+output to `stderr`.
+
+```yaml
+# Configuration settings
+
+## ...
+output_realtime: true
+## ...
+```
+
+In realtime mode the successful output is streamed live instead of being
+written again after the task finishes, so it is not duplicated. Output is
+forwarded verbatim (it is not passed through the console formatter). Error
+reporting (`log_errors`/`email_errors`) and `email_output` are unaffected and
+still operate on the complete output once the task completes.
+
+> Note: realtime mode streams successful output to the process' `stdout`/`stderr`.
+> When it is enabled, the successful-output log record (`log_output` /
+> `output_log_file` and per-event `sendOutputTo()`/`appendOutputTo()`) is
+> replaced by the live stream and is therefore not written at the end of the
+> job. The error log and email outputs are not affected.
+
 ## Error Handling
 
 Crunz makes error handling easy by logging and also allowing you add a set of callbacks in case of an error.
@@ -860,6 +892,12 @@ errors_log_file:
 # null output.
 # Set this to true if you want to keep the outputs
 log_output: false
+
+# By default a task's output is buffered and only emitted once the task
+# finishes. Set this to true to stream the output to the console (stdout for
+# standard output, stderr for error output) as soon as it is produced. Useful
+# for long-running tasks whose logs would otherwise be invisible until they end.
+output_realtime: false
 
 # This is the absolute path to the global output log file
 # The events which have dedicated log files (defined with them), won't be
