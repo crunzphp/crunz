@@ -38,10 +38,12 @@ log_output: false
 # finishes. Set this to true to stream the output to the console (stdout for
 # standard output, stderr for error output) as soon as it is produced. This is
 # useful for long-running tasks whose logs would otherwise be invisible until
-# completion (e.g. when monitored via Docker/CloudWatch). In realtime mode the
-# successful output is streamed live instead of being written again at the end
-# of the job, so it is not duplicated; error reporting and email_output are
-# unaffected.
+# completion (e.g. when monitored via Docker/CloudWatch). Realtime streaming is
+# additive: log files (log_output / sendOutputTo), email_output and error
+# reporting all keep working; only the end-of-job emission that prints directly
+# to the console is suppressed (it would duplicate the live stream). If a log
+# destination is itself php://stdout/php://stderr, set log_output/log_errors to
+# false when enabling this so the same output is not printed twice.
 output_realtime: false
 
 # This is the absolute path to the global output log file

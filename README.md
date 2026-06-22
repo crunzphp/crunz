@@ -565,7 +565,8 @@ the process' standard output (e.g. Docker/CloudWatch).
 
 Setting `output_realtime` to `true` streams each task's output to the console
 as soon as it is produced: standard output is written to `stdout` and error
-output to `stderr`.
+output to `stderr`. Output is forwarded verbatim (it is not passed through the
+console formatter).
 
 ```yaml
 # Configuration settings
@@ -575,17 +576,31 @@ output_realtime: true
 ## ...
 ```
 
-In realtime mode the successful output is streamed live instead of being
-written again after the task finishes, so it is not duplicated. Output is
-forwarded verbatim (it is not passed through the console formatter). Error
-reporting (`log_errors`/`email_errors`) and `email_output` are unaffected and
-still operate on the complete output once the task completes.
+Realtime streaming is **additive**: every other sink keeps working exactly as
+before. The only thing realtime mode changes is that it does **not** also print
+the output to the console a second time at the end of the job (which would
+duplicate the live stream). Concretely:
 
-> Note: realtime mode streams successful output to the process' `stdout`/`stderr`.
-> When it is enabled, the successful-output log record (`log_output` /
-> `output_log_file` and per-event `sendOutputTo()`/`appendOutputTo()`) is
-> replaced by the live stream and is therefore not written at the end of the
-> job. The error log and email outputs are not affected.
+- **Log files** (`log_output` → `output_log_file`, and per-event
+  `sendOutputTo()`/`appendOutputTo()`) are still written at the end of the job.
+- **`email_output`** and the **error reporting** sinks (`log_errors`,
+  `email_errors`) are unaffected and still operate on the complete output.
+- The end-of-job emission that prints output **directly to the console** is
+  suppressed (since that output already streamed live).
+
+> Note: if a log destination is itself the console stream — i.e. you set
+> `output_log_file` (or `errors_log_file`) to `php://stdout` / `php://stderr` —
+> then the live stream and the end-of-job log record both target the same
+> stream, so the output appears twice. When you enable `output_realtime`, set
+> `log_output: false` (and `log_errors: false`) if those logs were only going to
+> stdout/stderr: the realtime stream already provides them. Point them at a real
+> file instead if you want a persisted copy.
+>
+> Realtime mode changes **when and where** output is shown, not how much is held
+> in memory: the output is still buffered internally so `email_output` can send
+> the complete output at the end. Output echoed by `before()`/`then()` callbacks
+> is included in the log/email sinks but is not part of the live console stream
+> (only the task process' own output is streamed).
 
 ## Error Handling
 

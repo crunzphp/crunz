@@ -182,17 +182,6 @@ class EventRunner
 
     protected function handleOutput(Event $event): void
     {
-        // In realtime mode the task's successful output has already been
-        // streamed live to the console, so the end-of-job emission (per-event
-        // log, global log_output, and the console display fallback) is
-        // suppressed to avoid writing the same output twice. The buffer is
-        // still retained for email_output, and the error path is untouched.
-        if ($this->realtimeOutputEnabled()) {
-            $this->emailOutput($event);
-
-            return;
-        }
-
         $logged = false;
         $logOutput = $this->configuration
             ->get('log_output')
@@ -210,7 +199,13 @@ class EventRunner
             $logged = true;
         }
 
-        if (!$logged) {
+        // The display() fallback writes the task output straight to the runner's
+        // console. In realtime mode that same output has already been streamed
+        // live to the console, so suppress this fallback to avoid printing it
+        // twice. Logger-based sinks (per-event log files, global log_output) and
+        // email are NOT suppressed: they write to their own configured
+        // destinations, so they do not duplicate the live console stream.
+        if (!$logged && !$this->realtimeOutputEnabled()) {
             $this->display($event->getOutputStream());
         }
 
@@ -230,7 +225,10 @@ class EventRunner
             $this->logger()
                 ->error($this->formatEventError($event))
             ;
-        } else {
+        } elseif (!$this->realtimeOutputEnabled()) {
+            // Without log_errors, a failed task's output is written straight to
+            // the runner's console here. In realtime mode that output already
+            // streamed live, so suppress this write to avoid duplicating it.
             $output = $event->wholeOutput();
 
             $this->output

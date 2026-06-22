@@ -14,6 +14,7 @@ use Crunz\Mailer;
 use Crunz\Schedule;
 use Crunz\Tests\TestCase\FakeConfiguration;
 use Crunz\Tests\TestCase\Logger\SpyPsrLogger;
+use Crunz\Tests\TestCase\SpyConsoleOutput;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -114,13 +115,12 @@ final class EventRunnerTest extends TestCase
         self::assertSame(1, \substr_count($captured, 'RUNNER_BUFFERED_MARKER'));
     }
 
-    public function test_realtime_output_suppresses_end_of_job_log_record(): void
+    public function test_realtime_output_still_writes_global_log_output_record(): void
     {
-        // This is the core fix for issue #83 in the reporter's configuration
-        // (log_output: true, output_log_file: php://stdout): the realtime stream
-        // replaces the end-of-job structured record, so output is not written to
-        // stdout twice.
-        $command = "php -r \"echo 'NO_DOUBLE_LOG';\"";
+        // Logger-based sinks write to their own configured destination, so they
+        // do NOT duplicate the live console stream and must keep working in
+        // realtime mode. Only the console display() fallback is suppressed.
+        $command = "php -r \"echo 'GLOBAL_LOG';\"";
 
         $schedule = new Schedule();
         $schedule->run($command)
@@ -139,7 +139,7 @@ final class EventRunnerTest extends TestCase
                 [
                     'output_realtime' => true,
                     'log_output' => true,
-                    'output_log_file' => 'php://stdout',
+                    'output_log_file' => 'main.log',
                 ]
             ),
             $this->createMock(Mailer::class),
@@ -155,9 +155,146 @@ final class EventRunnerTest extends TestCase
             static fn (array $log): bool => 'info' === $log['level']
         );
         self::assertCount(
-            0,
+            1,
             $infoLogs,
-            'Successful output must not be logged again at end of job in realtime mode.'
+            'Global log_output record must still be written in realtime mode.'
+        );
+    }
+
+    public function test_realtime_output_still_writes_per_event_log_file(): void
+    {
+        // A task with appendOutputTo()/sendOutputTo() writes to a dedicated file
+        // via its own logger; that file is a separate sink from the console, so
+        // realtime mode must not drop it.
+        $command = "php -r \"echo 'PER_EVENT';\"";
+
+        $schedule = new Schedule();
+        $schedule->run($command)
+            ->everyMinute()
+            ->appendOutputTo('event.log')
+        ;
+
+        $eventSpyLogger = new SpyPsrLogger();
+        $loggerFactory = $this->createMock(LoggerFactory::class);
+        $loggerFactory->method('create')
+            ->willReturn(new Logger(new SpyPsrLogger()))
+        ;
+        $loggerFactory->method('createEvent')
+            ->willReturn(new Logger($eventSpyLogger))
+        ;
+
+        $eventRunner = new EventRunner(
+            new Invoker(),
+            new FakeConfiguration(['output_realtime' => true]),
+            $this->createMock(Mailer::class),
+            $loggerFactory,
+            $this->createMock(HttpClientInterface::class),
+            $this->createMock(ConsoleLoggerInterface::class)
+        );
+
+        $eventRunner->handle(new BufferedOutput(), [$schedule]);
+
+        $infoLogs = \array_filter(
+            $eventSpyLogger->getLogs(),
+            static fn (array $log): bool => 'info' === $log['level']
+        );
+        self::assertCount(
+            1,
+            $infoLogs,
+            'Per-event log file must still be written in realtime mode.'
+        );
+        self::assertStringContainsString('PER_EVENT', (string) \reset($infoLogs)['message']);
+    }
+
+    public function test_realtime_output_still_sends_email(): void
+    {
+        $command = "php -r \"echo 'MAIL_BODY';\"";
+
+        $schedule = new Schedule();
+        $schedule->run($command)
+            ->everyMinute()
+        ;
+
+        $mailer = $this->createMock(Mailer::class);
+        $mailer->expects(self::once())
+            ->method('send')
+        ;
+
+        $eventRunner = new EventRunner(
+            new Invoker(),
+            new FakeConfiguration(
+                [
+                    'output_realtime' => true,
+                    'email_output' => true,
+                ]
+            ),
+            $mailer,
+            $this->createMock(LoggerFactory::class),
+            $this->createMock(HttpClientInterface::class),
+            $this->createMock(ConsoleLoggerInterface::class)
+        );
+
+        $eventRunner->handle(new BufferedOutput(), [$schedule]);
+    }
+
+    public function test_realtime_routes_stderr_to_error_stream(): void
+    {
+        // With a real console output, stdout chunks go to the main stream and
+        // stderr chunks to the error stream.
+        $command = "php -r \"echo 'OUTCHUNK'; fwrite(STDERR, 'ERRCHUNK');\"";
+
+        $schedule = new Schedule();
+        $schedule->run($command)
+            ->everyMinute()
+        ;
+
+        $output = new SpyConsoleOutput();
+        $eventRunner = $this->createEventRunner(
+            realInvoker: true,
+            configuration: new FakeConfiguration(['output_realtime' => true]),
+        );
+
+        $eventRunner->handle($output, [$schedule]);
+
+        $stdout = $output->fetch();
+        $stderr = $output->fetchErrorOutput();
+
+        self::assertStringContainsString('OUTCHUNK', $stdout);
+        self::assertStringNotContainsString('ERRCHUNK', $stdout);
+        self::assertStringContainsString('ERRCHUNK', $stderr);
+    }
+
+    public function test_realtime_output_does_not_duplicate_failed_task_output(): void
+    {
+        // A failing task streams its output live; handleError must NOT also write
+        // the <error> blob in realtime mode, otherwise the output appears twice.
+        $command = "php -r \"fwrite(STDERR, 'BOOM'); exit(1);\"";
+
+        $schedule = new Schedule();
+        $schedule->run($command)
+            ->everyMinute()
+        ;
+
+        $output = new BufferedOutput();
+        $eventRunner = $this->createEventRunner(
+            realInvoker: true,
+            configuration: new FakeConfiguration(
+                [
+                    'output_realtime' => true,
+                    'log_errors' => false,
+                ]
+            ),
+        );
+
+        $eventRunner->handle($output, [$schedule]);
+
+        $captured = $output->fetch();
+
+        self::assertStringContainsString('BOOM', $captured);
+        self::assertSame(
+            1,
+            \substr_count($captured, 'BOOM'),
+            'Failed task output must not be duplicated by handleError in realtime mode.'
         );
     }
 
