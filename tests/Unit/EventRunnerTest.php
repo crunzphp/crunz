@@ -81,7 +81,7 @@ final class EventRunnerTest extends TestCase
         // emission, so display() must not also write the same output.
         self::assertSame(
             1,
-            \substr_count($captured, 'RUNNER_REALTIME_MARKER'),
+            \mb_substr_count($captured, 'RUNNER_REALTIME_MARKER'),
             'Realtime output must not be duplicated by the end-of-job emission.'
         );
     }
@@ -110,7 +110,7 @@ final class EventRunnerTest extends TestCase
         // existing end-of-job display() path (which strips the style tag).
         self::assertStringContainsString('RUNNER_BUFFERED_MARKER', $captured);
         self::assertStringNotContainsString($taskOutput, $captured);
-        self::assertSame(1, \substr_count($captured, 'RUNNER_BUFFERED_MARKER'));
+        self::assertSame(1, \mb_substr_count($captured, 'RUNNER_BUFFERED_MARKER'));
     }
 
     public function test_realtime_output_streams_to_global_log_file(): void
@@ -269,7 +269,7 @@ final class EventRunnerTest extends TestCase
         self::assertStringContainsString('BOOM', $captured);
         self::assertSame(
             1,
-            \substr_count($captured, 'BOOM'),
+            \mb_substr_count($captured, 'BOOM'),
             'Failed task output must not be duplicated by handleError in realtime mode.'
         );
     }
