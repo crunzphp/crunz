@@ -563,10 +563,9 @@ loop) this means no output is visible until the task ends, which makes
 monitoring and debugging difficult, especially when logs are collected from
 the process' standard output (e.g. Docker/CloudWatch).
 
-Setting `output_realtime` to `true` streams each task's output to the console
-as soon as it is produced: standard output is written to `stdout` and error
-output to `stderr`. Output is forwarded verbatim (it is not passed through the
-console formatter).
+Setting `output_realtime` to `true` streams each task's output to its
+configured destination as soon as it is produced, instead of buffering it until
+the task finishes:
 
 ```yaml
 # Configuration settings
@@ -576,31 +575,37 @@ output_realtime: true
 ## ...
 ```
 
-Realtime streaming is **additive**: every other sink keeps working exactly as
-before. The only thing realtime mode changes is that it does **not** also print
-the output to the console a second time at the end of the job (which would
-duplicate the live stream). Concretely:
+The output is streamed to the same destination it would normally be written to
+at the end of the job, resolved in the usual order:
 
-- **Log files** (`log_output` → `output_log_file`, and per-event
-  `sendOutputTo()`/`appendOutputTo()`) are still written at the end of the job.
-- **`email_output`** and the **error reporting** sinks (`log_errors`,
-  `email_errors`) are unaffected and still operate on the complete output.
-- The end-of-job emission that prints output **directly to the console** is
-  suppressed (since that output already streamed live).
+1. a per-event log file, if the task uses `sendOutputTo()`/`appendOutputTo()`;
+2. otherwise the global `output_log_file`, if `log_output` is enabled;
+3. otherwise the console (`stdout` for standard output, `stderr` for errors).
 
-> Note: if a log destination is itself the console stream — i.e. you set
-> `output_log_file` (or `errors_log_file`) to `php://stdout` / `php://stderr` —
-> then the live stream and the end-of-job log record both target the same
-> stream, so the output appears twice. When you enable `output_realtime`, set
-> `log_output: false` (and `log_errors: false`) if those logs were only going to
-> stdout/stderr: the realtime stream already provides them. Point them at a real
-> file instead if you want a persisted copy.
+So a task logging to a file gets that file written **live** (line by line as it
+runs), and a task whose output goes to `stdout` (e.g. for Docker/CloudWatch)
+gets it streamed to `stdout` live. The output is forwarded **verbatim** — the
+live stream is the raw task output, not the framed `[date] crunz.INFO: ...`
+record that buffered mode writes. Because the destination receives the live
+stream, the end-of-job framed record to that same destination is not written
+again (it would duplicate the stream).
+
+`email_output` is unaffected: it still sends the complete output once the task
+finishes. The error reporting sinks (`log_errors` → `errors_log_file`,
+`email_errors`) are also unaffected.
+
+> Notes:
 >
-> Realtime mode changes **when and where** output is shown, not how much is held
-> in memory: the output is still buffered internally so `email_output` can send
-> the complete output at the end. Output echoed by `before()`/`then()` callbacks
-> is included in the log/email sinks but is not part of the live console stream
-> (only the task process' own output is streamed).
+> - Realtime mode changes **when and in what form** output is written, not how
+>   much is held in memory: the output is still buffered internally so
+>   `email_output` can send the complete output at the end.
+> - Only the task process' own output is streamed. Output echoed by
+>   `before()`/`then()` callbacks is still sent via `email_output` but is not
+>   part of the live stream.
+> - If two sinks resolve to the same underlying stream — for example
+>   `output_log_file: php://stdout` together with a separate consumer of the
+>   runner's stdout — the output can appear twice on that stream. Point the log
+>   at a real file, or disable it, when you rely on the live stream.
 
 ## Error Handling
 

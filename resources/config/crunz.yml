@@ -35,15 +35,15 @@ errors_log_file: ~
 log_output: false
 
 # By default a task's output is buffered and only emitted once the task
-# finishes. Set this to true to stream the output to the console (stdout for
-# standard output, stderr for error output) as soon as it is produced. This is
-# useful for long-running tasks whose logs would otherwise be invisible until
-# completion (e.g. when monitored via Docker/CloudWatch). Realtime streaming is
-# additive: log files (log_output / sendOutputTo), email_output and error
-# reporting all keep working; only the end-of-job emission that prints directly
-# to the console is suppressed (it would duplicate the live stream). If a log
-# destination is itself php://stdout/php://stderr, set log_output/log_errors to
-# false when enabling this so the same output is not printed twice.
+# finishes. Set this to true to stream the output to its destination as soon as
+# it is produced, instead of buffering it. The output is streamed to wherever it
+# would normally be written: a per-event log file (sendOutputTo), else the
+# global output_log_file (when log_output is true), else the console (stdout for
+# standard output, stderr for errors). The live stream is the raw task output
+# (not the framed "[date] crunz.INFO:" record), and it replaces the end-of-job
+# record for that destination. email_output and error reporting are unaffected.
+# Useful for long-running tasks whose logs would otherwise be invisible until
+# completion (e.g. when monitored via Docker/CloudWatch).
 output_realtime: false
 
 # This is the absolute path to the global output log file

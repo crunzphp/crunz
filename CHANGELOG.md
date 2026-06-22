@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- [crunzphp#83] Add `output_realtime` config option to stream task output to the console as it is produced instead of only after the task finishes
+- [crunzphp#83] Add `output_realtime` config option to stream task output to its destination (log file or console) as it is produced instead of only after the task finishes
 
 ## [v3.7.0] - 2024-08-12
 

@@ -8,12 +8,10 @@ use Crunz\EventRunner;
 use Crunz\HttpClient\HttpClientInterface;
 use Crunz\Invoker;
 use Crunz\Logger\ConsoleLoggerInterface;
-use Crunz\Logger\Logger;
 use Crunz\Logger\LoggerFactory;
 use Crunz\Mailer;
 use Crunz\Schedule;
 use Crunz\Tests\TestCase\FakeConfiguration;
-use Crunz\Tests\TestCase\Logger\SpyPsrLogger;
 use Crunz\Tests\TestCase\SpyConsoleOutput;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -115,95 +113,73 @@ final class EventRunnerTest extends TestCase
         self::assertSame(1, \substr_count($captured, 'RUNNER_BUFFERED_MARKER'));
     }
 
-    public function test_realtime_output_still_writes_global_log_output_record(): void
+    public function test_realtime_output_streams_to_global_log_file(): void
     {
-        // Logger-based sinks write to their own configured destination, so they
-        // do NOT duplicate the live console stream and must keep working in
-        // realtime mode. Only the console display() fallback is suppressed.
-        $command = "php -r \"echo 'GLOBAL_LOG';\"";
+        // With log_output enabled, realtime streams the raw output to the global
+        // output_log_file as it is produced (replacing the end-of-job framed
+        // record), so a file target is written live, not dropped.
+        $logFile = \tempnam(\sys_get_temp_dir(), 'crunz_rt_global_');
+        self::assertIsString($logFile);
 
-        $schedule = new Schedule();
-        $schedule->run($command)
-            ->everyMinute()
-        ;
+        try {
+            $command = "php -r \"echo 'GLOBAL_FILE_OUTPUT';\"";
 
-        $spyLogger = new SpyPsrLogger();
-        $loggerFactory = $this->createMock(LoggerFactory::class);
-        $loggerFactory->method('create')
-            ->willReturn(new Logger($spyLogger))
-        ;
+            $schedule = new Schedule();
+            $schedule->run($command)
+                ->everyMinute()
+            ;
 
-        $eventRunner = new EventRunner(
-            new Invoker(),
-            new FakeConfiguration(
-                [
-                    'output_realtime' => true,
-                    'log_output' => true,
-                    'output_log_file' => 'main.log',
-                ]
-            ),
-            $this->createMock(Mailer::class),
-            $loggerFactory,
-            $this->createMock(HttpClientInterface::class),
-            $this->createMock(ConsoleLoggerInterface::class)
-        );
+            $eventRunner = $this->createEventRunner(
+                realInvoker: true,
+                configuration: new FakeConfiguration(
+                    [
+                        'output_realtime' => true,
+                        'log_output' => true,
+                        'output_log_file' => $logFile,
+                    ]
+                ),
+            );
 
-        $eventRunner->handle(new BufferedOutput(), [$schedule]);
+            $eventRunner->handle(new BufferedOutput(), [$schedule]);
 
-        $infoLogs = \array_filter(
-            $spyLogger->getLogs(),
-            static fn (array $log): bool => 'info' === $log['level']
-        );
-        self::assertCount(
-            1,
-            $infoLogs,
-            'Global log_output record must still be written in realtime mode.'
-        );
+            $contents = (string) \file_get_contents($logFile);
+            self::assertStringContainsString('GLOBAL_FILE_OUTPUT', $contents);
+            // Streamed raw, not as the framed end-of-job log record.
+            self::assertStringNotContainsString('crunz.INFO', $contents);
+        } finally {
+            @\unlink($logFile);
+        }
     }
 
-    public function test_realtime_output_still_writes_per_event_log_file(): void
+    public function test_realtime_output_streams_to_per_event_log_file(): void
     {
-        // A task with appendOutputTo()/sendOutputTo() writes to a dedicated file
-        // via its own logger; that file is a separate sink from the console, so
-        // realtime mode must not drop it.
-        $command = "php -r \"echo 'PER_EVENT';\"";
+        // A task with sendOutputTo()/appendOutputTo() streams its raw output to
+        // that dedicated file as it is produced.
+        $logFile = \tempnam(\sys_get_temp_dir(), 'crunz_rt_per_event_');
+        self::assertIsString($logFile);
 
-        $schedule = new Schedule();
-        $schedule->run($command)
-            ->everyMinute()
-            ->appendOutputTo('event.log')
-        ;
+        try {
+            $command = "php -r \"echo 'PER_EVENT_FILE_OUTPUT';\"";
 
-        $eventSpyLogger = new SpyPsrLogger();
-        $loggerFactory = $this->createMock(LoggerFactory::class);
-        $loggerFactory->method('create')
-            ->willReturn(new Logger(new SpyPsrLogger()))
-        ;
-        $loggerFactory->method('createEvent')
-            ->willReturn(new Logger($eventSpyLogger))
-        ;
+            $schedule = new Schedule();
+            $schedule->run($command)
+                ->everyMinute()
+                ->appendOutputTo($logFile)
+            ;
 
-        $eventRunner = new EventRunner(
-            new Invoker(),
-            new FakeConfiguration(['output_realtime' => true]),
-            $this->createMock(Mailer::class),
-            $loggerFactory,
-            $this->createMock(HttpClientInterface::class),
-            $this->createMock(ConsoleLoggerInterface::class)
-        );
+            $eventRunner = $this->createEventRunner(
+                realInvoker: true,
+                configuration: new FakeConfiguration(['output_realtime' => true]),
+            );
 
-        $eventRunner->handle(new BufferedOutput(), [$schedule]);
+            $eventRunner->handle(new BufferedOutput(), [$schedule]);
 
-        $infoLogs = \array_filter(
-            $eventSpyLogger->getLogs(),
-            static fn (array $log): bool => 'info' === $log['level']
-        );
-        self::assertCount(
-            1,
-            $infoLogs,
-            'Per-event log file must still be written in realtime mode.'
-        );
-        self::assertStringContainsString('PER_EVENT', (string) \reset($infoLogs)['message']);
+            $contents = (string) \file_get_contents($logFile);
+            self::assertStringContainsString('PER_EVENT_FILE_OUTPUT', $contents);
+            self::assertStringNotContainsString('crunz.INFO', $contents);
+        } finally {
+            @\unlink($logFile);
+        }
     }
 
     public function test_realtime_output_still_sends_email(): void
