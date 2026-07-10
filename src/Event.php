@@ -1035,62 +1035,62 @@ class Event implements PingableInterface
 
     public function everyMinute(): self
     {
-        return $this->cron('* * * * *');
+        return $this->cronPreservingCurrentDayOfWeek('* * * * *');
     }
 
     public function everyTwoMinutes(): self
     {
-        return $this->cron('*/2 * * * *');
+        return $this->cronPreservingCurrentDayOfWeek('*/2 * * * *');
     }
 
     public function everyThreeMinutes(): self
     {
-        return $this->cron('*/3 * * * *');
+        return $this->cronPreservingCurrentDayOfWeek('*/3 * * * *');
     }
 
     public function everyFourMinutes(): self
     {
-        return $this->cron('*/4 * * * *');
+        return $this->cronPreservingCurrentDayOfWeek('*/4 * * * *');
     }
 
     public function everyFiveMinutes(): self
     {
-        return $this->cron('*/5 * * * *');
+        return $this->cronPreservingCurrentDayOfWeek('*/5 * * * *');
     }
 
     public function everyTenMinutes(): self
     {
-        return $this->cron('*/10 * * * *');
+        return $this->cronPreservingCurrentDayOfWeek('*/10 * * * *');
     }
 
     public function everyFifteenMinutes(): self
     {
-        return $this->cron('*/15 * * * *');
+        return $this->cronPreservingCurrentDayOfWeek('*/15 * * * *');
     }
 
     public function everyThirtyMinutes(): self
     {
-        return $this->cron('*/30 * * * *');
+        return $this->cronPreservingCurrentDayOfWeek('*/30 * * * *');
     }
 
     public function everyTwoHours(): self
     {
-        return $this->cron('0 */2 * * *');
+        return $this->cronPreservingCurrentDayOfWeek('0 */2 * * *');
     }
 
     public function everyThreeHours(): self
     {
-        return $this->cron('0 */3 * * *');
+        return $this->cronPreservingCurrentDayOfWeek('0 */3 * * *');
     }
 
     public function everyFourHours(): self
     {
-        return $this->cron('0 */4 * * *');
+        return $this->cronPreservingCurrentDayOfWeek('0 */4 * * *');
     }
 
     public function everySixHours(): self
     {
-        return $this->cron('0 */6 * * *');
+        return $this->cronPreservingCurrentDayOfWeek('0 */6 * * *');
     }
 
     /**
@@ -1244,6 +1244,28 @@ class Event implements PingableInterface
         \array_splice($cron, 0, $fpos, \array_slice($mask, 0, $fpos));
 
         return $this->cron(\implode(' ', $cron));
+    }
+
+    /**
+     * Preserve day-of-week constraints while applying every* frequency shortcuts.
+     */
+    protected function cronPreservingCurrentDayOfWeek(string $expression): self
+    {
+        $weekdayPosition = $this->fieldsPosition['week'] - 1;
+        $currentExpressionParts = \preg_split('/\s+/', $this->expression, -1, PREG_SPLIT_NO_EMPTY);
+        $newExpressionParts = \preg_split('/\s+/', $expression, -1, PREG_SPLIT_NO_EMPTY);
+        $currentExpressionParts = false === $currentExpressionParts ? [] : $currentExpressionParts;
+        $newExpressionParts = false === $newExpressionParts ? [] : $newExpressionParts;
+
+        if (
+            isset($currentExpressionParts[$weekdayPosition], $newExpressionParts[$weekdayPosition])
+            && '*' !== $currentExpressionParts[$weekdayPosition]
+            && '*' === $newExpressionParts[$weekdayPosition]
+        ) {
+            $newExpressionParts[$weekdayPosition] = $currentExpressionParts[$weekdayPosition];
+        }
+
+        return $this->cron(\implode(' ', $newExpressionParts));
     }
 
     /**
