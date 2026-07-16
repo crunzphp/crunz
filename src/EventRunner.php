@@ -10,7 +10,9 @@ use Crunz\Logger\ConsoleLoggerInterface;
 use Crunz\Logger\Logger;
 use Crunz\Logger\LoggerFactory;
 use Crunz\Pinger\PingableInterface;
+use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Process\Process as SymfonyProcess;
 
 class EventRunner
 {
@@ -19,6 +21,14 @@ class EventRunner
     /** @var Logger|null */
     protected $logger;
     private ?OutputInterface $output = null;
+    /**
+     * Open stream handles used to stream realtime output to a file/stream
+     * destination, keyed by the event's object id. Closed once the event is
+     * handled.
+     *
+     * @var array<int,resource>
+     */
+    private array $realtimeStreams = [];
 
     public function __construct(
         protected Invoker $invoker,
@@ -73,6 +83,13 @@ class EventRunner
             }
             // Create an instance of the Logger specific to the event
             $event->logger = $this->loggerFactory->createEvent($event->output);
+        }
+
+        // When realtime output is enabled, stream the task's output to its
+        // resolved destination (per-event file, global log file, or the console)
+        // as it is produced instead of only after the process exits.
+        if ($this->realtimeOutputEnabled()) {
+            $event->setRealtimeCallback($this->createRealtimeCallback($event));
         }
 
         $this->consoleLogger
@@ -132,6 +149,9 @@ class EventRunner
                     $this->consoleLogger
                         ->debug("Task <info>{$id}</info> status: {$runStatus}.");
 
+                    // Close any realtime file stream opened for this event.
+                    $this->closeRealtimeStream($event);
+
                     // Dismiss the event if it's finished
                     $schedule->dismissEvent($eventKey);
                 }
@@ -174,6 +194,17 @@ class EventRunner
 
     protected function handleOutput(Event $event): void
     {
+        // In realtime mode the task's output has already been streamed, as it
+        // was produced, to its resolved destination (per-event file, global log
+        // file, or the console). The end-of-job framed emission to that same
+        // destination is replaced by the live stream, so it is skipped here.
+        // email_output is additive and still sends from the retained buffer.
+        if ($this->realtimeOutputEnabled()) {
+            $this->emailOutput($event);
+
+            return;
+        }
+
         $logged = false;
         $logOutput = $this->configuration
             ->get('log_output')
@@ -195,15 +226,7 @@ class EventRunner
             $this->display($event->getOutputStream());
         }
 
-        $emailOutput = $this->configuration
-            ->get('email_output')
-        ;
-        if ($emailOutput && !empty($event->getOutputStream())) {
-            $this->mailer->send(
-                'Crunz: output for event: ' . ($event->description ?? $event->getId()),
-                $this->formatEventOutput($event)
-            );
-        }
+        $this->emailOutput($event);
     }
 
     protected function handleError(Event $event): void
@@ -219,7 +242,10 @@ class EventRunner
             $this->logger()
                 ->error($this->formatEventError($event))
             ;
-        } else {
+        } elseif (!$this->realtimeOutputEnabled()) {
+            // Without log_errors, a failed task's output is written straight to
+            // the runner's console here. In realtime mode that output already
+            // streamed live, so suppress this write to avoid duplicating it.
             $output = $event->wholeOutput();
 
             $this->output
@@ -269,6 +295,26 @@ class EventRunner
         ;
     }
 
+    /**
+     * Email the event's output when email_output is enabled.
+     *
+     * Kept separate from the logging/display logic so it can run unchanged in
+     * realtime mode, where the live stream replaces the end-of-job logging but
+     * the retained buffer is still emailed.
+     */
+    private function emailOutput(Event $event): void
+    {
+        $emailOutput = $this->configuration
+            ->get('email_output')
+        ;
+        if ($emailOutput && !empty($event->getOutputStream())) {
+            $this->mailer->send(
+                'Crunz: output for event: ' . ($event->description ?? $event->getId()),
+                $this->formatEventOutput($event)
+            );
+        }
+    }
+
     private function pingBefore(PingableInterface $schedule): void
     {
         if (!$schedule->hasPingBefore()) {
@@ -310,5 +356,96 @@ class EventRunner
         }
 
         return $this->logger;
+    }
+
+    /** Whether realtime output streaming is enabled via configuration. */
+    private function realtimeOutputEnabled(): bool
+    {
+        return (bool) $this->configuration
+            ->get('output_realtime')
+        ;
+    }
+
+    /**
+     * Build a sink that writes each output chunk to the event's resolved output
+     * destination as it is produced. When the destination is a file/stream path
+     * (a per-event `sendOutputTo()` target or the global `output_log_file`), the
+     * raw chunks are appended to that path. Otherwise output is written to the
+     * runner console, with standard output going to the main stream and error
+     * output to the error stream (when available). Chunks are written raw and
+     * without an added newline so task output is forwarded verbatim.
+     *
+     * @return \Closure(string, string):void
+     */
+    private function createRealtimeCallback(Event $event): \Closure
+    {
+        $path = $this->realtimeStreamPath($event);
+        if (null !== $path) {
+            $stream = @\fopen($path, 'ab');
+            if (false !== $stream) {
+                $this->realtimeStreams[\spl_object_id($event)] = $stream;
+
+                return static function (string $type, string $content) use ($stream): void {
+                    \fwrite($stream, $content);
+                };
+            }
+        }
+
+        $output = $this->output;
+        if (null === $output) {
+            return static function (): void {};
+        }
+
+        $errorOutput = $output instanceof ConsoleOutputInterface
+            ? $output->getErrorOutput()
+            : $output
+        ;
+
+        return static function (string $type, string $content) use ($output, $errorOutput): void {
+            $stream = SymfonyProcess::ERR === $type
+                ? $errorOutput
+                : $output
+            ;
+            $stream->write($content, false, OutputInterface::OUTPUT_RAW);
+        };
+    }
+
+    /**
+     * Resolve the file/stream path a task's realtime output should be streamed
+     * to, mirroring the success-path routing precedence: a dedicated per-event
+     * output file first, then the global output log file. Returns null when the
+     * output is not directed at a file/stream and should go to the console.
+     */
+    private function realtimeStreamPath(Event $event): ?string
+    {
+        if (!$event->nullOutput()) {
+            return $event->output;
+        }
+
+        $logOutput = (bool) $this->configuration
+            ->get('log_output')
+        ;
+        if ($logOutput) {
+            $logFile = $this->configuration
+                ->get('output_log_file')
+            ;
+            if (\is_string($logFile) && '' !== $logFile) {
+                return $logFile;
+            }
+        }
+
+        return null;
+    }
+
+    /** Close and forget any realtime stream opened for the given event. */
+    private function closeRealtimeStream(Event $event): void
+    {
+        $id = \spl_object_id($event);
+        if (!isset($this->realtimeStreams[$id])) {
+            return;
+        }
+
+        \fclose($this->realtimeStreams[$id]);
+        unset($this->realtimeStreams[$id]);
     }
 }

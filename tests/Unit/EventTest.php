@@ -403,6 +403,32 @@ final class EventTest extends UnitTestCase
     }
 
     /** @test */
+    public function realtime_callback_receives_output_as_it_is_produced(): void
+    {
+        $command = "php -r \"echo 'Realtime output';\"";
+        $event = new Event(\uniqid('c', true), $command);
+
+        $collected = '';
+        $event->setRealtimeCallback(
+            static function (string $type, string $content) use (&$collected): void {
+                $collected .= $content;
+            }
+        );
+
+        $event->start();
+        $process = $event->getProcess();
+
+        while ($process->isRunning()) {
+            \usleep(20000); // wait 20 ms
+        }
+
+        self::assertStringContainsString('Realtime output', $collected);
+        // The callback must observe exactly the same bytes that populate the
+        // in-memory buffer, so streaming and buffering never diverge.
+        self::assertSame($event->wholeOutput(), $collected);
+    }
+
+    /** @test */
     public function task_will_prevent_overlapping_with_default_store(): void
     {
         $this->assertPreventOverlapping();

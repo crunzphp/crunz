@@ -34,6 +34,18 @@ errors_log_file: ~
 # Set this to true if you want to keep the outputs
 log_output: false
 
+# By default a task's output is buffered and only emitted once the task
+# finishes. Set this to true to stream the output to its destination as soon as
+# it is produced, instead of buffering it. The output is streamed to wherever it
+# would normally be written: a per-event log file (sendOutputTo), else the
+# global output_log_file (when log_output is true), else the console (stdout for
+# standard output, stderr for errors). The live stream is the raw task output
+# (not the framed "[date] crunz.INFO:" record), and it replaces the end-of-job
+# record for that destination. email_output and error reporting are unaffected.
+# Useful for long-running tasks whose logs would otherwise be invisible until
+# completion (e.g. when monitored via Docker/CloudWatch).
+output_realtime: false
+
 # This is the absolute path to the global output log file
 # The events which have dedicated log files (defined with them), won't be
 # logged to this file though.

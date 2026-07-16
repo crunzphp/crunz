@@ -555,6 +555,58 @@ Method `appendOutputTo()` **appends** the output to the specified file. To overr
 
 It is also possible to send the errors as emails to a group of recipients by setting `email_output` and `mailer` settings in the configuration file.
 
+## Realtime Output
+
+By default a task's output is buffered and only emitted once the task has
+finished. For long-running tasks (for example a worker that polls a queue in a
+loop) this means no output is visible until the task ends, which makes
+monitoring and debugging difficult, especially when logs are collected from
+the process' standard output (e.g. Docker/CloudWatch).
+
+Setting `output_realtime` to `true` streams each task's output to its
+configured destination as soon as it is produced, instead of buffering it until
+the task finishes:
+
+```yaml
+# Configuration settings
+
+## ...
+output_realtime: true
+## ...
+```
+
+The output is streamed to the same destination it would normally be written to
+at the end of the job, resolved in the usual order:
+
+1. a per-event log file, if the task uses `sendOutputTo()`/`appendOutputTo()`;
+2. otherwise the global `output_log_file`, if `log_output` is enabled;
+3. otherwise the console (`stdout` for standard output, `stderr` for errors).
+
+So a task logging to a file gets that file written **live** (line by line as it
+runs), and a task whose output goes to `stdout` (e.g. for Docker/CloudWatch)
+gets it streamed to `stdout` live. The output is forwarded **verbatim** — the
+live stream is the raw task output, not the framed `[date] crunz.INFO: ...`
+record that buffered mode writes. Because the destination receives the live
+stream, the end-of-job framed record to that same destination is not written
+again (it would duplicate the stream).
+
+`email_output` is unaffected: it still sends the complete output once the task
+finishes. The error reporting sinks (`log_errors` → `errors_log_file`,
+`email_errors`) are also unaffected.
+
+> Notes:
+>
+> - Realtime mode changes **when and in what form** output is written, not how
+>   much is held in memory: the output is still buffered internally so
+>   `email_output` can send the complete output at the end.
+> - Only the task process' own output is streamed. Output echoed by
+>   `before()`/`then()` callbacks is still sent via `email_output` but is not
+>   part of the live stream.
+> - If two sinks resolve to the same underlying stream — for example
+>   `output_log_file: php://stdout` together with a separate consumer of the
+>   runner's stdout — the output can appear twice on that stream. Point the log
+>   at a real file, or disable it, when you rely on the live stream.
+
 ## Error Handling
 
 Crunz makes error handling easy by logging and also allowing you add a set of callbacks in case of an error.
@@ -860,6 +912,12 @@ errors_log_file:
 # null output.
 # Set this to true if you want to keep the outputs
 log_output: false
+
+# By default a task's output is buffered and only emitted once the task
+# finishes. Set this to true to stream the output to the console (stdout for
+# standard output, stderr for error output) as soon as it is produced. Useful
+# for long-running tasks whose logs would otherwise be invisible until they end.
+output_realtime: false
 
 # This is the absolute path to the global output log file
 # The events which have dedicated log files (defined with them), won't be
