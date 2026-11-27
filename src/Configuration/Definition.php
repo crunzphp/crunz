@@ -59,6 +59,14 @@ class Definition implements ConfigurationInterface
                     ->info('Flag for logging output' . PHP_EOL)
                 ->end()
 
+                ->booleanNode('output_realtime')
+                    ->defaultFalse()
+                    ->info(
+                        'Stream task output to the console as it is produced'
+                        . ' instead of only after the task finishes.' . PHP_EOL
+                    )
+                ->end()
+
                 ->scalarNode('output_log_file')
                     ->defaultValue('/dev/null')
                     ->info('Path to output logs' . PHP_EOL)

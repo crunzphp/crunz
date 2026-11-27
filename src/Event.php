@@ -171,6 +171,13 @@ class Event implements PingableInterface
     private ?LockFactory $lockFactory = null;
     /** @var string[] */
     private array $wholeOutput = [];
+    /**
+     * Optional sink invoked with each output chunk as it is produced, used to
+     * stream output in realtime instead of only after the process exits.
+     *
+     * @var \Closure(string, string):void|null
+     */
+    private ?\Closure $realtimeCallback = null;
     /** @var Lock */
     private $lock;
     /** @var \Closure[] */
@@ -296,6 +303,20 @@ class Event implements PingableInterface
     }
 
     /**
+     * Register a sink that receives each output chunk as it is produced.
+     *
+     * The sink is invoked from the process output callback with the Symfony
+     * Process output type ('out'/'err') and the chunk content, enabling
+     * realtime streaming of output while it is still being generated.
+     *
+     * @param \Closure(string, string):void|null $callback
+     */
+    public function setRealtimeCallback(?\Closure $callback): void
+    {
+        $this->realtimeCallback = $callback;
+    }
+
+    /**
      * Start the event execution.
      *
      * @return int
@@ -309,6 +330,10 @@ class Event implements PingableInterface
         $this->getProcess()->start(
             function ($type, $content): void {
                 $this->wholeOutput[] = $content;
+
+                if (null !== $this->realtimeCallback) {
+                    ($this->realtimeCallback)($type, $content);
+                }
             }
         );
 
