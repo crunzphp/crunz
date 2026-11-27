@@ -53,7 +53,23 @@ final class ClosureRunTest extends EndToEndTestCase
         $secondCall = $environment->runCrunzCommand('schedule:run');
         $firstCall->wait();
 
-        self::assertStringContainsString('Done', $firstCall->getOutput());
-        self::assertStringContainsString('No event is due!', $secondCall->getOutput());
+        // preventOverlapping() guarantees that of two overlapping runs exactly
+        // one executes the task and the other is skipped as "not due". Which of
+        // the two processes wins the lock is NOT deterministic: PHP process
+        // startup latency varies (notably on Windows CI), so the second-spawned
+        // run can acquire the lock before the first. Assert the invariant over
+        // the combined output rather than assuming the first call always wins.
+        $combinedOutput = $firstCall->getOutput() . $secondCall->getOutput();
+
+        self::assertStringContainsString(
+            'Done',
+            $combinedOutput,
+            'Exactly one of the overlapping runs should execute the task.'
+        );
+        self::assertStringContainsString(
+            'No event is due!',
+            $combinedOutput,
+            'The overlapping run should be skipped because the lock is held.'
+        );
     }
 }
